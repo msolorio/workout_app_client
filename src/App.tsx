@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
-import CreateWorkout from './pages/CreateWorkout';
+import CreateWorkout from './pages/CreateWorkout/CreateWorkout';
 import IndexWorkout from './pages/IndexWorkout';
 import './App.css';
 
