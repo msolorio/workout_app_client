@@ -196,7 +196,20 @@ function CreateWorkout() {
             value={state.exerciseWeight}
             handleChange={handleInputChange}
           />
-          
+
+          <div>
+            <label htmlFor="exerciseUnit">Unit:</label>
+
+            <select
+              name="exerciseUnit"
+              onChange={handleInputChange}
+              value={state.exerciseUnit}
+            >
+              <option value="lbs">lbs</option>
+              <option value="kg">kg</option>
+            </select>
+          </div>
+
           <input
             type="button"
             value="Add"
