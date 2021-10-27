@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   useQuery,
   gql
@@ -17,13 +18,16 @@ const WORKOUTS = gql`
 
 
 function Workouts() {
-  const { loading, error, data } = useQuery(WORKOUTS);
+  const { loading, error, data, refetch } = useQuery(WORKOUTS);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   
   if (loading) return <h3>Loading...</h3>;
   
   if (error) {
     console.log(error);
-    
     return <h3>Error</h3>
   }
 
@@ -36,7 +40,6 @@ function Workouts() {
     );
   });
 }
-
 
 function IndexWorkout() {
   return (

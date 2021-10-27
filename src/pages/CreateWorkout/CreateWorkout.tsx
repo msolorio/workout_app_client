@@ -1,7 +1,28 @@
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useMutation, gql } from '@apollo/client';
 import TextInputGroup from '../../components/TextInputGroup';
 import NumberInputGroup from '../../components/NumberInputGroup';
 import Exercise from './components/Exercise';
+
+
+const CREATE_WORKOUT = gql`
+  mutation Mutation(
+    $name: String!,
+    $location: String!,
+    $description: String,
+    $length: Int,
+    $exercises: [InputExercise!]
+  ) {
+    createWorkout(
+      name: $name,
+      location: $location,
+      description: $description,
+      length: $length,
+      exercises: $exercises
+    ) { id }
+  }
+`;
 
 type ExerciseType = {
   name: string,
@@ -13,8 +34,10 @@ type ExerciseType = {
 
 const stateExercises: ExerciseType[] = [];
 
+// Create Workout Component //////////////////////////////////////////////////////////////
 function CreateWorkout() {
   const [state, setState] = useState({
+    redirect: false,
     workoutName: '',
     workoutLocation: '',
     workoutLength: '',
@@ -27,6 +50,10 @@ function CreateWorkout() {
     exercises: stateExercises
   });
 
+
+  const [createWorkout] = useMutation(CREATE_WORKOUT);
+
+
   const handleInputChange = (event: any) => {
     if (event.target.value < 0) return;
 
@@ -36,7 +63,8 @@ function CreateWorkout() {
     })
   }
 
-  const handleExerciseCreate = (event: any) => {
+
+  const handleExerciseAdd = (event: any) => {
     const newExercise = {
       name: state.exerciseName,
       reps: Number(state.exerciseReps),
@@ -49,15 +77,56 @@ function CreateWorkout() {
 
     setState({
       ...state,
-      exercises: updatedExercises
+      exercises: updatedExercises,
+      exerciseName: '',
+      exerciseReps: '10',
+      exerciseSets: '3',
+      exerciseWeight: '10',
+      exerciseUnit: 'lbs',
     });
   }
+  
+  
+  const handleCreateWorkout = async (event: any) => {
+    try {
+      await createWorkout({
+        variables: {
+          name: state.workoutName,
+          description: state.workoutDescription,
+          location: state.workoutLocation,
+          length: Number(state.workoutLength),
+          exercises: state.exercises
+        }
+      });
+
+      setState({
+        ...state,
+        redirect: true,
+        workoutName: '',
+        workoutLocation: '',
+        workoutLength: '',
+        workoutDescription: '',
+        exerciseName: '',
+        exerciseReps: '10',
+        exerciseSets: '3',
+        exerciseWeight: '10',
+        exerciseUnit: 'lbs',
+        exercises: stateExercises
+      })
+
+    } catch (err) {
+      console.log('Error creating workout ==>', err);
+    }
+  }
+
 
   function renderExercises(exercises: ExerciseType[]) {
     return exercises.map((exercise, idx) => {
       return <Exercise key={idx} exercise={exercise} />
     });
   }
+
+  if (state.redirect) return <Redirect to="/workouts" />
 
   return (
     <main>
@@ -127,11 +196,11 @@ function CreateWorkout() {
             value={state.exerciseWeight}
             handleChange={handleInputChange}
           />
-
+          
           <input
             type="button"
             value="Add"
-            onClick={handleExerciseCreate}
+            onClick={handleExerciseAdd}
           />
 
           { renderExercises(state.exercises) }
@@ -140,6 +209,7 @@ function CreateWorkout() {
         <input
           type="button"
           value="Create Workout" 
+          onClick={handleCreateWorkout}
         />
       </form>
     </main>
