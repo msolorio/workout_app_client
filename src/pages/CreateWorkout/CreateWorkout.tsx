@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
+import { storeNewWorkout } from '../../features/workouts/workoutsSlice'
+import { useAppDispatch } from '../../app/hooks'
 import TextInputGroup from '../../components/TextInputGroup';
 import NumberInputGroup from '../../components/NumberInputGroup';
 import Exercise from './components/Exercise';
@@ -36,6 +38,8 @@ const stateExercises: ExerciseType[] = [];
 
 // Create Workout Component //////////////////////////////////////////////////////////////
 function CreateWorkout() {
+  const dispatch = useAppDispatch()
+
   const [state, setState] = useState({
     redirect: false,
     workoutName: '',
@@ -98,6 +102,13 @@ function CreateWorkout() {
           exercises: state.exercises
         }
       });
+
+      dispatch(storeNewWorkout({
+        name: state.workoutName,
+        description: state.workoutDescription,
+        location: state.workoutLocation,
+        length: Number(state.workoutLength)
+      }))
 
       setState({
         ...state,

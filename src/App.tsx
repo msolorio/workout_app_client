@@ -28,6 +28,7 @@ const WORKOUTS = gql`
 
 function App() {
   const dispatch = useAppDispatch()
+  const loadWorkoutStatus = useAppSelector((state) => state.workouts.status)
 
   const { loading, error, data } = useQuery(WORKOUTS)
 
@@ -38,7 +39,9 @@ function App() {
     return <h2>Error</h2>
   }
   
-  if (data) dispatch(storeWorkouts(data.workouts))
+  if (data && loadWorkoutStatus !== 'succeeded') {
+    dispatch(storeWorkouts(data.workouts))
+  }
 
   return (
     <div className="App">

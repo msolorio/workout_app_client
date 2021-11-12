@@ -1,23 +1,6 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '../app/hooks'
 import { selectAllWorkouts } from '../features/workouts/workoutsSlice'
-import {
-  useQuery,
-  gql
-} from '@apollo/client';
-
-const WORKOUTS = gql`
-  query GetWorkouts {
-    workouts {
-      id
-      name
-      description
-      length
-      location
-    }
-  }
-`;
-
 
 function Workouts() {
   const workouts = useAppSelector(selectAllWorkouts)

@@ -1,9 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  useQuery,
-  gql
-} from '@apollo/client';
-import { isJsxClosingFragment } from 'typescript';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 
 interface Workout {
@@ -16,7 +11,7 @@ interface Workout {
 
 interface WorkoutsStateType {
   workouts: Workout[]
-  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  status: 'idle' | 'succeeded'
   error: string | null
 }
 
@@ -31,13 +26,23 @@ const workoutsSlice = createSlice({
   initialState,
   reducers: {
     storeWorkouts(state, action: PayloadAction<Workout[]>) {
+      console.log('called storeWorkouts')
+
+      console.log('action.payload ==>', action.payload)
+      
+
       state.workouts = state.workouts.concat(action.payload)
+      state.status = 'succeeded'
+    },
+
+    storeNewWorkout(state, action) {
+      state.workouts.push(action.payload)
     }
   }
 })
 
 export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 
-export const { storeWorkouts } = workoutsSlice.actions
+export const { storeWorkouts, storeNewWorkout } = workoutsSlice.actions
 
 export default workoutsSlice.reducer
