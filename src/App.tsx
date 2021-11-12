@@ -1,11 +1,45 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+
+import { useAppSelector, useAppDispatch } from './app/hooks'
+import { storeWorkouts } from './features/workouts/workoutsSlice'
+
 import Header from './components/Header';
-import CreateWorkout from './pages/CreateWorkout/CreateWorkout';
-import IndexWorkout from './pages/IndexWorkout';
-import './App.css';
+import CreateWorkout from './pages/CreateWorkout/CreateWorkout'
+import IndexWorkout from './pages/IndexWorkout'
+import './App.css'
+
+import {
+  useQuery,
+  gql
+} from '@apollo/client';
+
+const WORKOUTS = gql`
+  query GetWorkouts {
+    workouts {
+      id
+      name
+      description
+      length
+      location
+    }
+  }
+`;
 
 function App() {
+  const dispatch = useAppDispatch()
+
+  const { loading, error, data } = useQuery(WORKOUTS)
+
+  if (loading) return <h2>Loading...</h2>
+
+  if (error) {
+    console.log(error)
+    return <h2>Error</h2>
+  }
+  
+  if (data) dispatch(storeWorkouts(data.workouts))
+
   return (
     <div className="App">
       <h1>Workout App</h1>

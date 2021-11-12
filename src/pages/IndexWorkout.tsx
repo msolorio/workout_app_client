@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { useAppSelector } from '../app/hooks'
+import { selectAllWorkouts } from '../features/workouts/workoutsSlice'
 import {
   useQuery,
   gql
@@ -18,20 +20,9 @@ const WORKOUTS = gql`
 
 
 function Workouts() {
-  const { loading, error, data, refetch } = useQuery(WORKOUTS);
+  const workouts = useAppSelector(selectAllWorkouts)
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-  
-  if (loading) return <h3>Loading...</h3>;
-  
-  if (error) {
-    console.log(error);
-    return <h3>Error</h3>
-  }
-
-  return data.workouts.map((workout: any, idx: number) => {
+  const workoutsJSX = workouts.map((workout: any, idx: number) => {
     return (
       <div key={idx}>
         <h2>{workout.name}</h2>
@@ -39,6 +30,8 @@ function Workouts() {
       </div>
     );
   });
+
+  return <ul>{workoutsJSX}</ul>
 }
 
 function IndexWorkout() {
