@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../app/hooks'
 import TextInputGroup from '../../components/TextInputGroup';
 import NumberInputGroup from '../../components/NumberInputGroup';
 import Exercise from './components/Exercise';
+import { WorkoutType } from '../../features/workouts/workoutsSlice'
 
 
 const CREATE_WORKOUT = gql`
@@ -93,7 +94,7 @@ function CreateWorkout() {
   
   const handleCreateWorkout = async (event: any) => {
     try {
-      await createWorkout({
+      const response = await createWorkout({
         variables: {
           name: state.workoutName,
           description: state.workoutDescription,
@@ -103,11 +104,16 @@ function CreateWorkout() {
         }
       });
 
+      console.log('createdWorkout ==>', response.data.createWorkout);
+      
+      const workoutId: string = response.data.createWorkout.id
+
       dispatch(storeNewWorkout({
         name: state.workoutName,
         description: state.workoutDescription,
         location: state.workoutLocation,
-        length: Number(state.workoutLength)
+        length: Number(state.workoutLength),
+        id: workoutId
       }))
 
       setState({

@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
 import Exercise from './Exercise'
+import { ExerciseType } from '../../features/exercises/exercisesSlice'
 
 const ONE_WORKOUT = gql`
   query GetOneWorkout($workoutId: ID!) {
@@ -50,7 +51,6 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   console.log('data ==>', data);
   
   const {
-    id,
     name,
     description,
     length,
@@ -58,9 +58,9 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     exercises
   } = data.workout
 
-  function renderExercises(exercises: any) {
-    return exercises.map((ex: any, idx: number) => {
-      return <Exercise exercise={ex} key={idx} />
+  function renderExercises(exercises: ExerciseType[]) {
+    return exercises.map((ex: any) => {
+      return <Exercise exercise={ex} key={ex.id} />
     })
   }
 
@@ -70,7 +70,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
       <p>{description}</p>
 
-      <p>{length}</p>
+      <p>{length} minutes</p>
 
       <p>{location}</p>
 

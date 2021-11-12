@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { ExerciseType } from '../exercises/exercisesSlice'
 
-export interface Workout {
+export interface WorkoutType {
   description: string | null
   id: string
   length: null | number
@@ -12,8 +12,8 @@ export interface Workout {
 }
 
 interface WorkoutsStateType {
-  workouts: Workout[]
-  currentWorkout: Workout | null
+  workouts: WorkoutType[]
+  currentWorkout: WorkoutType | null
   status: 'idle' | 'succeeded'
   error: string | null
 }
@@ -29,7 +29,7 @@ const workoutsSlice = createSlice({
   name: 'workouts',
   initialState,
   reducers: {
-    storeWorkouts(state, action: PayloadAction<Workout[]>) {
+    storeWorkouts(state, action: PayloadAction<WorkoutType[]>) {
       state.workouts = state.workouts.concat(action.payload)
       state.status = 'succeeded'
     },

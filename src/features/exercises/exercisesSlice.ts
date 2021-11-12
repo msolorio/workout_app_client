@@ -1,4 +1,4 @@
-import { Workout } from '../workouts/workoutsSlice'
+import { WorkoutType } from '../workouts/workoutsSlice'
 
 export interface ExerciseType {
   id: String
@@ -7,5 +7,5 @@ export interface ExerciseType {
   sets: Number | null
   weight: Number | null
   unit: Number | null
-  workout: Workout | null
+  workout: WorkoutType | null
 }

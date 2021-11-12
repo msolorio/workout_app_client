@@ -9,8 +9,10 @@ function Exercise(props: Props) {
   return (
     <div>
       <h3>{props.exercise.name}</h3>
-      <p>Reps: {props.exercise.reps}</p>
-      { props.exercise.sets && <p>Sets: {props.exercise.sets}</p> }
+      <p>
+        <span>Reps: {props.exercise.reps}</span>
+        {' '}&nbsp;
+      { props.exercise.sets && <span>Sets: {props.exercise.sets}</span> }</p>
       {
         props.exercise.weight
         && props.exercise.unit
