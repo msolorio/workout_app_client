@@ -7,6 +7,7 @@ import { storeWorkouts } from './features/workouts/workoutsSlice'
 import Header from './components/Header';
 import CreateWorkout from './pages/CreateWorkout/CreateWorkout'
 import IndexWorkout from './pages/IndexWorkout/IndexWorkout'
+import ShowWorkout from './pages/ShowWorkout/ShowWorkout'
 import './App.css'
 
 import {
@@ -49,7 +50,8 @@ function App() {
       <Header />
       <Switch>
         <Route path="/workouts/create" render={() => <CreateWorkout />} />
-        <Route path="/workouts" render={() => <IndexWorkout />} />
+        <Route exact path="/workouts" render={() => <IndexWorkout />} />
+        <Route path="/workouts/:workoutId" render={() => <ShowWorkout />} />
       </Switch>
     </div>
   );
