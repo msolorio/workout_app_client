@@ -6,7 +6,6 @@ import { useAppDispatch } from '../../app/hooks'
 import TextInputGroup from '../../components/TextInputGroup';
 import NumberInputGroup from '../../components/NumberInputGroup';
 import Exercise from './components/Exercise';
-import { WorkoutType } from '../../features/workouts/workoutsSlice'
 
 
 const CREATE_WORKOUT = gql`
