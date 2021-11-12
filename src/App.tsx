@@ -49,9 +49,9 @@ function App() {
       <h1>Workout App</h1>
       <Header />
       <Switch>
-        <Route path="/workouts/create" render={() => <CreateWorkout />} />
         <Route exact path="/workouts" render={() => <IndexWorkout />} />
-        <Route path="/workouts/:workoutId" render={() => <ShowWorkout />} />
+        <Route exact path="/workouts/create" render={() => <CreateWorkout />} />
+        <Route exact path="/workouts/:workoutId" component={ShowWorkout} />
       </Switch>
     </div>
   );

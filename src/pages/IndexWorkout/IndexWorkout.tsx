@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../app/hooks'
 import { selectAllWorkouts } from '../../features/workouts/workoutsSlice'
 
@@ -7,10 +8,12 @@ function Workouts() {
 
   const workoutsJSX = workouts.map((workout: any, idx: number) => {
     return (
-      <div key={idx}>
-        <h2>{workout.name}</h2>
-        <p>{workout.description}</p>
-      </div>
+      <Link to={`/workouts/${workout.id}`} key={idx}>
+        <div>
+          <h2>{workout.name}</h2>
+          <p>{workout.description}</p>
+        </div>
+      </Link>
     );
   });
 
