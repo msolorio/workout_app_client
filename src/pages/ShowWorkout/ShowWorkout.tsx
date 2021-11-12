@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { useAppDispatch } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
@@ -32,7 +32,6 @@ interface Props {
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const dispatch = useAppDispatch()
-  const currentWorkout = useAppSelector((state) => state.workouts.currentWorkout)
   
   const { workoutId } = match.params
   
@@ -40,15 +39,13 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     variables: { workoutId: workoutId }
   })
 
+  useEffect(() => {
+    if (data) dispatch(storeCurrentWorkout(data.workout))
+  }, [data, dispatch])
+
   if (loading) return <h2>Loading...</h2>
 
-  if (error) console.log('error ==>', error);
-  
-  if (data && !currentWorkout) {
-    dispatch(storeCurrentWorkout(data.workout))
-  }
-
-  console.log('data ==>', data);
+  if (error) return <h2>Something went wrong. Please try again.</h2>
   
   const {
     name,
@@ -57,6 +54,15 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     location,
     exercises
   } = data.workout
+
+
+  const handleStartClick = () => {
+    console.log('called handleStartClick')
+
+    // make graphql query to create session
+    // passing in workoutId
+  }
+
 
   function renderExercises(exercises: ExerciseType[]) {
     return exercises.map((ex: any) => {
@@ -68,11 +74,16 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     <main>
       <h2>{name}</h2>
 
-      <p>{description}</p>
 
-      <p>{length} minutes</p>
+      { length && <p>{length} minutes</p> }
 
-      <p>{location}</p>
+      { location && <p>{location}</p> }
+
+      <button onClick={handleStartClick}>
+        Start
+      </button>
+
+      { description && <p>{description}</p> }
 
       <ul>
         {renderExercises(exercises)}

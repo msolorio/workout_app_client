@@ -1,12 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 import { ExerciseType } from '../exercises/exercisesSlice'
 
 export interface WorkoutType {
   description: string | null
   id: string
-  length: null | number
-  location: string
+  length: number | null
+  location: string | null
   name: string
   exercises?: ExerciseType[]
 }
@@ -25,6 +28,7 @@ const initialState: WorkoutsStateType = {
   error: null
 }
 
+
 const workoutsSlice = createSlice({
   name: 'workouts',
   initialState,
@@ -42,7 +46,7 @@ const workoutsSlice = createSlice({
       console.log('called storeCurrentWorkout')
 
       state.currentWorkout = action.payload
-    }
+    },
   }
 })
 
@@ -51,7 +55,7 @@ export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 export const {
   storeWorkouts,
   storeNewWorkout,
-  storeCurrentWorkout
+  storeCurrentWorkout,
 } = workoutsSlice.actions
 
 export default workoutsSlice.reducer

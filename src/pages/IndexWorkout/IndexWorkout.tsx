@@ -21,23 +21,18 @@ const WORKOUTS = gql`
   }
 `;
 
-function Workouts() {
+function IndexWorkout() {
   const dispatch = useAppDispatch()
   const workouts = useAppSelector(selectAllWorkouts)
-  const loadworkoutsStatus = useAppSelector((state) => state.workouts.status)
 
   const { loading, error, data } = useQuery(WORKOUTS)
 
-  if (loading) return <h2>Loading...</h2>
+  useEffect(() => {
+    if (data) dispatch(storeWorkouts(data.workouts))
+  }, [data, dispatch])
 
-  if (error) {
-    console.log('Error loading all workouts ==>', error)
-    return <h2>Something went wrong. Please try again</h2>
-  }
-
-  if (data && loadworkoutsStatus !== 'succeeded') {
-    dispatch(storeWorkouts(data.workouts))
-  }
+  if (loading) return <h2>Loading...</h2>  
+  if (error) return <h2>Something went wrong. Please try again.</h2>
 
   const workoutsJSX = workouts.map((workout: any, idx: number) => {
     return (
@@ -50,14 +45,10 @@ function Workouts() {
     );
   });
 
-  return <ul>{workoutsJSX}</ul>
-}
-
-function IndexWorkout() {
   return (
     <main>
-      <h2>Index workout page</h2>
-      <Workouts />
+      <h2>Workouts</h2>
+      <ul>{workoutsJSX}</ul>
     </main>
   )
 }
