@@ -26,11 +26,6 @@ const workoutsSlice = createSlice({
   initialState,
   reducers: {
     storeWorkouts(state, action: PayloadAction<Workout[]>) {
-      console.log('called storeWorkouts')
-
-      console.log('action.payload ==>', action.payload)
-      
-
       state.workouts = state.workouts.concat(action.payload)
       state.status = 'succeeded'
     },

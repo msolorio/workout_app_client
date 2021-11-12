@@ -6,7 +6,7 @@ import { storeWorkouts } from './features/workouts/workoutsSlice'
 
 import Header from './components/Header';
 import CreateWorkout from './pages/CreateWorkout/CreateWorkout'
-import IndexWorkout from './pages/IndexWorkout'
+import IndexWorkout from './pages/IndexWorkout/IndexWorkout'
 import './App.css'
 
 import {

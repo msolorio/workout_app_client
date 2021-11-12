@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppSelector } from '../app/hooks'
-import { selectAllWorkouts } from '../features/workouts/workoutsSlice'
+import { useAppSelector } from '../../app/hooks'
+import { selectAllWorkouts } from '../../features/workouts/workoutsSlice'
 
 function Workouts() {
   const workouts = useAppSelector(selectAllWorkouts)
