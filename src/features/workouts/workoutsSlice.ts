@@ -34,7 +34,7 @@ const workoutsSlice = createSlice({
   initialState,
   reducers: {
     storeWorkouts(state, action: PayloadAction<WorkoutType[]>) {
-      state.workouts = state.workouts.concat(action.payload)
+      state.workouts = action.payload
       state.status = 'succeeded'
     },
 
@@ -43,8 +43,6 @@ const workoutsSlice = createSlice({
     },
 
     storeCurrentWorkout(state, action) {
-      console.log('called storeCurrentWorkout')
-
       state.currentWorkout = action.payload
     },
   }
