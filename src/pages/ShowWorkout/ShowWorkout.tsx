@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
@@ -26,12 +26,27 @@ const ONE_WORKOUT = gql`
   }
 `
 
+// TODO:
+// 1. Return session info
+// including associated workout data
+// ex instances & associated exercies
+// 2. Store current session in redux
+const CREATE_SESSION = gql`
+  mutation Mutation($workoutId: ID!) {
+    createSession(workoutId: $workoutId) {
+      id
+    }
+  }
+`
+
 interface Props {
   workoutId: string
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const dispatch = useAppDispatch()
+
+  const [createSession] = useMutation(CREATE_SESSION)
   
   const { workoutId } = match.params
   
@@ -48,6 +63,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   if (error) return <h2>Something went wrong. Please try again.</h2>
   
   const {
+    id,
     name,
     description,
     length,
@@ -56,11 +72,24 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   } = data.workout
 
 
-  const handleStartClick = () => {
+  const handleStartClick = async () => {
     console.log('called handleStartClick')
 
-    // make graphql query to create session
+    // 1. make graphql query to create session
     // passing in workoutId
+
+    try {
+      const response = await createSession({ variables: { workoutId: id } })
+
+      console.log('response ==>', response)
+    } catch(err) {
+      console.log('err creating session ==>', err)
+    }
+
+
+    // 2. store current session in redux
+
+    // 3. redirect to current session page
   }
 
 
