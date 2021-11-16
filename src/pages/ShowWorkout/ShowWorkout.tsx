@@ -3,6 +3,7 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
+import { storeCurrentSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
 
@@ -32,11 +33,29 @@ const ONE_WORKOUT = gql`
 // ex instances & associated exercies
 // 2. Store current session in redux
 const CREATE_SESSION = gql`
-  mutation Mutation($workoutId: ID!) {
-    createSession(workoutId: $workoutId) {
+mutation CreateSessionMutation($workoutId: ID!) {
+  createSession(workoutId: $workoutId) {
+    id
+    workout {
       id
+      name
+      description
+      length
+      location
+    }
+    exerciseInstances {
+      id
+      exercise {
+        id
+        name
+        reps
+        sets
+        weight
+        unit
+      }
     }
   }
+}
 `
 
 interface Props {
@@ -82,14 +101,16 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       const response = await createSession({ variables: { workoutId: id } })
 
       console.log('response ==>', response)
+      // 2. store current session in redux
+      const newSession = response.data.createSession;
+      dispatch(storeCurrentSession(newSession))
+  
+      // 3. redirect to current session page
     } catch(err) {
       console.log('err creating session ==>', err)
     }
 
 
-    // 2. store current session in redux
-
-    // 3. redirect to current session page
   }
 
 

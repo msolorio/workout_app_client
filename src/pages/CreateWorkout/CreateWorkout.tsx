@@ -9,7 +9,7 @@ import Exercise from './components/Exercise';
 
 
 const CREATE_WORKOUT = gql`
-  mutation Mutation(
+  mutation CreateWorkoutMutation(
     $name: String!,
     $location: String!,
     $description: String,

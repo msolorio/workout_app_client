@@ -7,5 +7,5 @@ export interface ExerciseType {
   sets: Number | null
   weight: Number | null
   unit: Number | null
-  workout: WorkoutType | null
+  workout?: WorkoutType | null
 }

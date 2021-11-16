@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import workoutsReducer from '../features/workouts/workoutsSlice'
+import sessionsReducer from '../features/sessions/sessionsSlice'
 
 const store = configureStore({
   reducer: {
-    workouts: workoutsReducer
+    workouts: workoutsReducer,
+    sessions: sessionsReducer
   },
 })
 
