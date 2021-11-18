@@ -1,7 +1,5 @@
 # Workout App - Client
 
-
-
 The client component of a full stack workout tracking app
 
 ## Fetures
