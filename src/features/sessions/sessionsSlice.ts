@@ -7,10 +7,11 @@ import {
 import { WorkoutType } from '../workouts/workoutsSlice'
 import { ExerciseInstanceType } from '../exerciseInstance/exerciseInstancesSlice'
 
-interface SessionType {
+export interface SessionType {
   id: string,
   workout: WorkoutType,
   exerciseInstances: ExerciseInstanceType[]
+  date: number
 }
 
 interface SessionStateType {
@@ -34,18 +35,11 @@ const sessionsSlice = createSlice({
     // functionality set session to currentSession
     storeCurrentSession(state, action: PayloadAction<SessionType>) {
       const newSession = action.payload
-      newSession.exerciseInstances = newSession.exerciseInstances.map((exInstance: ExerciseInstanceType) => {
-        exInstance.setsCompleted = 0
-        exInstance.repsCompleted = 0
-        return exInstance
-      })
-      
       state.currentSession = newSession
     },
 
     // Adds newly created session in list of sessions
-    storeNewSession(state, action) {
-    }
+    storeNewSession(state, action) {}
   }
 })
 

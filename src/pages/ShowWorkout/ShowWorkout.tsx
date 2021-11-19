@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
 import { storeCurrentSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
@@ -36,6 +37,7 @@ const CREATE_SESSION = gql`
 mutation CreateSessionMutation($workoutId: ID!) {
   createSession(workoutId: $workoutId) {
     id
+    date
     workout {
       id
       name
@@ -53,6 +55,8 @@ mutation CreateSessionMutation($workoutId: ID!) {
         weight
         unit
       }
+      setsCompleted
+      repsCompleted
     }
   }
 }
@@ -63,8 +67,11 @@ interface Props {
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
+  const sessionId = useAppSelector((state) => state.sessions.currentSession?.id)
+  const [redirectToNewSession, setRedirectToNewSession] = useState(false)
+  
   const dispatch = useAppDispatch()
-
+  
   const [createSession] = useMutation(CREATE_SESSION)
   
   const { workoutId } = match.params
@@ -72,7 +79,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
     variables: { workoutId: workoutId }
   })
-
+  
   useEffect(() => {
     if (data) dispatch(storeCurrentWorkout(data.workout))
   }, [data, dispatch])
@@ -94,23 +101,23 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const handleStartClick = async () => {
     console.log('called handleStartClick')
 
-    // 1. make graphql query to create session
-    // passing in workoutId
-
     try {
+      console.log('id ==>', id)
+
       const response = await createSession({ variables: { workoutId: id } })
 
-      console.log('response ==>', response)
-      // 2. store current session in redux
-      const newSession = response.data.createSession;
+      const newSession = response.data.createSession
+
+      console.log('newSession ==>', newSession)
+      
+
       dispatch(storeCurrentSession(newSession))
   
       // 3. redirect to current session page
+      setRedirectToNewSession(true)
     } catch(err) {
       console.log('err creating session ==>', err)
     }
-
-
   }
 
 
@@ -120,10 +127,13 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     })
   }
 
+  if (redirectToNewSession && sessionId) {
+    return <Redirect to={`/sessions/${sessionId}`} />
+  }
+
   return (
     <main>
       <h2>{name}</h2>
-
 
       { length && <p>{length} minutes</p> }
 
