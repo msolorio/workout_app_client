@@ -1,10 +1,12 @@
 import { RouteComponentProps } from 'react-router-dom'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { storeCurrentSession, SessionType } from '../../features/sessions/sessionsSlice'
 import {
   useQuery,
   gql
 } from '@apollo/client'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { storeCurrentSession, SessionType } from '../../features/sessions/sessionsSlice'
+import DateWidget from '../../components/DateWidget'
+import ExerciseInstances from './ExerciseInstances'
 
 const SESSION = gql`
   query getSession($sessionId: ID!) {
@@ -46,11 +48,11 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   const sessionId = match.params.sessionId
 
   // retrieve session from redux
-  let currentSession = useAppSelector((state) => state.sessions.currentSession)
+  let session = useAppSelector((state) => state.sessions.currentSession)
 
   // otherwise retrieve from server
   const { loading, error, data } = useQuery(SESSION, {
-    skip: !!currentSession,
+    skip: !!session,
     variables: { sessionId }
   })
   
@@ -58,33 +60,48 @@ function ShowSession({match}: RouteComponentProps<Props>) {
 
   if (error) {
     console.log('error ==>', error)
-    
     return <h2>Something went wrong. Please try again.</h2>
   }
 
   if (data) {
-    currentSession = data.session as SessionType
-    dispatch(storeCurrentSession(currentSession))
+    session = data.session as SessionType
+    dispatch(storeCurrentSession(session))
   }
 
+  const currentSession: SessionType = session as SessionType
+  
   console.log('currentSession ==>', currentSession)
   
-  
-  console.log('currentSession?.date ==>', currentSession?.date)
 
-  console.log('typeof currentSession?.date ==>', typeof currentSession?.date)
-  
-
-  const myDate = new Date(currentSession?.date as number)
-
-  console.log('myDate ==>', myDate)
-  
-  
   return (
-    <section>
-      <h2>{currentSession?.workout.name}</h2>
-      <p>{}</p>
-    </section>
+    <main>
+      <section>
+        <h2>{currentSession.workout.name}</h2>
+        <div>
+          <DateWidget timestamp={currentSession.date} />
+          <p>{currentSession.workout.location}</p>
+        </div>
+      </section>
+
+      {/* TODO: convert to dropdown */}
+      <section>
+        <p>{currentSession.workout.description}</p>
+      </section>
+
+      <section>
+        {/* TODO: clicking start initializes timer */}
+        <button>Start</button>
+        <button>Reset</button>
+        {/* TODO: completion of the workout saves the workout length */}
+        <button>Complete</button>
+      </section>
+
+      <section>
+        <ExerciseInstances
+          exInstances={currentSession.exerciseInstances}
+        />
+      </section>
+    </main>
   )
 }
 
