@@ -1,4 +1,5 @@
 import { ExerciseInstanceType } from "../../features/exerciseInstance/exerciseInstancesSlice"
+import RepsAndSets from './RepsAndSets'
 
 interface Props {
   exInst: ExerciseInstanceType
@@ -12,7 +13,7 @@ function ExerciseInstance({ exInst }: Props) {
     reps,
     sets
   } = exInst.exercise
-
+  
   return (
     <div>
       <label htmlFor="completed" hidden>completed</label>
@@ -20,11 +21,12 @@ function ExerciseInstance({ exInst }: Props) {
       <div>
         <p>{name}</p>
         <p>{weight} {unit}</p>
-
-        <p>Reps: {reps}</p>
-
-        {/* TODO: on button click - update DB / update redux */}
-        <p>Sets: <button>{exInst.setsCompleted}/{sets}</button></p>
+        <RepsAndSets
+          reps={reps}
+          sets={sets}
+          repsCompleted={exInst.repsCompleted}
+          setsCompleted={exInst.setsCompleted}
+        />
       </div>
     </div>
   )
