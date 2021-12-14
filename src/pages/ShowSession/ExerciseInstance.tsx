@@ -6,7 +6,6 @@ interface Props {
 }
 
 function ExerciseInstance({ exInst }: Props) {
-  
   const exInstId = exInst.id
   const {
     name,
@@ -16,11 +15,12 @@ function ExerciseInstance({ exInst }: Props) {
     sets
   } = exInst.exercise
   
+  const completed = exInst.setsCompleted >= (sets || Infinity)
 
   return (
     <div>
       <label htmlFor="completed" hidden>completed</label>
-      <input type="checkbox" name="completed" />
+      <input type="checkbox" name="completed" checked={completed} readOnly />
       <div>
         <p>{name}</p>
         <p>{weight} {unit}</p>

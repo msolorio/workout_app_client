@@ -33,17 +33,16 @@ function RepsAndSets({
 
   const handleSetComplete = async () => {
     console.log('called handleSetcomplete')
-    const updatedSets = setsCompleted + 1
 
-    // Update DB with GraphQL
+    if (setsCompleted >= sets) return
+
     await incrementSetForExInstance({
       variables: {
         id: exInstId,
-        setsCompleted: updatedSets
+        setsCompleted: setsCompleted + 1
       }
     })
 
-    // TODO: Update Redux
     dispatch(incrementSetForExInst({
       exInstId: exInstId
     }))
@@ -52,8 +51,7 @@ function RepsAndSets({
   return (
     <>
       <p>Reps: {reps}</p>
-    
-      {/* TODO: on button click - update DB / update redux */}
+
       <p>
         <span>Sets:</span>
         <button onClick={handleSetComplete}>
