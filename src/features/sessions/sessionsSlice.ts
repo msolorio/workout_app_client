@@ -39,13 +39,32 @@ const sessionsSlice = createSlice({
     },
 
     // Adds newly created session in list of sessions
-    storeNewSession(state, action) {}
+    storeNewSession(state, action) {},
+
+    incrementSetForExInst(state, action: any) {
+      console.log('action ==>', action)
+
+      
+      const exInst = state.currentSession?.exerciseInstances.find((exInst) => {
+        return exInst.id === action.payload.exInstId
+      })
+
+      const maxSets = exInst?.exercise.sets
+
+      console.log('maxSets ==>', maxSets)
+      
+
+      if (exInst && maxSets && exInst.setsCompleted < maxSets) {
+        exInst.setsCompleted += 1
+      }
+    }
   }
 })
 
 export const {
   storeCurrentSession,
-  // storeNewSession
+  incrementSetForExInst,
+  // storeNewSession,
 } = sessionsSlice.actions
 
 export default sessionsSlice.reducer

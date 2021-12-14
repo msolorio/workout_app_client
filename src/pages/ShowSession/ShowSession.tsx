@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import {
   useQuery,
@@ -56,22 +57,24 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     variables: { sessionId }
   })
   
+  useEffect(() => {
+    if (data) dispatch(storeCurrentSession(data.session))
+  }, [data, dispatch])
+  
+  
   if (loading) return <h2>Loading...</h2>
-
+  
   if (error) {
     console.log('error ==>', error)
     return <h2>Something went wrong. Please try again.</h2>
   }
-
+  
   if (data) {
     session = data.session as SessionType
-    dispatch(storeCurrentSession(session))
   }
-
+  
   const currentSession: SessionType = session as SessionType
-  
-  console.log('currentSession ==>', currentSession)
-  
+
 
   return (
     <main>

@@ -6,6 +6,8 @@ interface Props {
 }
 
 function ExerciseInstance({ exInst }: Props) {
+  
+  const exInstId = exInst.id
   const {
     name,
     weight,
@@ -14,6 +16,7 @@ function ExerciseInstance({ exInst }: Props) {
     sets
   } = exInst.exercise
   
+
   return (
     <div>
       <label htmlFor="completed" hidden>completed</label>
@@ -22,6 +25,7 @@ function ExerciseInstance({ exInst }: Props) {
         <p>{name}</p>
         <p>{weight} {unit}</p>
         <RepsAndSets
+          exInstId={exInstId}
           reps={reps}
           sets={sets}
           repsCompleted={exInst.repsCompleted}
