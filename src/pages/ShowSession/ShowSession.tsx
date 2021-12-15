@@ -49,11 +49,15 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   const sessionId = match.params.sessionId
 
   // retrieve session from redux
-  let session = useAppSelector((state) => state.sessions.currentSession)
+  let session = useAppSelector((state) => state.sessions.currentSession) as SessionType
 
-  // otherwise retrieve from server
+  // if no session in redux or current session does not match url param
+  // retrieve session from server
+  const currentSeshId = session?.id
+  const makeQuery = !!session || (currentSeshId !== sessionId)
+
   const { loading, error, data } = useQuery(SESSION, {
-    skip: !!session,
+    skip: !makeQuery,
     variables: { sessionId }
   })
   
@@ -69,26 +73,21 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     return <h2>Something went wrong. Please try again.</h2>
   }
   
-  if (data) {
-    session = data.session as SessionType
-  }
-  
-  const currentSession: SessionType = session as SessionType
-
+  if (data) session = data.session as SessionType
 
   return (
     <main>
       <section>
-        <h2>{currentSession.workout.name}</h2>
+        <h2>{session.workout.name}</h2>
         <div>
-          <DateWidget timestamp={currentSession.date} />
-          <p>{currentSession.workout.location}</p>
+          <DateWidget timestamp={session.date} />
+          <p>{session.workout.location}</p>
         </div>
       </section>
 
       {/* TODO: convert to dropdown */}
       <section>
-        <p>{currentSession.workout.description}</p>
+        <p>{session.workout.description}</p>
       </section>
 
       <section>
@@ -100,7 +99,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
 
       <section>
         <ExerciseInstances
-          exInstances={currentSession.exerciseInstances}
+          exInstances={session.exerciseInstances}
         />
       </section>
     </main>
