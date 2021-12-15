@@ -3,7 +3,7 @@ import {
   useQuery,
   gql
 } from '@apollo/client'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { useAppSelector } from '../../app/hooks'
 import { SessionType } from '../../features/sessions/sessionsSlice'
 import { RootState } from '../../app/store'
 import DateWidget from '../../components/DateWidget'
@@ -45,8 +45,6 @@ interface Props {
 
 function ShowSession({match}: RouteComponentProps<Props>) {
   const sessionId = match.params.sessionId
-
-  const dispatch = useAppDispatch()
   const sessions: SessionType[] | undefined = useAppSelector((state: RootState) => state.sessions.sessions)
   
   let currentSession
@@ -71,9 +69,6 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     console.log('No session found with that id')
     return <Redirect to="/sessions" />
   }
-
-  console.log('currentSession ==>', currentSession)
-  
   
   return (
     <main>
