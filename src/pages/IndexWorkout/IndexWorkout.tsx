@@ -17,6 +17,14 @@ const WORKOUTS = gql`
       description
       length
       location
+      exercises {
+        id
+        name
+        reps
+        sets
+        weight
+        unit
+      }
     }
   }
 `;

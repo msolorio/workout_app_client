@@ -16,14 +16,12 @@ export interface WorkoutType {
 
 interface WorkoutsStateType {
   workouts: WorkoutType[]
-  currentWorkout: WorkoutType | null
   status: 'idle' | 'succeeded'
   error: string | null
 }
 
 const initialState: WorkoutsStateType = {
   workouts: [],
-  currentWorkout: null,
   status: 'idle',
   error: null
 }
@@ -41,10 +39,6 @@ const workoutsSlice = createSlice({
     storeNewWorkout(state, action) {
       state.workouts.push(action.payload)
     },
-
-    storeCurrentWorkout(state, action) {
-      state.currentWorkout = action.payload
-    },
   }
 })
 
@@ -53,7 +47,6 @@ export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 export const {
   storeWorkouts,
   storeNewWorkout,
-  storeCurrentWorkout,
 } = workoutsSlice.actions
 
 export default workoutsSlice.reducer

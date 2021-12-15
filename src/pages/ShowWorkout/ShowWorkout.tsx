@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
+import { RootState } from '../../app/store'
+import { WorkoutType } from '../../features/workouts/workoutsSlice'
 import { storeNewSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
@@ -28,11 +29,6 @@ const ONE_WORKOUT = gql`
   }
 `
 
-// TODO:
-// 1. Return session info
-// including associated workout data
-// ex instances & associated exercies
-// 2. Store current session in redux
 const CREATE_SESSION = gql`
 mutation CreateSessionMutation($workoutId: ID!) {
   createSession(workoutId: $workoutId) {
@@ -67,21 +63,25 @@ interface Props {
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
+  const dispatch = useAppDispatch()
+  const [createSession] = useMutation(CREATE_SESSION)
+  const { workoutId } = match.params
+
   const [state, setState] = useState({ sessionId: null })
   
-  const dispatch = useAppDispatch()
+  const workouts: WorkoutType[] = useAppSelector((state: RootState) => state.workouts.workouts)
   
-  const [createSession] = useMutation(CREATE_SESSION)
+  let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
   
-  const { workoutId } = match.params
-  
+console.log('currentWorkout ==>', currentWorkout)
+
+
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
+    skip: !!currentWorkout,
     variables: { workoutId: workoutId }
   })
-  
-  useEffect(() => {
-    if (data) dispatch(storeCurrentWorkout(data.workout))
-  }, [data, dispatch])
+
+  if (data) currentWorkout = data.workout
 
   if (loading) return <h2>Loading...</h2>
 
@@ -94,7 +94,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     length,
     location,
     exercises
-  } = data.workout
+  } = currentWorkout as WorkoutType
 
 
   const handleCreateSession = async () => {
@@ -136,7 +136,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       { description && <p>{description}</p> }
 
       <ul>
-        {renderExercises(exercises)}
+        {renderExercises(exercises as ExerciseType[])}
       </ul>
     </main>
   )
