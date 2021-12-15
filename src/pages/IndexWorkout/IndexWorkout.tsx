@@ -33,11 +33,13 @@ function IndexWorkout() {
   const dispatch = useAppDispatch()
   const workouts = useAppSelector(selectAllWorkouts)
 
-  const { loading, error, data } = useQuery(WORKOUTS)
+  const { loading, error, data } = useQuery(WORKOUTS, {
+    skip: !!workouts.length
+  })
 
   useEffect(() => {
     if (data) dispatch(storeWorkouts(data.workouts))
-  }, [data, dispatch])
+  })
 
   if (loading) return <h2>Loading...</h2>  
   if (error) return <h2>Something went wrong. Please try again.</h2>

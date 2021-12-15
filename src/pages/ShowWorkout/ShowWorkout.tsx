@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -72,9 +72,6 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const workouts: WorkoutType[] = useAppSelector((state: RootState) => state.workouts.workouts)
   
   let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
-  
-console.log('currentWorkout ==>', currentWorkout)
-
 
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
     skip: !!currentWorkout,
@@ -104,7 +101,10 @@ console.log('currentWorkout ==>', currentWorkout)
   
       dispatch(storeNewSession(newSession))
   
-      setState({ sessionId: newSession.id })
+      setState({
+        ...state,
+        sessionId: newSession.id
+      })
     } catch(err) {
       console.log('err creating session ==>', err)
     }
@@ -130,7 +130,11 @@ console.log('currentWorkout ==>', currentWorkout)
       { location && <p>{location}</p> }
 
       <button onClick={handleCreateSession}>
-        Create Session
+        Start Session
+      </button>
+
+      <button>
+        <Link to={`/workouts/${id}/edit`}>Edit Workout</Link>
       </button>
 
       { description && <p>{description}</p> }
