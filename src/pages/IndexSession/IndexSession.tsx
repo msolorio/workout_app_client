@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import {
   useQuery,
   gql
@@ -11,11 +12,27 @@ const SESSIONS = gql`
   query Sessions {
     sessions {
       id
-      completed
       date
       workout {
+        id
         name
+        description
+        length
         location
+      }
+      completed
+      exerciseInstances {
+        id
+        exercise {
+          id
+          name
+          reps
+          sets
+          weight
+          unit
+        }
+        setsCompleted
+        repsCompleted
       }
     }
   }
@@ -40,11 +57,13 @@ function IndexSession() {
 
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (
-      <div>
-        <h2>{session.date}</h2>
-        <p>{session.workout.name}</p>
-        <p>{ session.completed ? "completed" : "in-progress" }</p>
-      </div>
+      <Link to={`/sessions/${session.id}`} key={session.id}>
+        <div>
+          <h2>{session.date}</h2>
+          <p>{session.workout.name}</p>
+          <p>{ session.completed ? "completed" : "in-progress" }</p>
+        </div>
+      </Link>
     )
   })
 
