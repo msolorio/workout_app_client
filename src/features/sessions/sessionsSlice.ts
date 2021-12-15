@@ -37,10 +37,12 @@ const sessionsSlice = createSlice({
   name: 'sessions',
   initialState,
   reducers: {
+
+    // TODO: Update to store only current Session Id
     // functionality set session to currentSession
     storeCurrentSession(state, action: PayloadAction<SessionType>) {
       const newSession = action.payload
-      state.currentSession = newSession
+      // state.currentSession = newSession
     },
 
     // Adds newly created session in list of sessions

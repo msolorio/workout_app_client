@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import {
   useQuery,
   gql
@@ -26,9 +25,6 @@ function IndexSession() {
   const dispatch = useAppDispatch()
   const sessions = useAppSelector((state: RootState) => state.sessions.sessions)
 
-  console.log('sessions ==>', sessions)
-  
-
   const { loading, error, data } = useQuery(SESSIONS, {
     skip: !!sessions.length
   })
@@ -54,7 +50,7 @@ function IndexSession() {
 
   return (
     <main>
-      <h2>Sessions</h2>
+      <h2>Session</h2>
       <ul>{sessionsJSX}</ul>
     </main>
   )
