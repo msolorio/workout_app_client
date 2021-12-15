@@ -67,8 +67,7 @@ interface Props {
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
-  const sessionId = useAppSelector((state) => state.sessions.currentSession?.id)
-  const [redirectToNewSession, setRedirectToNewSession] = useState(false)
+  const [state, setState] = useState({ sessionId: null })
   
   const dispatch = useAppDispatch()
   
@@ -99,23 +98,13 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleCreateSession = async () => {
-    console.log('called handleCreateSession')
-
     try {
-      console.log('id ==>', id)
-
       const response = await createSession({ variables: { workoutId: id } })
-
       const newSession = response.data.createSession
-
-      console.log('newSession ==>', newSession)
-      
-
-      // dispatch(storeCurrentSession(newSession))
+  
       dispatch(storeNewSession(newSession))
   
-      // 3. redirect to current session page
-      setRedirectToNewSession(true)
+      setState({ sessionId: newSession.id })
     } catch(err) {
       console.log('err creating session ==>', err)
     }
@@ -128,8 +117,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     })
   }
 
-  if (redirectToNewSession && sessionId) {
-    return <Redirect to={`/sessions/${sessionId}`} />
+  if (state.sessionId) {
+    return <Redirect to={`/sessions/${state.sessionId}`} />
   }
 
   return (
