@@ -45,6 +45,8 @@ const sessionsSlice = createSlice({
 
     // Adds newly created session in list of sessions
     storeNewSession(state, action: PayloadAction<SessionType>) {
+      console.log('action.payload ==>', action.payload)
+
       state.sessions.push(action.payload)
     },
 

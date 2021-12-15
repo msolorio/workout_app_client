@@ -29,10 +29,14 @@ function IndexSession() {
   console.log('sessions ==>', sessions)
   
 
-  const { loading, error, data } = useQuery(SESSIONS)
+  const { loading, error, data } = useQuery(SESSIONS, {
+    skip: !!sessions.length
+  })
 
   useEffect(() => {
-    if (data) dispatch(storeSessions(data.sessions))
+    if (data) {
+      dispatch(storeSessions(data.sessions))
+    }
   })
 
   if (loading) return <h2>Loading...</h2>
