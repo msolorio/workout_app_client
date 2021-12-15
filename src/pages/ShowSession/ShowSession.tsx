@@ -51,13 +51,14 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   // retrieve session from redux
   let session = useAppSelector((state) => state.sessions.currentSession) as SessionType
 
+  
   // if no session in redux or current session does not match url param
   // retrieve session from server
   const currentSeshId = session?.id
-  const makeQuery = !!session || (currentSeshId !== sessionId)
+  // const makeQuery = !!session || (currentSeshId !== sessionId)
 
   const { loading, error, data } = useQuery(SESSION, {
-    skip: !makeQuery,
+    skip: !!session,
     variables: { sessionId }
   })
   
@@ -74,6 +75,8 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   }
   
   if (data) session = data.session as SessionType
+
+  console.log('session ==>', session.exerciseInstances[0])
 
   return (
     <main>

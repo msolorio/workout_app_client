@@ -63,10 +63,7 @@ const sessionsSlice = createSlice({
 
       const maxSets = exInst?.exercise.sets
 
-      console.log('maxSets ==>', maxSets)
-      
-
-      if (exInst && maxSets && exInst.setsCompleted < maxSets) {
+      if (exInst && maxSets) {
         exInst.setsCompleted += 1
       }
     }

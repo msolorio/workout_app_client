@@ -31,9 +31,7 @@ function RepsAndSets({
     return <p>Reps: <button>{repsCompleted}/{reps}</button></p>
   }
 
-  const handleSetComplete = async () => {
-    console.log('called handleSetcomplete')
-
+  const handleSetComplete = async () => {    
     if (setsCompleted >= sets) return
 
     await incrementSetForExInstance({

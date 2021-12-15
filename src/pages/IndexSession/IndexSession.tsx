@@ -44,13 +44,11 @@ function IndexSession() {
 
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (
-      <Link to={`/sessions/${session.id}`} key={session.id}>
-        <div>
-          <h2>{session.date}</h2>
-          <p>{session.workout.name}</p>
-          <p>{ session.completed ? "completed" : "in-progress" }</p>
-        </div>
-      </Link>
+      <div>
+        <h2>{session.date}</h2>
+        <p>{session.workout.name}</p>
+        <p>{ session.completed ? "completed" : "in-progress" }</p>
+      </div>
     )
   })
 
