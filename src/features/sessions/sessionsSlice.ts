@@ -16,7 +16,8 @@ export interface SessionType {
 }
 
 interface ExInstanceIdPL {
-  exInstId: string
+  exInstId: string,
+  sessionId: string
 }
 
 interface SessionStateType {
@@ -40,10 +41,10 @@ const sessionsSlice = createSlice({
 
     // TODO: Update to store only current Session Id
     // functionality set session to currentSession
-    storeCurrentSession(state, action: PayloadAction<SessionType>) {
-      const newSession = action.payload
+    // storeCurrentSession(state, action: PayloadAction<SessionType>) {
+      // const newSession = action.payload
       // state.currentSession = newSession
-    },
+    // },
 
     // Adds newly created session in list of sessions
     storeNewSession(state, action: PayloadAction<SessionType>) {
@@ -73,7 +74,7 @@ const sessionsSlice = createSlice({
 })
 
 export const {
-  storeCurrentSession,
+  // storeCurrentSession,
   incrementSetForExInst,
   storeNewSession,
   storeSessions

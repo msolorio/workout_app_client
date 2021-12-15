@@ -2,10 +2,11 @@ import { ExerciseInstanceType } from "../../features/exerciseInstance/exerciseIn
 import RepsAndSets from './RepsAndSets'
 
 interface Props {
-  exInst: ExerciseInstanceType
+  exInst: ExerciseInstanceType,
+  sessionId: string
 }
 
-function ExerciseInstance({ exInst }: Props) {
+function ExerciseInstance({ exInst, sessionId }: Props) {
   const exInstId = exInst.id
   const {
     name,
@@ -30,6 +31,7 @@ function ExerciseInstance({ exInst }: Props) {
           sets={sets}
           repsCompleted={exInst.repsCompleted}
           setsCompleted={exInst.setsCompleted}
+          sessionId={sessionId}
         />
       </div>
     </div>

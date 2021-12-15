@@ -1,11 +1,11 @@
 import { WorkoutType } from '../workouts/workoutsSlice'
 
 export interface ExerciseType {
-  id: String
-  name: String
-  reps: Number
-  sets: Number | null
-  weight: Number | null
-  unit: Number | null
+  id: string
+  name: string
+  reps: number
+  sets: number | null
+  weight: number | null
+  unit: number | null
   workout?: WorkoutType | null
 }

@@ -17,13 +17,25 @@ const INCREMENT_SET = gql`
   }
 `
 
+interface Props {
+  reps: number
+  sets: number | null
+  repsCompleted: number
+  setsCompleted: number
+  exInstId: string
+  sessionId: string
+}
+
 function RepsAndSets({
   reps,
   sets,
   repsCompleted,
   setsCompleted,
-  exInstId
-}: any) {
+  exInstId,
+  sessionId
+}: Props) {
+
+
   const [incrementSetForExInstance] = useMutation(INCREMENT_SET)
   const dispatch = useAppDispatch()
 
@@ -31,8 +43,8 @@ function RepsAndSets({
     return <p>Reps: <button>{repsCompleted}/{reps}</button></p>
   }
 
-  const handleSetComplete = async () => {    
-    if (setsCompleted >= sets) return
+  const handleSetIncrement = async () => {    
+    if (!sets || setsCompleted >= sets) return
 
     await incrementSetForExInstance({
       variables: {
@@ -42,20 +54,61 @@ function RepsAndSets({
     })
 
     dispatch(incrementSetForExInst({
-      exInstId: exInstId
+      exInstId: exInstId,
+      sessionId: sessionId
     }))
+  }
+
+  const handleRepIncrement = async () => {
+    if (repsCompleted >= reps) return
+
+    await incrementSetForExInstance({
+      variables: {
+        id: exInstId,
+        repsCompleted: repsCompleted + 1
+      }
+    })
+
+    // dispatch(incrementSetForExInst({
+    //   exInstId: exInstId,
+    //   sessionId: sessionId
+    // }))
+  }
+
+  function renderSets() {
+    if (sets) {
+      return (
+        <p>
+          <span>Sets:</span>
+          <button onClick={handleSetIncrement}>
+          {setsCompleted}/{sets}
+          </button>
+        </p>
+      )
+    }
+
+    return
+  }
+
+  function renderReps() {
+    if (!sets) {
+      return (
+        <p>
+          <span>Reps:</span>
+          <button onClick={handleRepIncrement}>
+          {repsCompleted}/{reps}
+          </button>
+        </p>
+      ) 
+    }
+
+    return <p>Reps: {reps}</p>
   }
 
   return (
     <>
-      <p>Reps: {reps}</p>
-
-      <p>
-        <span>Sets:</span>
-        <button onClick={handleSetComplete}>
-        {setsCompleted}/{sets}
-        </button>
-      </p>
+      {renderReps()}
+      {renderSets()}
     </>  
   )
 }

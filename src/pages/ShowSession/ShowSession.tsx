@@ -100,6 +100,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
       <section>
         <ExerciseInstances
           exInstances={currentSession.exerciseInstances}
+          sessionId={currentSession.id}
         />
       </section>
     </main>

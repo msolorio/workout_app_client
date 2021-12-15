@@ -4,7 +4,7 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
-import { storeCurrentSession, storeNewSession } from '../../features/sessions/sessionsSlice'
+import { storeNewSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
 
@@ -111,7 +111,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       console.log('newSession ==>', newSession)
       
 
-      dispatch(storeCurrentSession(newSession))
+      // dispatch(storeCurrentSession(newSession))
       dispatch(storeNewSession(newSession))
   
       // 3. redirect to current session page
