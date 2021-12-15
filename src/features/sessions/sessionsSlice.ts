@@ -59,15 +59,15 @@ const sessionsSlice = createSlice({
     incrementSetForExInst(state, action: PayloadAction<ExInstanceIdPL>) {
       console.log('action ==>', action)
 
-      const exInst = state.currentSession?.exerciseInstances.find((exInst) => {
-        return exInst.id === action.payload.exInstId
-      })
+      // const exInst = state.currentSession?.exerciseInstances.find((exInst) => {
+      //   return exInst.id === action.payload.exInstId
+      // })
 
-      const maxSets = exInst?.exercise.sets
+      // const maxSets = exInst?.exercise.sets
 
-      if (exInst && maxSets) {
-        exInst.setsCompleted += 1
-      }
+      // if (exInst && maxSets) {
+      //   exInst.setsCompleted += 1
+      // }
     }
   }
 })

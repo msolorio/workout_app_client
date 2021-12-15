@@ -1,11 +1,11 @@
-import { useEffect } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, Redirect } from 'react-router-dom'
 import {
   useQuery,
   gql
 } from '@apollo/client'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { storeCurrentSession, SessionType } from '../../features/sessions/sessionsSlice'
+import { SessionType } from '../../features/sessions/sessionsSlice'
+import { RootState } from '../../app/store'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
 
@@ -44,28 +44,21 @@ interface Props {
 }
 
 function ShowSession({match}: RouteComponentProps<Props>) {
-  const dispatch = useAppDispatch()
-
   const sessionId = match.params.sessionId
 
-  // retrieve session from redux
-  let session = useAppSelector((state) => state.sessions.currentSession) as SessionType
-
+  const dispatch = useAppDispatch()
+  const sessions: SessionType[] | undefined = useAppSelector((state: RootState) => state.sessions.sessions)
   
-  // if no session in redux or current session does not match url param
-  // retrieve session from server
-  const currentSeshId = session?.id
-  // const makeQuery = !!session || (currentSeshId !== sessionId)
+  let currentSession
+
+  currentSession = sessions && sessions.find((session) => session.id === sessionId)
 
   const { loading, error, data } = useQuery(SESSION, {
-    skip: !!session,
+    skip: !!currentSession,
     variables: { sessionId }
   })
-  
-  useEffect(() => {
-    if (data) dispatch(storeCurrentSession(data.session))
-  }, [data, dispatch])
-  
+
+  if (data) currentSession = data.session
   
   if (loading) return <h2>Loading...</h2>
   
@@ -73,24 +66,25 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     console.log('error ==>', error)
     return <h2>Something went wrong. Please try again.</h2>
   }
+
+  if (!currentSession) {
+    console.log('No session found with that id')
+    return <Redirect to="/sessions" />
+  }
   
-  if (data) session = data.session as SessionType
-
-  console.log('session ==>', session.exerciseInstances[0])
-
   return (
     <main>
       <section>
-        <h2>{session.workout.name}</h2>
+        <h2>{currentSession.workout.name}</h2>
         <div>
-          <DateWidget timestamp={session.date} />
-          <p>{session.workout.location}</p>
+          <DateWidget timestamp={currentSession.date} />
+          <p>{currentSession.workout.location}</p>
         </div>
       </section>
 
       {/* TODO: convert to dropdown */}
       <section>
-        <p>{session.workout.description}</p>
+        <p>{currentSession.workout.description}</p>
       </section>
 
       <section>
@@ -102,7 +96,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
 
       <section>
         <ExerciseInstances
-          exInstances={session.exerciseInstances}
+          exInstances={currentSession.exerciseInstances}
         />
       </section>
     </main>
