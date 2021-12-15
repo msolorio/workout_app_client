@@ -31,6 +31,7 @@ function Header() {
             currentSessionId && 
             <li><Link to={`/sessions/${currentSessionId}`}>Current Session</Link></li>
           }
+          <li><Link to="/sessions">Sessions</Link></li>
           <li onClick={handleReset}>Reset</li>
         </ul>
       </nav>

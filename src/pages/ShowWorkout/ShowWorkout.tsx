@@ -4,7 +4,7 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { storeCurrentWorkout } from '../../features/workouts/workoutsSlice'
-import { storeCurrentSession } from '../../features/sessions/sessionsSlice'
+import { storeCurrentSession, storeNewSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
 
@@ -98,8 +98,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   } = data.workout
 
 
-  const handleStartClick = async () => {
-    console.log('called handleStartClick')
+  const handleCreateSession = async () => {
+    console.log('called handleCreateSession')
 
     try {
       console.log('id ==>', id)
@@ -112,6 +112,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       
 
       dispatch(storeCurrentSession(newSession))
+      dispatch(storeNewSession(newSession))
   
       // 3. redirect to current session page
       setRedirectToNewSession(true)
@@ -139,8 +140,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
       { location && <p>{location}</p> }
 
-      <button onClick={handleStartClick}>
-        Start
+      <button onClick={handleCreateSession}>
+        Create Session
       </button>
 
       { description && <p>{description}</p> }

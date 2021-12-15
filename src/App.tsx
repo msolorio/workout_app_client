@@ -5,6 +5,7 @@ import CreateWorkout from './pages/CreateWorkout/CreateWorkout'
 import IndexWorkout from './pages/IndexWorkout/IndexWorkout'
 import ShowWorkout from './pages/ShowWorkout/ShowWorkout'
 import ShowSession from './pages/ShowSession/ShowSession'
+import IndexSession from './pages/IndexSession/IndexSession'
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/workouts/create" render={() => <CreateWorkout />} />
         <Route exact path="/workouts/:workoutId" render={(props) => <ShowWorkout {...props} />} />
         <Route exact path="/sessions/:sessionId" render={(props) => <ShowSession {...props} />} />
+        <Route exact path="/sessions" render={(props) => <IndexSession />} />
       </Switch>
     </div>
   );

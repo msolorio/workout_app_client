@@ -95,8 +95,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
         {/* TODO: clicking start initializes timer */}
         <button>Start</button>
         <button>Reset</button>
-        {/* TODO: completion of the workout saves the workout length */}
-        <button>Complete</button>
+        <button>Pause</button>
       </section>
 
       <section>

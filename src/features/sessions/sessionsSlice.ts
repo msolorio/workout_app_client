@@ -12,6 +12,11 @@ export interface SessionType {
   workout: WorkoutType,
   exerciseInstances: ExerciseInstanceType[]
   date: number
+  completed: boolean
+}
+
+interface ExInstanceIdPL {
+  exInstId: string
 }
 
 interface SessionStateType {
@@ -39,12 +44,17 @@ const sessionsSlice = createSlice({
     },
 
     // Adds newly created session in list of sessions
-    storeNewSession(state, action) {},
+    storeNewSession(state, action: PayloadAction<SessionType>) {
+      state.sessions.push(action.payload)
+    },
 
-    incrementSetForExInst(state, action: any) {
+    storeSessions(state, action: PayloadAction<SessionType[]>) {
+      state.sessions = action.payload
+    },
+
+    incrementSetForExInst(state, action: PayloadAction<ExInstanceIdPL>) {
       console.log('action ==>', action)
 
-      
       const exInst = state.currentSession?.exerciseInstances.find((exInst) => {
         return exInst.id === action.payload.exInstId
       })
@@ -64,7 +74,8 @@ const sessionsSlice = createSlice({
 export const {
   storeCurrentSession,
   incrementSetForExInst,
-  // storeNewSession,
+  storeNewSession,
+  storeSessions
 } = sessionsSlice.actions
 
 export default sessionsSlice.reducer
