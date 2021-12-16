@@ -76,7 +76,8 @@ function WorkoutForm(props: Props) {
       description: state.workoutDescription,
       location: state.workoutLocation,
       length: Number(state.workoutLength),
-      exercises: state.exercises
+      exercises: state.exercises,
+      id: props.workoutData?.id
     }
 
     props.handleSubmit(workoutData)

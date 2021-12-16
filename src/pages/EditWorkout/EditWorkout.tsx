@@ -6,7 +6,6 @@ import { RootState } from '../../app/store'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WorkoutForm from '../../components/WorkoutForm'
 
-// TODO: set up update query
 const ONE_WORKOUT = gql`
   query GetOneWorkout($workoutId: ID!) {
     workout(id: $workoutId) {
@@ -29,19 +28,35 @@ const ONE_WORKOUT = gql`
 
 const UPDATE_WORKOUT = gql`
   mutation UpdateWorkoutMutation(
+    $id: ID!
     $name: String
     $location: String
     $description: String
     $length: Int
-    $exercises: [InputExercise!]
+    $exercises: [InputUpdateExercise!]
   ) {
     updateWorkout(
+      id: $id
       name: $name
       location: $location
-      description: $description,
-      length: $length,
+      description: $description
+      length: $length
       exercises: $exercises
-    ) { id }
+    ) {
+      id
+      name
+      location
+      description
+      length
+      exercises {
+        id
+        name
+        reps
+        sets
+        weight
+        unit
+      }
+    }
   }
 `
 
@@ -53,6 +68,8 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   const workoutId = match.params.workoutId
   const [state, setState] = useState({ redirectToWorkout: false })
   const dispatch = useAppDispatch()
+
+  const [updateWorkout] = useMutation(UPDATE_WORKOUT)
 
   const allWorkouts = useAppSelector((state: RootState) => state.workouts.workouts)
 
@@ -69,18 +86,26 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
   if (error) return <h2>Something went wrong. Please try again.</h2>
 
-  console.log('currentWorkout ==>', currentWorkout)
-  
-
   const handleUpdateWorkout = async (workoutData: any) => {
     console.log('called handleUpdateWorkout')
 
-    // TODO: trigger update query on submit
+    console.log('workoutData ==>', workoutData)
+
+    try {
+      const response = await updateWorkout({
+        variables: { ...workoutData }
+      })
+
+      console.log('response ==>', response)
+
+    }
+    catch (err) {
+      console.error(err)
+    }
 
     // TODO: update state to trigger redirect
   }
 
-  // TODO: pass workout data to workout form
   return (
     <main>
       <h2>Edit Workout</h2>
