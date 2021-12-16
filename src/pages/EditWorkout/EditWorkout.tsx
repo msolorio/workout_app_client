@@ -27,6 +27,24 @@ const ONE_WORKOUT = gql`
   }
 `
 
+const UPDATE_WORKOUT = gql`
+  mutation UpdateWorkoutMutation(
+    $name: String
+    $location: String
+    $description: String
+    $length: Int
+    $exercises: [InputExercise!]
+  ) {
+    updateWorkout(
+      name: $name
+      location: $location
+      description: $description,
+      length: $length,
+      exercises: $exercises
+    ) { id }
+  }
+`
+
 interface Props {
   workoutId: string
 }
@@ -54,7 +72,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   console.log('currentWorkout ==>', currentWorkout)
   
 
-  const handleUpdateWorkout = async () => {
+  const handleUpdateWorkout = async (workoutData: any) => {
     console.log('called handleUpdateWorkout')
 
     // TODO: trigger update query on submit
@@ -68,7 +86,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
       <h2>Edit Workout</h2>
       <WorkoutForm
         handleSubmit={handleUpdateWorkout}
-        submitBtnText="Edit Workout"
+        submitBtnText="Save Workout"
         workoutData={currentWorkout}
       />
     </main>
