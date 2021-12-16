@@ -45,16 +45,12 @@ const workoutsSlice = createSlice({
       const workoutFromDb = action.payload
       const workoutId = workoutFromDb.id
 
-      if (!state.workouts.length) {
-        state.workouts.push(workoutFromDb)
+      const updatedWorkouts = state.workouts.map((workout) => {
+        return workout.id === workoutId ? {...workout, ...workoutFromDb} : workout
+      })
 
-      } else {
-        const updatedWorkouts = state.workouts.map((workout) => {
-          return workout.id === workoutId ? {...workout, ...workoutFromDb} : workout
-        })
-  
-        state.workouts = updatedWorkouts
-      }
+      state.workouts = updatedWorkouts
+      // }
 
     }
   }

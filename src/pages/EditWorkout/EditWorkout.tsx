@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { WorkoutType, updateWorkoutRdx, selectAllWorkouts } from '../../features/workouts/workoutsSlice'
+import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { RootState } from '../../app/store'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WorkoutForm from '../../components/WorkoutForm'
 
-const ONE_WORKOUT = gql`
-  query GetOneWorkout($workoutId: ID!) {
-    workout(id: $workoutId) {
+const WORKOUTS = gql`
+  query GetWorkouts {
+    workouts {
       id
       name
       description
@@ -24,7 +24,27 @@ const ONE_WORKOUT = gql`
       }
     }
   }
-`
+`;
+
+// const ONE_WORKOUT = gql`
+//   query GetOneWorkout($workoutId: ID!) {
+//     workout(id: $workoutId) {
+//       id
+//       name
+//       description
+//       length
+//       location
+//       exercises {
+//         id
+//         name
+//         reps
+//         sets
+//         weight
+//         unit
+//       }
+//     }
+//   }
+// `
 
 const UPDATE_WORKOUT = gql`
   mutation UpdateWorkoutMutation(
@@ -72,18 +92,24 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   
   const [updateWorkout] = useMutation(UPDATE_WORKOUT)
   
-  const allWorkouts = useAppSelector(selectAllWorkouts)
+  let allWorkouts = useAppSelector(selectAllWorkouts)
 
-  let currentWorkout: WorkoutType | undefined = allWorkouts.find((workout) => workout.id === workoutId)
-  
+  let currentWorkout = allWorkouts?.find((workout: WorkoutType) => workout.id === workoutId)
 
-
-  const { loading, error, data } = useQuery(ONE_WORKOUT, {
-    skip: !!currentWorkout,
-    variables: { workoutId }
+  const { loading, error, data } = useQuery(WORKOUTS, {
+    skip: !!allWorkouts.length
   })
 
-  if (data) currentWorkout = data.workout
+  useEffect(() => {
+    if (data) {
+      dispatch(storeWorkouts(data.workouts))
+    }
+  })
+
+  if (data) {
+    console.log('in if')
+    currentWorkout = data.workouts.find((workout: WorkoutType) => workout.id === workoutId)
+  }
 
   if (loading) return <h2>Loading...</h2>
 
