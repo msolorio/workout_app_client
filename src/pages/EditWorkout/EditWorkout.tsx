@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { WorkoutType } from '../../features/workouts/workoutsSlice'
+import { WorkoutType, updateWorkoutRdx, selectAllWorkouts } from '../../features/workouts/workoutsSlice'
 import { RootState } from '../../app/store'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WorkoutForm from '../../components/WorkoutForm'
@@ -65,16 +65,19 @@ interface Props {
 }
 
 function EditWorkout({ match }: RouteComponentProps<Props>) {
+  
   const workoutId = match.params.workoutId
   const [state, setState] = useState({ redirectToWorkout: false })
   const dispatch = useAppDispatch()
-
+  
   const [updateWorkout] = useMutation(UPDATE_WORKOUT)
-
-  const allWorkouts = useAppSelector((state: RootState) => state.workouts.workouts)
+  
+  const allWorkouts = useAppSelector(selectAllWorkouts)
 
   let currentWorkout: WorkoutType | undefined = allWorkouts.find((workout) => workout.id === workoutId)
   
+
+
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
     skip: !!currentWorkout,
     variables: { workoutId }
@@ -86,25 +89,28 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
   if (error) return <h2>Something went wrong. Please try again.</h2>
 
-  const handleUpdateWorkout = async (workoutData: any) => {
-    console.log('called handleUpdateWorkout')
 
-    console.log('workoutData ==>', workoutData)
 
+  const handleUpdateWorkout = async (workoutData: WorkoutType) => {
     try {
       const response = await updateWorkout({
         variables: { ...workoutData }
       })
 
-      console.log('response ==>', response)
+      const workoutFromDb = response.data.updateWorkout
 
+      dispatch(updateWorkoutRdx(workoutFromDb))
+
+      setState({ redirectToWorkout: true })
     }
     catch (err) {
       console.error(err)
     }
-
-    // TODO: update state to trigger redirect
   }
+
+
+
+  if (state.redirectToWorkout) return <Redirect to={`/workouts/${workoutId}`} />
 
   return (
     <main>

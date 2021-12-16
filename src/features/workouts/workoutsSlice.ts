@@ -6,10 +6,10 @@ import { RootState } from '../../app/store'
 import { ExerciseType } from '../exercises/exercisesSlice'
 
 export interface WorkoutType {
-  description: string | null
+  description: string | null | undefined
   id: string
-  length: number | null
-  location: string | null
+  length: number | null | undefined
+  location: string | null | undefined
   name: string
   exercises?: ExerciseType[]
 }
@@ -36,9 +36,27 @@ const workoutsSlice = createSlice({
       state.status = 'succeeded'
     },
 
-    storeNewWorkout(state, action) {
+    // Update action type in parameter
+    storeNewWorkout(state, action: PayloadAction<WorkoutType>) {
       state.workouts.push(action.payload)
     },
+
+    updateWorkoutRdx(state, action: PayloadAction<WorkoutType>) {
+      const workoutFromDb = action.payload
+      const workoutId = workoutFromDb.id
+
+      if (!state.workouts.length) {
+        state.workouts.push(workoutFromDb)
+
+      } else {
+        const updatedWorkouts = state.workouts.map((workout) => {
+          return workout.id === workoutId ? {...workout, ...workoutFromDb} : workout
+        })
+  
+        state.workouts = updatedWorkouts
+      }
+
+    }
   }
 })
 
@@ -47,6 +65,7 @@ export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 export const {
   storeWorkouts,
   storeNewWorkout,
+  updateWorkoutRdx
 } = workoutsSlice.actions
 
 export default workoutsSlice.reducer
