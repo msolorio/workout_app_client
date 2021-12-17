@@ -1,7 +1,7 @@
 import { WorkoutType } from '../workouts/workoutsSlice'
 
 export interface ExerciseType {
-  id: string
+  id?: string
   name: string
   reps: number
   sets: number | null

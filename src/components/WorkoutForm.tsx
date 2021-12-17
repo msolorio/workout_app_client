@@ -3,14 +3,15 @@ import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
 import Exercise from './Exercise';
 import { WorkoutType } from '../features/workouts/workoutsSlice'
+import { ExerciseType } from '../features/exercises/exercisesSlice'
 
-type ExerciseType = {
-  name: string,
-  reps: number,
-  sets: number,
-  weight: number,
-  unit: string
-}
+// type ExerciseType = {
+//   name: string,
+//   reps: number,
+//   sets: number,
+//   weight: number,
+//   unit: string
+// }
 
 const stateExercises: ExerciseType[] = [];
 
@@ -68,6 +69,12 @@ function WorkoutForm(props: Props) {
       exerciseUnit: 'lbs',
     });
   }
+
+  const handleRemoveExercise = (idxToRemove: number) => {
+    const updatedExercises = state.exercises.filter((ex, idx) => idx !== idxToRemove)
+
+    setState({ ...state, exercises: updatedExercises })
+  }
   
   
   const handleSubmit = async () => {
@@ -101,7 +108,14 @@ function WorkoutForm(props: Props) {
 
   function renderExercises(exercises: ExerciseType[]) {
     return exercises.map((exercise, idx) => {
-      return <Exercise key={idx} exercise={exercise} />
+      return (
+      <Exercise
+        key={idx}
+        idx={idx}
+        exercise={exercise}
+        handleRemoveExercise={handleRemoveExercise}
+      />
+      )
     });
   }
 

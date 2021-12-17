@@ -101,10 +101,14 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
+    console.log('workoutData ==>', workoutData)
+
     try {
       const response = await updateWorkout({
         variables: { ...workoutData }
       })
+
+      console.log('response ==>', response)
 
       const workoutFromDb = response.data.updateWorkout
 
