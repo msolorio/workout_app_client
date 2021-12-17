@@ -84,6 +84,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
   if (error) return <h2>Something went wrong. Please try again.</h2>
   
+  if (!currentWorkout) return <Redirect to="/workouts" />
+
   const {
     id,
     name,
@@ -117,9 +119,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     })
   }
 
-  if (state.sessionId) {
-    return <Redirect to={`/sessions/${state.sessionId}`} />
-  }
+  if (state.sessionId) return <Redirect to={`/sessions/${state.sessionId}`} />
 
   return (
     <main>
