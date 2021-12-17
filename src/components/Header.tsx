@@ -3,18 +3,72 @@ import {
   useMutation,
   gql
 } from '@apollo/client'
+import { useAppDispatch } from '../app/hooks'
+import { storeWorkouts } from '../features/workouts/workoutsSlice'
+import { storeSessions } from '../features/sessions/sessionsSlice'
 
 const RESET = gql`
   mutation reset {
-    seed
+    seed {
+      workouts {
+        id
+        name
+        description
+        length
+        location
+        exercises {
+          id
+          name
+          reps
+          sets
+          weight
+          unit
+        }
+      }
+      sessions {
+        id
+        date
+        completed
+        workout {
+          id
+          name
+          description
+          length
+          location
+        }
+        exerciseInstances {
+          id
+          setsCompleted
+          repsCompleted
+          exercise {
+            id
+            name
+            reps
+            sets
+            weight
+            unit
+          }
+        }
+      }
+    }
   }
 `
 
 function Header() {
+  const dispatch = useAppDispatch()
   const [resetData] = useMutation(RESET)
 
   const handleReset = async () => {
-    await resetData()
+    try {
+      const response = await resetData()
+      const workouts = response.data.seed.workouts
+      const sessions = response.data.seed.sessions
+  
+      dispatch(storeWorkouts(workouts))
+      dispatch(storeSessions(sessions))
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

@@ -36,7 +36,6 @@ const workoutsSlice = createSlice({
       state.status = 'succeeded'
     },
 
-    // Update action type in parameter
     storeNewWorkout(state, action: PayloadAction<WorkoutType>) {
       state.workouts.push(action.payload)
     },
@@ -50,8 +49,6 @@ const workoutsSlice = createSlice({
       })
 
       state.workouts = updatedWorkouts
-      // }
-
     }
   }
 })
