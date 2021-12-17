@@ -69,10 +69,10 @@ function RepsAndSets({
       }
     })
 
-    // dispatch(incrementSetForExInst({
-    //   exInstId: exInstId,
-    //   sessionId: sessionId
-    // }))
+    dispatch(incrementSetForExInst({
+      exInstId: exInstId,
+      sessionId: sessionId
+    }))
   }
 
   function renderSets() {

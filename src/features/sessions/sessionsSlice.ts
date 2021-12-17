@@ -58,17 +58,25 @@ const sessionsSlice = createSlice({
     },
 
     incrementSetForExInst(state, action: PayloadAction<ExInstanceIdPL>) {
-      console.log('action ==>', action)
 
-      // const exInst = state.currentSession?.exerciseInstances.find((exInst) => {
-      //   return exInst.id === action.payload.exInstId
-      // })
+      const { sessionId, exInstId } = action.payload
 
-      // const maxSets = exInst?.exercise.sets
+      function getUpdatedSesh(session: SessionType) {
+        const updatedExInsts = session.exerciseInstances.map((exInst) => {
+          if (exInst.id === exInstId) exInst.setsCompleted += 1
+          return exInst
+        })
 
-      // if (exInst && maxSets) {
-      //   exInst.setsCompleted += 1
-      // }
+        session.exerciseInstances = updatedExInsts
+        return session
+      }
+
+
+      const updatedSessions = state.sessions.map((session) => {
+        return session.id === sessionId ? getUpdatedSesh(session) : session
+      })
+
+      state.sessions = updatedSessions
     }
   }
 })
