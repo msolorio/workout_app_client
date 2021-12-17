@@ -1,6 +1,7 @@
 import { useState, MouseEvent } from 'react';
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
+import UnitSelector from './UnitSelector'
 import Exercise from './Exercise';
 import { WorkoutType } from '../features/workouts/workoutsSlice'
 import { ExerciseType } from '../features/exercises/exercisesSlice'
@@ -218,16 +219,11 @@ function WorkoutForm(props: Props) {
         />
 
         <div>
-          <label htmlFor="exerciseUnit">Unit:</label>
-
-          <select
+          <UnitSelector
             name="exerciseUnit"
-            onChange={handleInputChange}
+            handleInputChange={handleInputChange}
             value={state.exerciseUnit}
-          >
-            <option value="lbs">lbs</option>
-            <option value="kg">kg</option>
-          </select>
+          />
         </div>
 
         <input

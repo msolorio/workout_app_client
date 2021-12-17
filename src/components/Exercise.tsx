@@ -1,6 +1,9 @@
 import { MouseEvent } from 'react'
 import { ExerciseType } from '../features/exercises/exercisesSlice'
-import TextInputGroup from '../components/TextInputGroup';
+import TextInputNoLabel from '../components/TextInputNoLabel';
+import NumberInputNoLabel from '../components/NumberInputNoLabel'
+import UnitSelector from './UnitSelector'
+
 import NumberInputGroup from '../components/NumberInputGroup';
 
 interface Props {
@@ -22,7 +25,13 @@ function Exercise(props: Props) {
 
   return (
     <div>
-      <h4>{props.exercise.name}</h4>
+      {/* <h4>{props.exercise.name}</h4> */}
+      <TextInputNoLabel
+        name="name"
+        placeholder="Exercise Name"
+        value={props.exercise.name}
+        handleChange={handleExerciseUpdate}
+      />
       <NumberInputGroup
         name="reps"
         labelText="Reps"
@@ -35,7 +44,19 @@ function Exercise(props: Props) {
         value={props.exercise.sets}
         handleChange={handleExerciseUpdate}
       />
-      <p>{props.exercise.weight} {props.exercise.unit}</p>
+      <div>
+        <NumberInputNoLabel
+          name="weight"
+          value={props.exercise.weight as number}
+          handleChange={handleExerciseUpdate}
+          placeholder="Weight"
+        />
+        <UnitSelector
+          name="unit"
+          handleInputChange={handleExerciseUpdate}
+          value={props.exercise.unit || ''}
+        />
+      </div>
       <button onClick={handleRemoveClick}>Remove</button>
     </div>
   )
