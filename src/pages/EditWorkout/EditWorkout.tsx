@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
-import { RootState } from '../../app/store'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WorkoutForm from '../../components/WorkoutForm'
 
@@ -25,26 +24,6 @@ const WORKOUTS = gql`
     }
   }
 `;
-
-// const ONE_WORKOUT = gql`
-//   query GetOneWorkout($workoutId: ID!) {
-//     workout(id: $workoutId) {
-//       id
-//       name
-//       description
-//       length
-//       location
-//       exercises {
-//         id
-//         name
-//         reps
-//         sets
-//         weight
-//         unit
-//       }
-//     }
-//   }
-// `
 
 const UPDATE_WORKOUT = gql`
   mutation UpdateWorkoutMutation(
@@ -101,20 +80,24 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   })
 
   useEffect(() => {
-    if (data) {
-      dispatch(storeWorkouts(data.workouts))
-    }
+    if (data) dispatch(storeWorkouts(data.workouts))
   })
 
   if (data) {
-    console.log('in if')
     currentWorkout = data.workouts.find((workout: WorkoutType) => workout.id === workoutId)
   }
 
   if (loading) return <h2>Loading...</h2>
 
-  if (error) return <h2>Something went wrong. Please try again.</h2>
+  if (error) {
+    console.log('Something went wrong')
+    return <Redirect to="/workouts" />
+  }
 
+  if (!currentWorkout) {
+    console.log('No workout found with that id')
+    return <Redirect to="/workouts" />
+  }
 
 
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
@@ -133,7 +116,6 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
       console.error(err)
     }
   }
-
 
 
   if (state.redirectToWorkout) return <Redirect to={`/workouts/${workoutId}`} />

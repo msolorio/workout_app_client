@@ -82,9 +82,15 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
   if (loading) return <h2>Loading...</h2>
 
-  if (error) return <h2>Something went wrong. Please try again.</h2>
+  if (error) {
+    console.log('Something went wrong')
+    return <Redirect to="/workouts" />
+  }
   
-  if (!currentWorkout) return <Redirect to="/workouts" />
+  if (!currentWorkout) {
+    console.log('No workout found with that id')
+    return <Redirect to="/workouts" />
+  }
 
   const {
     id,
@@ -118,6 +124,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       return <Exercise exercise={ex} key={ex.id} />
     })
   }
+
 
   if (state.sessionId) return <Redirect to={`/sessions/${state.sessionId}`} />
 

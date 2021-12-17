@@ -61,8 +61,8 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   if (loading) return <h2>Loading...</h2>
   
   if (error) {
-    console.log('error ==>', error)
-    return <h2>Something went wrong. Please try again.</h2>
+    console.log('Something went wrong')
+    return <Redirect to="/sessions" />
   }
 
   if (!currentSession) {

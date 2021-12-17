@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/Header';
 import CreateWorkout from './pages/CreateWorkout/CreateWorkout'
 import IndexWorkout from './pages/IndexWorkout/IndexWorkout'
@@ -21,6 +21,7 @@ function App() {
         <Route exact path="/workouts/:workoutId/edit" render={(props) => <EditWorkout {...props} />} />
         <Route exact path="/sessions" render={() => <IndexSession />} />
         <Route exact path="/sessions/:sessionId" render={(props) => <ShowSession {...props} />} />
+        <Route path="*" render={() => <Redirect to="/workouts" />} />
       </Switch>
     </div>
   );
