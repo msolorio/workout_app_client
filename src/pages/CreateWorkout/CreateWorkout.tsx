@@ -20,43 +20,55 @@ const CREATE_WORKOUT = gql`
       description: $description,
       length: $length,
       exercises: $exercises
-    ) { id }
+    ) {
+      id
+      name
+      description
+      length
+      location
+      exercises {
+        name
+        reps
+        sets
+        unit
+        weight
+        id
+      }
+    }
   }
 `;
 
+interface State {
+  workoutId: null | string
+}
+
 // Create Workout Component //////////////////////////////////////////////////////////////
 function CreateWorkout() {
-  const [state, setState] = useState({ redirectToWorkouts: false })
-
+  const stateObj: State = { workoutId: null }
+  const [state, setState] = useState(stateObj)
   const dispatch = useAppDispatch()
+  const [createWorkout] = useMutation(CREATE_WORKOUT)
 
-  const [createWorkout] = useMutation(CREATE_WORKOUT);
-  
+
   const handleCreateWorkout = async (workoutData: any) => {
-    console.log('called handleCreateWorkout')
-    
     try {
       const response = await createWorkout({
         variables: { ...workoutData }
       });
 
-      console.log('createdWorkout ==>', response.data.createWorkout);
-      
-      const workoutId: string = response.data.createWorkout.id
+      const createdWorkout = response.data.createWorkout
 
-      dispatch(storeNewWorkout({
-        ...workoutData,
-        id: workoutId
-      }))
+      dispatch(storeNewWorkout(createdWorkout))
 
-      setState({ redirectToWorkouts: true })
+      setState({ workoutId: createdWorkout.id })
       
     } catch (err) {
       console.log('Error creating workout ==>', err);
     }
   }
 
-  if (state.redirectToWorkouts) return <Redirect to="/workouts" />
+
+  if (state.workoutId) return <Redirect to={`/workouts/${state.workoutId}`} />
 
   return (
     <main>

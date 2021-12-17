@@ -125,7 +125,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     <main>
       <h2>{name}</h2>
 
-      { length && <p>{length} minutes</p> }
+      { length ? <p>{length} minutes</p> : '' }
 
       { location && <p>{location}</p> }
 

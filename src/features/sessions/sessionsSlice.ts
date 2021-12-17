@@ -38,24 +38,15 @@ const sessionsSlice = createSlice({
   name: 'sessions',
   initialState,
   reducers: {
-
-    // TODO: Update to store only current Session Id
-    // functionality set session to currentSession
-    // storeCurrentSession(state, action: PayloadAction<SessionType>) {
-      // const newSession = action.payload
-      // state.currentSession = newSession
-    // },
-
-    // Adds newly created session in list of sessions
     storeNewSession(state, action: PayloadAction<SessionType>) {
-      console.log('action.payload ==>', action.payload)
-
       state.sessions.push(action.payload)
     },
+
 
     storeSessions(state, action: PayloadAction<SessionType[]>) {
       state.sessions = action.payload
     },
+
 
     incrementSetForExInst(state, action: PayloadAction<ExInstanceIdPL>) {
 
@@ -71,7 +62,6 @@ const sessionsSlice = createSlice({
         return session
       }
 
-
       const updatedSessions = state.sessions.map((session) => {
         return session.id === sessionId ? getUpdatedSesh(session) : session
       })
@@ -82,7 +72,6 @@ const sessionsSlice = createSlice({
 })
 
 export const {
-  // storeCurrentSession,
   incrementSetForExInst,
   storeNewSession,
   storeSessions
