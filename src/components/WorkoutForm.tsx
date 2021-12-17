@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
 import Exercise from './Exercise';
@@ -105,6 +105,33 @@ function WorkoutForm(props: Props) {
     })
   }
 
+  interface Target { name: string, value: string | number }
+
+  interface Event { target: Target }
+
+  const handleExerciseUpdate = (event: Event, exIdx: number) => {
+    console.log('handleExerciseUpdate')
+    console.log('event.target.name ==>', event.target.name)
+    console.log('exIdx ==>', exIdx)
+    console.log('event.target.value ==>', event.target.value)
+
+    const fieldName = event.target.name
+    let fieldValue = event.target.value
+    const exsClone = [...state.exercises]
+    const exClone = { ...exsClone[exIdx] }
+
+    if (['reps', 'sets', 'weight'].includes(fieldName)) {
+      fieldValue = Number(fieldValue)
+    }
+
+    exsClone[exIdx] = {
+      ...exClone,
+      [fieldName]: fieldValue
+    }
+
+    setState({ ...state, exercises: exsClone })
+  }
+
 
   function renderExercises(exercises: ExerciseType[]) {
     return exercises.map((exercise, idx) => {
@@ -114,10 +141,14 @@ function WorkoutForm(props: Props) {
         idx={idx}
         exercise={exercise}
         handleRemoveExercise={handleRemoveExercise}
+        handleExerciseUpdate={handleExerciseUpdate}
       />
       )
     });
   }
+
+
+
 
   return (
     <form>
