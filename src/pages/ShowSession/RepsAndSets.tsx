@@ -57,6 +57,12 @@ function RepsAndSets({
       exInstId: exInstId,
       sessionId: sessionId
     }))
+
+    // TODO: Check if session is completed
+    // If all sets for all ex instances for this session 
+    // have meet max sets, update completed prop
+    // for session
+    // checkIfSeshComplete(sessionId: string): boolean
   }
 
   const handleRepIncrement = async () => {
