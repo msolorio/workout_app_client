@@ -1,10 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useMutation, gql } from '@apollo/client';
-import { storeNewWorkout } from '../../features/workouts/workoutsSlice'
-import { useAppDispatch } from '../../app/hooks'
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+
 import WorkoutForm from '../../components/WorkoutForm'
 
+const WORKOUTS = gql`
+  query GetWorkouts {
+    workouts {
+      id
+      name
+      description
+      length
+      location
+      exercises {
+        id
+        name
+        reps
+        sets
+        weight
+        unit
+      }
+    }
+  }
+`;
 
 const CREATE_WORKOUT = gql`
   mutation CreateWorkoutMutation(
@@ -49,6 +69,22 @@ function CreateWorkout() {
   const dispatch = useAppDispatch()
   const [createWorkout] = useMutation(CREATE_WORKOUT)
 
+  let allWorkouts = useAppSelector(selectAllWorkouts)
+
+  const { loading, error, data } = useQuery(WORKOUTS, {
+    skip: !!allWorkouts.length
+  })
+
+  useEffect(() => {
+    if (data) dispatch(storeWorkouts(data.workouts))
+  })
+
+  if (loading) return <h2>Loading...</h2>
+
+  if (error) {
+    console.log('Something went wrong')
+    return <Redirect to="/workouts" />
+  }
 
   const handleCreateWorkout = async (workoutData: any) => {
     try {
