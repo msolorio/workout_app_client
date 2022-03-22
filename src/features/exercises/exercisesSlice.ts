@@ -6,7 +6,6 @@ export interface ExerciseType {
   reps: number
   sets: number | null
   weight: number | null
-  unit: string | null // TODO: should be string
+  unit: string | null
   workout?: WorkoutType | null
-  [key: string]: any
 }

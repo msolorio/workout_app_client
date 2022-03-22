@@ -1,4 +1,10 @@
-function Exercise(props: any) {
+import { ExerciseType } from '../../../features/exercises/exercisesSlice'
+
+interface Props {
+  exercise: ExerciseType
+}
+
+function Exercise(props: Props) {
 
 
   return (

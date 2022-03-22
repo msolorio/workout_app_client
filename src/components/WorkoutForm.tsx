@@ -1,3 +1,4 @@
+import { ChangeEvent, MouseEvent } from 'react'
 import { useState } from 'react';
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
@@ -30,16 +31,19 @@ function WorkoutForm(props: Props) {
     exerciseUnit: 'lbs',
   });
 
-  const handleInputChange = (event: any) => {
-    if (event.target.value < 0) return;
-
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement>
+      | ChangeEvent<HTMLSelectElement>
+      | ChangeEvent<HTMLTextAreaElement>
+    ) => {
+    if (Number(event.target.value) < 0) return;
     setState({
       ...state,
       [event.target.name]: event.target.value
     })
   }
 
-  const handleExerciseAdd = (event: any) => {
+  const handleExerciseAdd = (event: MouseEvent<HTMLInputElement>) => {
     const newExercise = {
       name: state.exerciseName,
       reps: Number(state.exerciseReps),

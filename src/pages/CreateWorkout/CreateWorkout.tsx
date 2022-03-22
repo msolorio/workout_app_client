@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import CREATE_WORKOUT from '../../queries/workouts/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
+import { WorkoutType } from '../../features/workouts/workoutsSlice'
 
 interface State {
   workoutId: null | string
@@ -34,7 +35,7 @@ function CreateWorkout() {
     return <Redirect to="/workouts" />
   }
 
-  const handleCreateWorkout = async (workoutData: any) => {
+  const handleCreateWorkout = async (workoutData: WorkoutType) => {
     try {
       const response = await createWorkout({
         variables: { ...workoutData }

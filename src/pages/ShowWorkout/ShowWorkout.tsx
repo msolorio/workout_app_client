@@ -74,7 +74,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
 
   function renderExercises(exercises: ExerciseType[]) {
-    return exercises.map((ex: any) => {
+    return exercises.map((ex: ExerciseType) => {
       return <Exercise exercise={ex} key={ex.id} />
     })
   }

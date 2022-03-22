@@ -29,12 +29,12 @@ function ShowSession({match}: RouteComponentProps<Props>) {
 
   useEffect(() => {
     async function triggerCompleteSession() {
-      const response = await completeSession({
-        variables: { id: sessionId }
-      })
-
-      if (!response.data.completeSession.completed) {
-        console.error('Session not updated on complete')
+      try {
+        await completeSession({
+          variables: { id: sessionId }
+        })
+      } catch (err) {
+        console.error('Error marking session as complete:', err)
       }
     }
 
