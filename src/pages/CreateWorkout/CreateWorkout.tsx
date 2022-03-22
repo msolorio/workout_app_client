@@ -1,68 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation, useQuery} from '@apollo/client';
 import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-
+import WORKOUTS from '../../queries/workouts'
+import CREATE_WORKOUT from '../../queries/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
-
-const WORKOUTS = gql`
-  query GetWorkouts {
-    workouts {
-      id
-      name
-      description
-      length
-      location
-      exercises {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-    }
-  }
-`;
-
-const CREATE_WORKOUT = gql`
-  mutation CreateWorkoutMutation(
-    $name: String!,
-    $location: String!,
-    $description: String,
-    $length: Int,
-    $exercises: [InputExercise!]
-  ) {
-    createWorkout(
-      name: $name,
-      location: $location,
-      description: $description,
-      length: $length,
-      exercises: $exercises
-    ) {
-      id
-      name
-      description
-      length
-      location
-      exercises {
-        name
-        reps
-        sets
-        unit
-        weight
-        id
-      }
-    }
-  }
-`;
 
 interface State {
   workoutId: null | string
 }
 
-// Create Workout Component //////////////////////////////////////////////////////////////
 function CreateWorkout() {
   const stateObj: State = { workoutId: null }
   const [state, setState] = useState(stateObj)

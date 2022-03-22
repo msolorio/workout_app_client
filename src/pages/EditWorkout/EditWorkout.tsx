@@ -3,65 +3,14 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import WORKOUTS from '../../queries/workouts'
+import UPDATE_WORKOUT from '../../queries/updateWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
-
-const WORKOUTS = gql`
-  query GetWorkouts {
-    workouts {
-      id
-      name
-      description
-      length
-      location
-      exercises {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-    }
-  }
-`;
-
-const UPDATE_WORKOUT = gql`
-  mutation UpdateWorkoutMutation(
-    $id: ID!
-    $name: String
-    $location: String
-    $description: String
-    $length: Int
-    $exercises: [InputUpdateExercise!]
-  ) {
-    updateWorkout(
-      id: $id
-      name: $name
-      location: $location
-      description: $description
-      length: $length
-      exercises: $exercises
-    ) {
-      id
-      name
-      location
-      description
-      length
-      exercises {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-    }
-  }
-`
 
 interface Props {
   workoutId: string
 }
+
 
 function EditWorkout({ match }: RouteComponentProps<Props>) {
   
@@ -101,14 +50,10 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
-    console.log('workoutData ==>', workoutData)
-
     try {
       const response = await updateWorkout({
         variables: { ...workoutData }
       })
-
-      console.log('response ==>', response)
 
       const workoutFromDb = response.data.updateWorkout
 

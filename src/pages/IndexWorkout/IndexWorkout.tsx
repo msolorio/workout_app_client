@@ -3,31 +3,9 @@ import { Link } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { selectAllWorkouts } from '../../features/workouts/workoutsSlice'
+import WORKOUTS from '../../queries/workouts'
+import { useQuery, gql } from '@apollo/client';
 
-import {
-  useQuery,
-  gql
-} from '@apollo/client';
-
-const WORKOUTS = gql`
-  query GetWorkouts {
-    workouts {
-      id
-      name
-      description
-      length
-      location
-      exercises {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-    }
-  }
-`;
 
 function IndexWorkout() {
   const dispatch = useAppDispatch()
