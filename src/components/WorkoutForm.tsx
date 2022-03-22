@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
 import UnitSelector from './UnitSelector'
@@ -6,24 +6,15 @@ import Exercise from './Exercise';
 import { WorkoutType } from '../features/workouts/workoutsSlice'
 import { ExerciseType } from '../features/exercises/exercisesSlice'
 
-// type ExerciseType = {
-//   name: string,
-//   reps: number,
-//   sets: number,
-//   weight: number,
-//   unit: string
-// }
-
 const stateExercises: ExerciseType[] = [];
 
 interface Props {
-  // TODO: update Function to proper func sig
-  handleSubmit: Function
+  handleSubmit: (workout: WorkoutType) => void
   submitBtnText: string
   workoutData?: WorkoutType
 }
 
-// Create Workout Component //////////////////////////////////////////////////////////////
+
 function WorkoutForm(props: Props) {
   const [state, setState] = useState({
     redirect: false,
@@ -47,7 +38,6 @@ function WorkoutForm(props: Props) {
       [event.target.name]: event.target.value
     })
   }
-
 
   const handleExerciseAdd = (event: any) => {
     const newExercise = {
@@ -111,11 +101,6 @@ function WorkoutForm(props: Props) {
   interface Event { target: Target }
 
   const handleExerciseUpdate = (event: Event, exIdx: number) => {
-    console.log('handleExerciseUpdate')
-    console.log('event.target.name ==>', event.target.name)
-    console.log('exIdx ==>', exIdx)
-    console.log('event.target.value ==>', event.target.value)
-
     const fieldName = event.target.name
     let fieldValue = event.target.value
     const exsClone = [...state.exercises]
@@ -147,9 +132,6 @@ function WorkoutForm(props: Props) {
       )
     });
   }
-
-
-
 
   return (
     <form>

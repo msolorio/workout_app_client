@@ -2,6 +2,7 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit'
+import checkIfSeshComplete from '../../utils/checkIfSeshComplete'
 // import { RootState } from '../../app/store'
 
 import { WorkoutType } from '../workouts/workoutsSlice'
@@ -59,6 +60,9 @@ const sessionsSlice = createSlice({
         })
 
         session.exerciseInstances = updatedExInsts
+
+        if (checkIfSeshComplete(session)) session.completed = true
+
         return session
       }
 

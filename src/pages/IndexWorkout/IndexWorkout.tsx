@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeWorkouts } from '../../features/workouts/workoutsSlice'
-import { selectAllWorkouts } from '../../features/workouts/workoutsSlice'
-import WORKOUTS from '../../queries/workouts'
-import { useQuery, gql } from '@apollo/client';
+import { selectAllWorkouts, WorkoutType } from '../../features/workouts/workoutsSlice'
+import WORKOUTS from '../../queries/workouts/getWorkouts'
+import { useQuery } from '@apollo/client';
 
 
 function IndexWorkout() {
@@ -22,7 +22,7 @@ function IndexWorkout() {
   if (loading) return <h2>Loading...</h2>  
   if (error) return <h2>Something went wrong. Please try again.</h2>
 
-  const workoutsJSX = workouts.map((workout: any, idx: number) => {
+  const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>
         <div>

@@ -1,21 +1,7 @@
-import {
-  useMutation,
-  gql
-} from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useAppDispatch } from '../../app/hooks'
 import { incrementSetForExInst } from '../../features/sessions/sessionsSlice'
-
-const INCREMENT_SET = gql`
-  mutation UpdateSetMutation(
-    $id: ID!,
-    $setsCompleted: Int!
-  ) {
-    updateSetForExInstance(
-      id: $id,
-      setsCompleted: $setsCompleted
-    ) { id }
-  }
-`
+import INCREMENT_SET from '../../queries/sessions/incrementSet'
 
 interface Props {
   reps: number
@@ -34,7 +20,6 @@ function RepsAndSets({
   exInstId,
   sessionId
 }: Props) {
-
 
   const [incrementSetForExInstance] = useMutation(INCREMENT_SET)
   const dispatch = useAppDispatch()
@@ -57,12 +42,6 @@ function RepsAndSets({
       exInstId: exInstId,
       sessionId: sessionId
     }))
-
-    // TODO: Check if session is completed
-    // If all sets for all ex instances for this session 
-    // have meet max sets, update completed prop
-    // for session
-    // checkIfSeshComplete(sessionId: string): boolean
   }
 
   const handleRepIncrement = async () => {
@@ -110,6 +89,7 @@ function RepsAndSets({
 
     return <p>Reps: {reps}</p>
   }
+
 
   return (
     <>

@@ -1,61 +1,50 @@
+import { useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
-import {
-  useQuery,
-  gql
-} from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { useAppSelector } from '../../app/hooks'
 import { SessionType } from '../../features/sessions/sessionsSlice'
 import { RootState } from '../../app/store'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
-
-const SESSION = gql`
-  query getSession($sessionId: ID!) {
-    session(id: $sessionId) {
-      id
-      date
-      workout {
-        id
-        name
-        description
-        length
-        location
-      }
-      completed
-      exerciseInstances {
-        id
-        exercise {
-          id
-          name
-          reps
-          sets
-          weight
-          unit
-        }
-        setsCompleted
-        repsCompleted
-      }
-    }
-  }
-`
+import SESSION from '../../queries/sessions/getOneSession'
+import COMPLETE_SESSION from '../../queries/sessions/completeSession'
 
 interface Props {
   sessionId: string
 }
 
+
 function ShowSession({match}: RouteComponentProps<Props>) {
+  const [completeSession] = useMutation(COMPLETE_SESSION)
+
   const sessionId = match.params.sessionId
   const sessions: SessionType[] | undefined = useAppSelector((state: RootState) => state.sessions.sessions)
-  
-  let currentSession
 
-  currentSession = sessions && sessions.find((session) => session.id === sessionId)
+  let currentSession: SessionType | undefined = sessions && sessions.find((session) => session.id === sessionId)
 
   const { loading, error, data } = useQuery(SESSION, {
     skip: !!currentSession,
     variables: { sessionId }
   })
 
+  useEffect(() => {
+    async function triggerCompleteSession() {
+      const response = await completeSession({
+        variables: { id: sessionId }
+      })
+
+      if (!response.data.completeSession.completed) {
+        console.error('Session not updated on complete')
+      }
+    }
+
+    if (currentSession?.completed) {
+      triggerCompleteSession()
+    }
+  
+  }, [currentSession?.completed, sessionId, completeSession])
+
+  
   if (data) currentSession = data.session
   
   if (loading) return <h2>Loading...</h2>
@@ -69,6 +58,8 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     console.log('No session found with that id')
     return <Redirect to="/sessions" />
   }
+
+  
   
   return (
     <main>

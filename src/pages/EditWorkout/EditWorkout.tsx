@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
-import { useMutation, useQuery, gql } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import WORKOUTS from '../../queries/workouts'
-import UPDATE_WORKOUT from '../../queries/updateWorkout'
+import WORKOUTS from '../../queries/workouts/getWorkouts'
+import UPDATE_WORKOUT from '../../queries/workouts/updateWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
 
 interface Props {

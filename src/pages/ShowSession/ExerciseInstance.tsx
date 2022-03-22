@@ -2,7 +2,7 @@ import { ExerciseInstanceType } from "../../features/exerciseInstance/exerciseIn
 import RepsAndSets from './RepsAndSets'
 
 interface Props {
-  exInst: ExerciseInstanceType,
+  exInst: ExerciseInstanceType
   sessionId: string
 }
 

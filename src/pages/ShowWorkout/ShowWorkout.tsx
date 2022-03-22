@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { RootState } from '../../app/store'
@@ -8,55 +8,9 @@ import { WorkoutType } from '../../features/workouts/workoutsSlice'
 import { storeNewSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
+import ONE_WORKOUT from '../../queries/workouts/getOneWorkout'
+import CREATE_SESSION from '../../queries/sessions/createSession'
 
-const ONE_WORKOUT = gql`
-  query GetOneWorkout($workoutId: ID!) {
-    workout(id: $workoutId) {
-      id
-      name
-      description
-      length
-      location
-      exercises {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-    }
-  }
-`
-
-const CREATE_SESSION = gql`
-mutation CreateSessionMutation($workoutId: ID!) {
-  createSession(workoutId: $workoutId) {
-    id
-    date
-    workout {
-      id
-      name
-      description
-      length
-      location
-    }
-    exerciseInstances {
-      id
-      exercise {
-        id
-        name
-        reps
-        sets
-        weight
-        unit
-      }
-      setsCompleted
-      repsCompleted
-    }
-  }
-}
-`
 
 interface Props {
   workoutId: string

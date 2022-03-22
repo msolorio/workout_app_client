@@ -1,42 +1,11 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  useQuery,
-  gql
-} from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeSessions, SessionType } from '../../features/sessions/sessionsSlice'
 import { RootState } from '../../app/store'
+import SESSIONS from '../../queries/sessions/getSessions'
 
-const SESSIONS = gql`
-  query Sessions {
-    sessions {
-      id
-      date
-      workout {
-        id
-        name
-        description
-        length
-        location
-      }
-      completed
-      exerciseInstances {
-        id
-        exercise {
-          id
-          name
-          reps
-          sets
-          weight
-          unit
-        }
-        setsCompleted
-        repsCompleted
-      }
-    }
-  }
-`
 
 function IndexSession() {
   const dispatch = useAppDispatch()

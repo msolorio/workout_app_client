@@ -1,10 +1,10 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, ChangeEvent } from 'react'
 import { ExerciseType } from '../features/exercises/exercisesSlice'
-import TextInputNoLabel from '../components/TextInputNoLabel';
-import NumberInputNoLabel from '../components/NumberInputNoLabel'
+import TextInputNoLabel from './TextInputNoLabel';
+import NumberInputNoLabel from './NumberInputNoLabel'
 import UnitSelector from './UnitSelector'
 
-import NumberInputGroup from '../components/NumberInputGroup';
+import NumberInputGroup from './NumberInputGroup';
 
 interface Props {
   exercise: ExerciseType
@@ -19,13 +19,12 @@ function Exercise(props: Props) {
     props.handleRemoveExercise(props.idx)
   }
 
-  const handleExerciseUpdate = (event: any) => {
+  const handleExerciseUpdate = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     props.handleExerciseUpdate(event, props.idx)
   }
 
   return (
     <div>
-      {/* <h4>{props.exercise.name}</h4> */}
       <TextInputNoLabel
         name="name"
         placeholder="Exercise Name"

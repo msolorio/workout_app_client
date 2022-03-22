@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { useMutation, useQuery} from '@apollo/client';
 import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import WORKOUTS from '../../queries/workouts'
-import CREATE_WORKOUT from '../../queries/createWorkout'
+import WORKOUTS from '../../queries/workouts/getWorkouts'
+import CREATE_WORKOUT from '../../queries/workouts/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
 
 interface State {

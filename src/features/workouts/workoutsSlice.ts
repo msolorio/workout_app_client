@@ -7,7 +7,7 @@ import { ExerciseType } from '../exercises/exercisesSlice'
 
 export interface WorkoutType {
   description: string | null | undefined
-  id: string
+  id: string | undefined
   length: number | null | undefined
   location: string | null | undefined
   name: string
