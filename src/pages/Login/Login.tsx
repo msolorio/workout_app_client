@@ -1,9 +1,11 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
+import { useAppDispatch } from '../../app/hooks'
+import { storeLoginTokenInRdx } from '../../features/auth/authSlice'
 import TextInputGroup from '../../components/TextInputGroup'
 import PasswordInputGroup from '../../components/PasswordInputGroup'
-import { setLoginToken } from '../../utils/authUtils'
+import { setLoginTokenInLocalStorage } from '../../utils/authUtils'
 import LOGIN_USER from '../../queries/users/loginUser'
 
 interface State {
@@ -13,11 +15,6 @@ interface State {
   redirectToWorkouts: boolean
 }
 
-// interface Props {
-//   setSessionToken: (token: string) => void
-// }
-
-// function Login({ setSessionToken }: Props) {
 function Login() {
   const stateObj: State = {
     username: '',
@@ -29,6 +26,7 @@ function Login() {
   const [state, setState] = useState(stateObj)
 
   const [login] = useMutation(LOGIN_USER)
+  const dispatch = useAppDispatch()
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     setState({
@@ -61,8 +59,10 @@ function Login() {
         errorMessage: ''
       })
 
-      setLoginToken(response.data.login.token)
-      // setSessionToken(response.data.login.token)
+      const loginToken = response.data.login.token
+
+      setLoginTokenInLocalStorage(loginToken)
+      dispatch(storeLoginTokenInRdx(loginToken))
 
       setState({
         ...state,
@@ -96,7 +96,7 @@ function Login() {
 
         <input
           type="button"
-          value="Sign Up"
+          value="Log In"
           onClick={handleSubmit}
         />
       </form>

@@ -5,7 +5,8 @@ import { useAppDispatch } from '../app/hooks'
 import { storeWorkouts } from '../features/workouts/workoutsSlice'
 import { storeSessions } from '../features/sessions/sessionsSlice'
 import RESET from '../queries/reset'
-import { removeLoginToken } from '../utils/authUtils'
+import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
+import { removeLoginTokenInRdx } from '../features/auth/authSlice';
 
 function Header() {
 
@@ -23,6 +24,11 @@ function Header() {
     } catch (err) {
       console.error(err)
     }
+  }
+
+  function handleLogout() {
+    removeLoginTokenInLocalStorage()
+    dispatch(removeLoginTokenInRdx())
   }
 
   // const handleLogout = () => {
@@ -54,7 +60,7 @@ function Header() {
           <li><Link to="/workouts">Workouts</Link></li>
           <li><Link to ="/workouts/create">Create</Link></li>
           <li><Link to="/sessions">Sessions</Link></li>
-          <li onClick={removeLoginToken}><Link to="/">Logout</Link></li>
+          <li onClick={handleLogout}><Link to="/">Logout</Link></li>
 
           <li><Link to="/signup">Signup</Link></li>
           <li><Link to="/login">Login</Link></li>

@@ -1,17 +1,17 @@
-function setLoginToken(token: string) {
+function setLoginTokenInLocalStorage(token: string) {
   localStorage.setItem('logintoken', token)
 }
 
-function getLoginToken() {
+function getLoginTokenFromLocalStorage() {
   return localStorage.getItem('logintoken')
 }
 
-function removeLoginToken() {
+function removeLoginTokenInLocalStorage() {
   return localStorage.removeItem('logintoken')
 }
 
 export {
-  setLoginToken,
-  getLoginToken,
-  removeLoginToken
+  setLoginTokenInLocalStorage,
+  getLoginTokenFromLocalStorage,
+  removeLoginTokenInLocalStorage
 }
