@@ -3,8 +3,7 @@ import { Redirect, Link } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { RootState } from '../../app/store'
-import { WorkoutType } from '../../features/workouts/workoutsSlice'
+import { WorkoutType, selectAllWorkouts } from '../../features/workouts/workoutsSlice'
 import { storeNewSession } from '../../features/sessions/sessionsSlice'
 import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
@@ -23,7 +22,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
   const [state, setState] = useState({ sessionId: null })
   
-  const workouts: WorkoutType[] = useAppSelector((state: RootState) => state.workouts.workouts)
+  const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
   
   let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
 
