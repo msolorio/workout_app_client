@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useMutation, useQuery} from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'

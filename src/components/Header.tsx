@@ -1,60 +1,20 @@
-import { Link } from 'react-router-dom';
-import {
-  useMutation,
-  gql
-} from '@apollo/client'
+import { useState } from 'react'
+import { Link, Redirect } from 'react-router-dom';
+import { useMutation } from '@apollo/client'
 import { useAppDispatch } from '../app/hooks'
 import { storeWorkouts } from '../features/workouts/workoutsSlice'
 import { storeSessions } from '../features/sessions/sessionsSlice'
+import RESET from '../queries/reset'
 
-const RESET = gql`
-  mutation reset {
-    seed {
-      workouts {
-        id
-        name
-        description
-        length
-        location
-        exercises {
-          id
-          name
-          reps
-          sets
-          weight
-          unit
-        }
-      }
-      sessions {
-        id
-        date
-        completed
-        workout {
-          id
-          name
-          description
-          length
-          location
-        }
-        exerciseInstances {
-          id
-          setsCompleted
-          repsCompleted
-          exercise {
-            id
-            name
-            reps
-            sets
-            weight
-            unit
-          }
-        }
-      }
-    }
-  }
-`
+interface Props {
+  removeSessionToken: () => void
+}
 
-function Header() {
+function Header({ removeSessionToken }: Props) {
+  const [state, setState] = useState({
+    redirectToHome: false
+  })
+
   const dispatch = useAppDispatch()
   const [resetData] = useMutation(RESET)
 
@@ -71,14 +31,40 @@ function Header() {
     }
   }
 
+  const handleLogout = () => {
+    removeSessionToken()
+  }
+
+  // const loggedInLinks = (
+  //   <>
+  //     <li><Link to="/workouts">Workouts</Link></li>
+  //     <li><Link to ="/workouts/create">Create</Link></li>
+  //     <li><Link to="/sessions">Sessions</Link></li>
+  //     <li onClick={handleLogout}>Logout</li>
+  //   </>
+  // )
+
+  // const loggedOutLinks = (
+  //   <>
+  //     <li><Link to="/signup">Signup</Link></li>
+  //     <li><Link to="/login">Login</Link></li>
+  //   </>
+  // )
+
   return (
     <header>
       <nav>
         <ul>
+          <li onClick={handleReset}>Reset</li>
+
           <li><Link to="/workouts">Workouts</Link></li>
           <li><Link to ="/workouts/create">Create</Link></li>
           <li><Link to="/sessions">Sessions</Link></li>
-          <li onClick={handleReset}>Reset</li>
+          <li onClick={handleLogout}><Link to="/">Logout</Link></li>
+
+          <li><Link to="/signup">Signup</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          {/* { userLoggedIn ? loggedInLinks : loggedOutLinks } */}
         </ul>
       </nav>
     </header>
