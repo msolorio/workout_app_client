@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 const SESSION = gql`
-  query getSession($sessionId: ID!) {
-    session(id: $sessionId) {
+  query getSession($token: String!, $sessionId: ID!) {
+    session(token: $token, id: $sessionId) {
       id
       date
       workout {

@@ -5,10 +5,11 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { WorkoutType, selectAllWorkouts } from '../../features/workouts/workoutsSlice'
 import { storeNewSession } from '../../features/sessions/sessionsSlice'
-import Exercise from './Exercise'
 import { ExerciseType } from '../../features/exercises/exercisesSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import ONE_WORKOUT from '../../queries/workouts/getOneWorkout'
 import CREATE_SESSION from '../../queries/sessions/createSession'
+import Exercise from './Exercise'
 
 
 interface Props {
@@ -23,12 +24,13 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const [state, setState] = useState({ sessionId: null })
   
   const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
   
   let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
 
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
     skip: !!currentWorkout,
-    variables: { workoutId: workoutId }
+    variables: { token: logintoken, workoutId: workoutId }
   })
 
   if (data) currentWorkout = data.workout

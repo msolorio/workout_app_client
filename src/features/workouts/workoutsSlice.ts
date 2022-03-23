@@ -49,6 +49,10 @@ const workoutsSlice = createSlice({
       })
 
       state.workouts = updatedWorkouts
+    },
+
+    removeWorkouts(state) {
+      state.workouts = []
     }
   }
 })
@@ -58,7 +62,8 @@ export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 export const {
   storeWorkouts,
   storeNewWorkout,
-  updateWorkoutRdx
+  updateWorkoutRdx,
+  removeWorkouts
 } = workoutsSlice.actions
 
 export default workoutsSlice.reducer

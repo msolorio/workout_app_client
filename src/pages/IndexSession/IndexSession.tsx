@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeSessions, SessionType } from '../../features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { RootState } from '../../app/store'
 import SESSIONS from '../../queries/sessions/getSessions'
 
@@ -10,9 +11,11 @@ import SESSIONS from '../../queries/sessions/getSessions'
 function IndexSession() {
   const dispatch = useAppDispatch()
   const sessions = useAppSelector((state: RootState) => state.sessions.sessions)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   const { loading, error, data } = useQuery(SESSIONS, {
-    skip: !!sessions.length
+    skip: !!sessions.length,
+    variables: { token: logintoken }
   })
 
   useEffect(() => {

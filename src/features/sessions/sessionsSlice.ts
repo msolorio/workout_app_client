@@ -71,6 +71,10 @@ const sessionsSlice = createSlice({
       })
 
       state.sessions = updatedSessions
+    },
+
+    removeSessions(state) {
+      state.sessions = []
     }
   }
 })
@@ -78,7 +82,8 @@ const sessionsSlice = createSlice({
 export const {
   incrementSetForExInst,
   storeNewSession,
-  storeSessions
+  storeSessions,
+  removeSessions
 } = sessionsSlice.actions
 
 export default sessionsSlice.reducer

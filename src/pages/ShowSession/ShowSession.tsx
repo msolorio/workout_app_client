@@ -3,6 +3,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { useAppSelector } from '../../app/hooks'
 import { SessionType } from '../../features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { RootState } from '../../app/store'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
@@ -19,12 +20,16 @@ function ShowSession({match}: RouteComponentProps<Props>) {
 
   const sessionId = match.params.sessionId
   const sessions: SessionType[] | undefined = useAppSelector((state: RootState) => state.sessions.sessions)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   let currentSession: SessionType | undefined = sessions && sessions.find((session) => session.id === sessionId)
 
   const { loading, error, data } = useQuery(SESSION, {
     skip: !!currentSession,
-    variables: { sessionId }
+    variables: {
+      token: logintoken,
+      sessionId
+    }
   })
 
   useEffect(() => {

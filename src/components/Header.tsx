@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { storeWorkouts } from '../features/workouts/workoutsSlice'
-import { storeSessions } from '../features/sessions/sessionsSlice'
+import { storeWorkouts, removeWorkouts } from '../features/workouts/workoutsSlice'
+import { storeSessions, removeSessions } from '../features/sessions/sessionsSlice'
 import RESET from '../queries/reset'
 import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
 import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../features/auth/authSlice';
@@ -30,6 +30,8 @@ function Header() {
   function handleLogout() {
     removeLoginTokenInLocalStorage()
     dispatch(removeLoginTokenInRdx())
+    dispatch(removeWorkouts())
+    dispatch(removeSessions())
   }
 
   const loggedInLinks = (

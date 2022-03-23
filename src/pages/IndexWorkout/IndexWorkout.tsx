@@ -5,14 +5,17 @@ import { storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { selectAllWorkouts, WorkoutType } from '../../features/workouts/workoutsSlice'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import { useQuery } from '@apollo/client';
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 
 
 function IndexWorkout() {
   const dispatch = useAppDispatch()
   const workouts = useAppSelector(selectAllWorkouts)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)  
 
   const { loading, error, data } = useQuery(WORKOUTS, {
-    skip: !!workouts.length
+    skip: !!workouts.length,
+    variables: { token: logintoken }
   })
 
   useEffect(() => {

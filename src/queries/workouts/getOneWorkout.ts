@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 const ONE_WORKOUT = gql`
-  query GetOneWorkout($workoutId: ID!) {
-    workout(id: $workoutId) {
+  query GetOneWorkout($token: String!, $workoutId: ID!) {
+    workout(token: $token, id: $workoutId) {
       id
       name
       description
