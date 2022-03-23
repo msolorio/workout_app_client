@@ -57,10 +57,14 @@ function Signup() {
         }
       })
 
-      // setSessionToken(response.data.signup.token)
+      console.log('response ==>', response)
+
+      if (response.data.signup.error) {
+        setState({ ...state, errorMessage: response.data.signup.error })
+        return
+      }
 
       setState({ ...state, redirectToLogin: true })
-
 
     } catch (err) {
       console.error('There was an error signing up.')
