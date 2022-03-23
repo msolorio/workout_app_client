@@ -10,28 +10,17 @@ import EditWorkout from './pages/EditWorkout/EditWorkout'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Home from './pages/Home/Home'
-import { setLoginToken, removeLoginToken } from './utils/authUtils'
 import './App.css'
 
 function App() {
-
-  // TODO: Move these methods to the child components ////////////////////////////
-  const setSessionToken = (token: string) => {
-    setLoginToken(token)
-  }
-
-  const removeSessionToken = () => {
-    removeLoginToken()
-  }
-
   return (
     <div className="App">
       <h1>Workout App</h1>
-      <Header removeSessionToken={removeSessionToken} />
+      <Header />
       <Switch>
         <Route exact path="/" render={() => <Home />} />
         <Route exact path="/signup" render={() => <Signup />} />
-        <Route exact path="/login" render={() => <Login setSessionToken={setSessionToken} />} />
+        <Route exact path="/login" render={() => <Login />} />
 
         <Route exact path="/workouts" render={() => <IndexWorkout />} />
         <Route exact path="/workouts/create" render={() => <CreateWorkout />} />

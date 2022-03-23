@@ -13,11 +13,12 @@ interface State {
   redirectToWorkouts: boolean
 }
 
-interface Props {
-  setSessionToken: (token: string) => void
-}
+// interface Props {
+//   setSessionToken: (token: string) => void
+// }
 
-function Login({ setSessionToken }: Props) {
+// function Login({ setSessionToken }: Props) {
+function Login() {
   const stateObj: State = {
     username: '',
     password: '',
@@ -60,7 +61,8 @@ function Login({ setSessionToken }: Props) {
         errorMessage: ''
       })
 
-      setSessionToken(response.data.login.token)
+      setLoginToken(response.data.login.token)
+      // setSessionToken(response.data.login.token)
 
       setState({
         ...state,

@@ -5,15 +5,9 @@ import { useAppDispatch } from '../app/hooks'
 import { storeWorkouts } from '../features/workouts/workoutsSlice'
 import { storeSessions } from '../features/sessions/sessionsSlice'
 import RESET from '../queries/reset'
+import { removeLoginToken } from '../utils/authUtils'
 
-interface Props {
-  removeSessionToken: () => void
-}
-
-function Header({ removeSessionToken }: Props) {
-  const [state, setState] = useState({
-    redirectToHome: false
-  })
+function Header() {
 
   const dispatch = useAppDispatch()
   const [resetData] = useMutation(RESET)
@@ -31,16 +25,16 @@ function Header({ removeSessionToken }: Props) {
     }
   }
 
-  const handleLogout = () => {
-    removeSessionToken()
-  }
+  // const handleLogout = () => {
+  //   removeSessionToken()
+  // }
 
   // const loggedInLinks = (
   //   <>
   //     <li><Link to="/workouts">Workouts</Link></li>
   //     <li><Link to ="/workouts/create">Create</Link></li>
   //     <li><Link to="/sessions">Sessions</Link></li>
-  //     <li onClick={handleLogout}>Logout</li>
+  //     <li onClick={handleLogout}><Link to="/">Logout</Link></li>
   //   </>
   // )
 
@@ -60,7 +54,7 @@ function Header({ removeSessionToken }: Props) {
           <li><Link to="/workouts">Workouts</Link></li>
           <li><Link to ="/workouts/create">Create</Link></li>
           <li><Link to="/sessions">Sessions</Link></li>
-          <li onClick={handleLogout}><Link to="/">Logout</Link></li>
+          <li onClick={removeLoginToken}><Link to="/">Logout</Link></li>
 
           <li><Link to="/signup">Signup</Link></li>
           <li><Link to="/login">Login</Link></li>
