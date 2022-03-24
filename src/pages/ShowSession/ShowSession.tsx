@@ -63,29 +63,15 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     console.log('No session found with that id')
     return <Redirect to="/sessions" />
   }
-
-  
   
   return (
-    <main>
+    <main className="main">
       <section>
-        <h2>{currentSession.workout.name}</h2>
+        <h2 className="pageHeader">{currentSession.workout.name}</h2>
         <div>
           <DateWidget timestamp={currentSession.date} />
-          <p>{currentSession.workout.location}</p>
+          <p className="description">{currentSession.completed ? 'completed' : 'in-progress'}</p>
         </div>
-      </section>
-
-      {/* TODO: convert to dropdown */}
-      <section>
-        <p>{currentSession.workout.description}</p>
-      </section>
-
-      <section>
-        {/* TODO: clicking start initializes timer */}
-        <button>Start</button>
-        <button>Reset</button>
-        <button>Pause</button>
       </section>
 
       <section>

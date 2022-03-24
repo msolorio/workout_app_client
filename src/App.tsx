@@ -4,8 +4,6 @@ import { storeLoginTokenInRdx, removeLoginTokenInRdx } from './features/auth/aut
 import { getLoginTokenFromLocalStorage } from './utils/authUtils';
 import Header from './components/Header';
 import Routes from './Routes'
-import './App.css'
-
 
 function App() {
   const dispatch = useAppDispatch()
@@ -18,10 +16,11 @@ function App() {
   })
 
   return (
-    <div className="App">
-      <h1>Workout App</h1>
-      <Header />
-      <Routes />
+    <div className="window">
+      <div className="mobileContainer">
+        <Header />
+        <Routes />
+      </div>
     </div>
   );
 }

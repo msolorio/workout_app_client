@@ -7,9 +7,9 @@ interface Props {
 
 function Exercise(props: Props) {
   return (
-    <div>
-      <h3>{props.exercise.name}</h3>
-      <p>
+    <div className="section">
+      <h3 className="subHeader">{props.exercise.name}</h3>
+      <p className="description">
         { props.exercise.sets && <span>Sets: {props.exercise.sets}</span> }
         {' '}&nbsp;
         <span>Reps: {props.exercise.reps}</span>
@@ -17,7 +17,7 @@ function Exercise(props: Props) {
       {
         props.exercise.weight
         && props.exercise.unit
-        && <p>{props.exercise.weight} {props.exercise.unit}</p>
+        && <p className="description">{props.exercise.weight} {props.exercise.unit}</p>
       }
     </div>
   )

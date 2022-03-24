@@ -28,17 +28,17 @@ function IndexWorkout() {
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>
-        <div>
-          <h2>{workout.name}</h2>
-          <p>{workout.description}</p>
+        <div className="section">
+          <h2 className="subHeader">{workout.name}</h2>
+          <p className="description">{workout.description}</p>
         </div>
       </Link>
     );
   });
 
   return (
-    <main>
-      <h2>Workouts</h2>
+    <main className="main">
+      <h2 className="pageHeader">Workouts</h2>
       <ul>{workoutsJSX}</ul>
     </main>
   )

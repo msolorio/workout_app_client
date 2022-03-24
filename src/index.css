@@ -11,3 +11,245 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* **************************************************************************** */
+/* RESET */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	/* font: inherit; */
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* ******************************************************************************** */
+/* ******************************************************************************** */
+/* CUSTOM STYLES */
+/* ******************************************************************************** */
+
+/* GENERAL STYLES ***************************************************************** */
+* {
+  box-sizing: border-box;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  font-size: 16px;
+}
+
+.window {
+  background: #292929;
+  height: 100vh;
+}
+
+.mobileContainer {
+  background: #fff;
+  max-width: 412px;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.main {
+  position: relative;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 0 .9em;
+}
+
+.pageHeader {
+  text-align: center;
+  padding: 1em 0 1.2em;
+}
+
+.subHeader {
+  margin: 0 0 .4em;
+  line-height: 1.3em;
+}
+
+.description {
+  font-size: .9em;
+  line-height: 1.3em;
+  margin: 0 .9em .6em 0;
+}
+
+.description_small {
+  font-size: .85em;
+  font-weight: 700;
+  line-height: 1.3em;
+  margin: 0 .9em .2em 0;
+}
+
+.section {
+  margin: 0 0 1em;
+  border-bottom: .1em solid #ccc;
+  padding: .3em 0 1em 0;
+}
+
+.shortText {
+  font-size: 1em;
+  line-height: 1.1em;
+  margin: 0 .4em .4em;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.centerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  padding: .4em .9em;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin: .3em .7em 1em;
+  background: #ddd;
+}
+
+.cornerText {
+  position: absolute;
+  top: 1em;
+  right: .0em;
+}
+
+.divider {
+  border-bottom: .1em solid #ccc;
+  margin: 0 0 1em;
+}
+
+/* HEADER ***************************************************************** */
+.header-title {
+  background: #ccc;
+  padding: .4em 2em;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.nav {
+  background: #eee;
+  padding: .7em .1em;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-li {
+  width: 100%;
+  font-size: .8em;
+  text-align: center;
+}
+
+.nav-a {
+  text-decoration: none;
+  color: #000;
+}
+
+.nav-link {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-decoration: none;
+  padding: 10px 0;
+  color: #555;
+}
+
+.checkbox {
+  position: relative;
+  top: -.2em;
+  left: -.4em;
+  margin-right: .2em;
+}
+
+/* FORM COMPONENTS ***************************************************************** */
+.form {
+  margin: 0 0 1em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 .8em;
+}
+
+.form-label {
+  margin: 0 0 .3em;
+}
+
+.form-input {
+  padding: .3em .4em;
+  margin: 0 0 .5em;
+  border-radius: .3em;
+  border: .1em solid #888;
+}
+
+.form-button {
+  margin: 0 auto;
+  display: block;
+  padding: .4em 1em;
+  border-radius: .3em;
+  background: #c0c0c0;
+  border: none;
+}
+
+.form-buttonOption {
+  width: 100%;
+}
+
+.form-buttonSubmit {
+  margin-top: 1.5em;
+}

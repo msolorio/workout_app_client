@@ -19,12 +19,14 @@ function ExerciseInstance({ exInst, sessionId }: Props) {
   const completed = exInst.setsCompleted >= (sets || Infinity)
 
   return (
-    <div>
-      <label htmlFor="completed" hidden>completed</label>
-      <input type="checkbox" name="completed" checked={completed} readOnly />
-      <div>
-        <p>{name}</p>
-        <p>{weight} {unit}</p>
+    <div className="section">
+      <div className="row">
+        <label htmlFor="completed" hidden>completed</label>
+        <input className="checkbox" type="checkbox" name="completed" checked={completed} readOnly />
+        <h2 className="subHeader">{name}</h2>
+      </div>
+      <span>
+        <p className="description">{weight} {unit}</p>
         <RepsAndSets
           exInstId={exInstId}
           reps={reps}
@@ -33,7 +35,7 @@ function ExerciseInstance({ exInst, sessionId }: Props) {
           setsCompleted={exInst.setsCompleted}
           sessionId={sessionId}
         />
-      </div>
+      </span>
     </div>
   )
 }

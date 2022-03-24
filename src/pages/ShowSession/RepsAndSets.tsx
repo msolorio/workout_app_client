@@ -65,12 +65,12 @@ function RepsAndSets({
   function renderSets() {
     if (sets) {
       return (
-        <p>
+        <span className="description">
           <span>Sets:</span>
-          <button onClick={handleSetIncrement}>
+          <button className="button" onClick={handleSetIncrement}>
           {setsCompleted}/{sets}
           </button>
-        </p>
+        </span>
       )
     }
 
@@ -80,16 +80,16 @@ function RepsAndSets({
   function renderReps() {
     if (!sets) {
       return (
-        <p>
+        <span>
           <span>Reps:</span>
           <button onClick={handleRepIncrement}>
           {repsCompleted}/{reps}
           </button>
-        </p>
+        </span>
       ) 
     }
 
-    return <p>Reps: {reps}</p>
+    return <span className="description">Reps: {reps}</span>
   }
 
 

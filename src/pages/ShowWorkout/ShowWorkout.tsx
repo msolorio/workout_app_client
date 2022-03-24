@@ -84,22 +84,27 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
   if (state.sessionId) return <Redirect to={`/sessions/${state.sessionId}`} />
 
   return (
-    <main>
-      <h2>{name}</h2>
+    <main className="main">
+      <h2 className="pageHeader">{name}</h2>
+      
+      { length ? <p className="cornerText description">{length} minutes</p> : '' }
 
-      { length ? <p>{length} minutes</p> : '' }
 
-      { location && <p>{location}</p> }
+      <div className="centerContainer">
+        <button className="button" onClick={handleCreateSession}>
+          Start Session
+        </button>
 
-      <button onClick={handleCreateSession}>
-        Start Session
-      </button>
+        <button className="button">
+          <Link to={`/workouts/${id}/edit`}>Edit Workout</Link>
+        </button>
+      </div>
 
-      <button>
-        <Link to={`/workouts/${id}/edit`}>Edit Workout</Link>
-      </button>
+      { location && <p className="description_small">{location}</p> }
 
-      { description && <p>{description}</p> }
+      { description && <p className="description">{description}</p> }
+
+      <div className="divider" />
 
       <ul>
         {renderExercises(exercises as ExerciseType[])}

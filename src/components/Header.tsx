@@ -36,26 +36,37 @@ function Header() {
 
   const loggedInLinks = (
     <>
-      <li><Link to="/workouts">Workouts</Link></li>
-      <li><Link to ="/workouts/create">Create</Link></li>
-      <li><Link to="/sessions">Sessions</Link></li>
-      <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
+      <li className="nav-li">
+        <Link className="nav-a" to="/workouts">Workouts</Link>
+      </li>
+      <li className="nav-li">
+        <Link className="nav-a" to ="/workouts/create">Create</Link>
+      </li>
+      <li className="nav-li">
+        <Link className="nav-a" to="/sessions">Sessions</Link>
+      </li>
+      <li className="nav-li" onClick={handleLogout}><Link className="nav-a" to="/login">Logout</Link></li>
     </>
   )
 
   const loggedOutLinks = (
     <>
-      <li><Link to="/signup">Signup</Link></li>
-      <li><Link to="/login">Login</Link></li>
+      <li className="nav-li">
+        <Link className="nav-a" to="/signup">Signup</Link>
+      </li>
+      <li className="nav-li">
+        <Link className="nav-a" to="/login">Login</Link>
+      </li>
     </>
   )
 
   return (
     <header>
-      <nav>
-        <ul>
-          <li onClick={handleReset}>Reset Test Data</li>
+      <h1 className="header-title">Workout App</h1>
+      <nav className="nav">
+        <ul className="nav-ul">
           { loginToken ? loggedInLinks : loggedOutLinks }
+          <li className="nav-li" onClick={handleReset}>Reset</li>
         </ul>
       </nav>
     </header>

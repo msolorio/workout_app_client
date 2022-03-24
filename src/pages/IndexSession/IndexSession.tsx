@@ -6,6 +6,7 @@ import { storeSessions, SessionType } from '../../features/sessions/sessionsSlic
 import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { RootState } from '../../app/store'
 import SESSIONS from '../../queries/sessions/getSessions'
+import DateWidget from '../../components/DateWidget'
 
 
 function IndexSession() {
@@ -30,18 +31,19 @@ function IndexSession() {
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (
       <Link to={`/sessions/${session.id}`} key={session.id}>
-        <div>
-          <h2>{session.date}</h2>
-          <p>{session.workout.name}</p>
-          <p>{ session.completed ? "completed" : "in-progress" }</p>
+        <div className="section">
+          {/* <h2 className="subHeader">{displayDate}</h2> */}
+          <DateWidget timestamp={session.date} />
+          <p className="description">{session.workout.name}</p>
+          <p className="description">{ session.completed ? "completed" : "in-progress" }</p>
         </div>
       </Link>
     )
   })
 
   return (
-    <main>
-      <h2>Session</h2>
+    <main className="main">
+      <h2 className="pageHeader">Session</h2>
       <ul>{sessionsJSX}</ul>
     </main>
   )
