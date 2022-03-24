@@ -72,10 +72,12 @@ function Signup() {
   if (state.redirectToLogin) return <Redirect to="/login" />
 
   return (
-    <main>
-      <h2>Sign Up</h2>
-      <p>Add a username and password to create an account.</p>
-      { state.errorMessage && <p>{state.errorMessage}</p> }
+    <main className="main">
+      <h2 className="pageHeader">Sign Up</h2>
+      <p className="description">Add a username and password to create an account.</p>
+      { state.errorMessage && <p className="description_small form-errorMessage">
+        {state.errorMessage}
+      </p> }
       <form action="">
         <TextInputGroup
           name="username"
@@ -99,6 +101,7 @@ function Signup() {
         />
 
         <input
+          className="button"
           type="button"
           value="Sign Up"
           onClick={handleSubmit}

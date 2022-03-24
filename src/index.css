@@ -75,31 +75,38 @@ table {
   color: #333;
 }
 
-a {
-  text-decoration: none;
+body, html, #root {
+  height: 100%;
 }
 
 html {
   font-size: 16px;
 }
 
-.window {
+body {
   background: #292929;
-  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.window {
+  height: 100%;
 }
 
 .mobileContainer {
   background: #fff;
   max-width: 412px;
   margin: 0 auto;
-  height: 100vh;
 }
 
 .main {
   position: relative;
   margin: 0 auto;
   max-width: 400px;
-  padding: 0 .9em;
+  padding: 0 .9em .4em;
+  min-height: 900px;
 }
 
 .pageHeader {
@@ -151,12 +158,23 @@ html {
   justify-content: center;
 }
 
+.centerContainer_spread {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .button {
+  display: block;
   padding: .4em .9em;
   border: 1px solid #ccc;
   border-radius: 3px;
   margin: .3em .7em 1em;
   background: #ddd;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .cornerText {
@@ -168,6 +186,14 @@ html {
 .divider {
   border-bottom: .1em solid #ccc;
   margin: 0 0 1em;
+}
+
+.footer {
+  background: #555;
+  color: #ddd;
+  padding: 1em .3em;
+  font-size: .7em;
+  text-align: center;
 }
 
 /* HEADER ***************************************************************** */
@@ -220,14 +246,24 @@ html {
   margin: 0 0 1em;
 }
 
-.form-group {
+.form-group-col {
   display: flex;
   flex-direction: column;
   padding: 0 0 .8em;
 }
 
+.form-group-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 .8em;
+}
+
 .form-label {
-  margin: 0 0 .3em;
+  margin: 0 .5em .4em 0;
+}
+
+.form-label_short {
+  width: 4em;
 }
 
 .form-input {
@@ -237,6 +273,32 @@ html {
   border: .1em solid #888;
 }
 
+.form-numInput {
+  width: 5em;
+  padding: .3em .4em;
+  margin: 0 0 .5em;
+  border-radius: .3em;
+  border: .1em solid #888;
+}
+
+.form-selectInput {
+  width: 5em;
+  padding: .3em .4em;
+  margin: 0 0 .5em;
+  border-radius: .3em;
+  border: .1em solid #888;
+  background: #fff;
+}
+
+.form-errorMessage {
+  background: #fdcaca;
+  border: .1em solid #eaa6a6;
+  padding: .2em .6em;
+  border-radius: 4px;
+  margin: 0 0 .5em;
+}
+
+/* 
 .form-button {
   margin: 0 auto;
   display: block;
@@ -252,4 +314,4 @@ html {
 
 .form-buttonSubmit {
   margin-top: 1.5em;
-}
+} */

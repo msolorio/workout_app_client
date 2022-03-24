@@ -139,42 +139,51 @@ function WorkoutForm(props: Props) {
 
   return (
     <form>
-      <TextInputGroup 
-        name="workoutName"
-        labelText="Name"
-        value={state.workoutName}
-        handleChange={handleInputChange}
-      />
-
-      <TextInputGroup 
-        name="workoutLocation"
-        labelText="Location"
-        value={state.workoutLocation}
-        handleChange={handleInputChange}
-      />
-
-      <TextInputGroup 
-        name="workoutLength"
-        labelText="Length"
-        value={state.workoutLength}
-        handleChange={handleInputChange}
-      />
-
-      <div>
-        <label htmlFor="workoutDescription">Description:</label>
-        {' '}
-        <textarea
-          name="workoutDescription"
-          cols={30}
-          rows={10}
-          placeholder="Optional..."
-          onChange={handleInputChange}
-          value={state.workoutDescription}
+      <div className="section">
+        <TextInputGroup 
+          name="workoutName"
+          labelText="Name"
+          value={state.workoutName}
+          handleChange={handleInputChange}
         />
+
+        <TextInputGroup 
+          name="workoutLocation"
+          labelText="Location"
+          value={state.workoutLocation}
+          handleChange={handleInputChange}
+        />
+
+        <TextInputGroup 
+          name="workoutLength"
+          labelText="Length"
+          value={state.workoutLength}
+          placeholder="In minutes"
+          handleChange={handleInputChange}
+        />
+
+        <div className="form-group-col">
+          <label
+            className="form-label"
+            htmlFor="workoutDescription"
+          >
+            Description:
+          </label>
+
+          <textarea
+            className="form-input"
+            name="workoutDescription"
+            cols={30}
+            rows={10}
+            placeholder="Optional..."
+            onChange={handleInputChange}
+            value={state.workoutDescription}
+          />
+        </div>
       </div>
 
-      <div>
-        <h3>Add Exercise</h3>
+      <div className="section">
+        <h3 className="subHeader">Add Exercise</h3>
 
         <TextInputGroup
           name="exerciseName"
@@ -212,20 +221,26 @@ function WorkoutForm(props: Props) {
           />
         </div>
 
-        <input
-          type="button"
-          value="Add"
-          onClick={handleExerciseAdd}
-        />
+        <div className="centerContainer">
+          <input
+            className="button"
+            type="button"
+            value="Add Exercise"
+            onClick={handleExerciseAdd}
+          />
+        </div>
 
         { renderExercises(state.exercises) }
       </div>
 
-      <input
-        type="button"
-        value={props.submitBtnText}
-        onClick={handleSubmit}
-      />
+      <div className="centerContainer">
+        <input
+          className="button"
+          type="button"
+          value={props.submitBtnText}
+          onClick={handleSubmit}
+        />
+      </div>
     </form>
   )
 }

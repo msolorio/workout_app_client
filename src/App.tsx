@@ -3,6 +3,7 @@ import { useAppDispatch } from './app/hooks'
 import { storeLoginTokenInRdx, removeLoginTokenInRdx } from './features/auth/authSlice';
 import { getLoginTokenFromLocalStorage } from './utils/authUtils';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Routes from './Routes'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <div className="mobileContainer">
         <Header />
         <Routes />
+        <Footer />
       </div>
     </div>
   );

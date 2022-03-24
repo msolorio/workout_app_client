@@ -9,10 +9,15 @@ interface Props {
 
 function PasswordInputGroup(props: Props) {
   return (
-    <div>
-      <label htmlFor={props.name}>{props.labelText}:</label>
-      {' '}
+    <div className="form-group-col">
+      <label 
+        className="form-label" 
+        htmlFor={props.name}
+      >
+        {props.labelText}:
+      </label>
       <input 
+        className="form-input"
         type="password" 
         name={props.name}
         value={props.value as string}

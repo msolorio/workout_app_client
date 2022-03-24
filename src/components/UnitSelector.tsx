@@ -9,6 +9,7 @@ interface Props {
 function UnitSelector(props: Props) {
   return (
     <select
+      className="form-selectInput"
       name={props.name}
       onChange={props.handleInputChange}
       value={props.value || ""}

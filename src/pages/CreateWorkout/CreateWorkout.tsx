@@ -58,8 +58,8 @@ function CreateWorkout() {
   if (state.workoutId) return <Redirect to={`/workouts/${state.workoutId}`} />
 
   return (
-    <main>
-      <h2>New Workout</h2>
+    <main className="main">
+      <h2 className="pageHeader">New Workout</h2>
       <WorkoutForm
         handleSubmit={handleCreateWorkout}
         submitBtnText="Create Workout"

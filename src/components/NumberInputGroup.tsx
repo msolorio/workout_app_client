@@ -10,9 +10,15 @@ interface Props {
 
 function NumberInputGroup(props: Props) {
   return (
-    <div>
-      <label htmlFor={props.name}>{props.labelText}:</label>
+    <div className="form-group-row">
+      <label 
+        className="form-label form-label_short"
+        htmlFor={props.name}
+      >
+        {props.labelText}:
+      </label>
       <input
+        className="form-numInput"
         type="number"
         name={props.name}
         step={props.step || "1"}

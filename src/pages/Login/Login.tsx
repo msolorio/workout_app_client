@@ -81,10 +81,14 @@ function Login() {
   if (state.redirectToWorkouts) return <Redirect to="/workouts" />
 
   return (
-    <main>
-      <h2>Log In</h2>
-      { state.errorMessage && <p>{state.errorMessage}</p> }
-      <form action="">
+    <main className="main">
+      <h2 className="pageHeader">Log In</h2>
+      { 
+        state.errorMessage && <p className="description_small form-errorMessage">
+          {state.errorMessage}
+        </p> 
+      }
+      <form>
         <TextInputGroup
           name="username"
           labelText="username"
@@ -99,17 +103,21 @@ function Login() {
           handleChange={handleInputChange}
         />
 
-        <input
-          type="button"
-          value="Log In"
-          onClick={() => handleSubmit()}
-        />
+        <span className="centerContainer">
+          <input
+            className="button"
+            type="button"
+            value="Log In"
+            onClick={() => handleSubmit()}
+          />
 
-        <input
-          type="button"
-          value="Log In as the Test User"
-          onClick={() => handleSubmit(true)}
-        />
+          <input
+            className="button"
+            type="button"
+            value="Log In as the Test User"
+            onClick={() => handleSubmit(true)}
+          />
+        </span>
       </form>
     </main>
   )

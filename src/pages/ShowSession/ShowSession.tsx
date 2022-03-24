@@ -66,9 +66,9 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   
   return (
     <main className="main">
-      <section>
+      <section className="section">
         <h2 className="pageHeader">{currentSession.workout.name}</h2>
-        <div>
+        <div className="centerContainer_spread">
           <DateWidget timestamp={currentSession.date} />
           <p className="description">{currentSession.completed ? 'completed' : 'in-progress'}</p>
         </div>
