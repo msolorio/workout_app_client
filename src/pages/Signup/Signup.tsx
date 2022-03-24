@@ -57,8 +57,6 @@ function Signup() {
         }
       })
 
-      console.log('response ==>', response)
-
       if (response.data.signup.error) {
         setState({ ...state, errorMessage: response.data.signup.error })
         return
@@ -77,6 +75,7 @@ function Signup() {
     <main>
       <h2>Sign Up</h2>
       <p>Add a username and password to create an account.</p>
+      { state.errorMessage && <p>{state.errorMessage}</p> }
       <form action="">
         <TextInputGroup
           name="username"
