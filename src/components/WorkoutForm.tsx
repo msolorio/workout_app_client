@@ -192,28 +192,31 @@ function WorkoutForm(props: Props) {
           handleChange={handleInputChange}
         />
 
-        <NumberInputGroup
-          name="exerciseReps"
-          labelText="Reps"
-          value={state.exerciseReps}
-          handleChange={handleInputChange}
-        />
 
-        <NumberInputGroup
-          name="exerciseSets"
-          labelText="Sets"
-          value={state.exerciseSets}
-          handleChange={handleInputChange}
-        />
+        <div className="row">
+          <NumberInputGroup
+            name="exerciseReps"
+            labelText="Reps"
+            value={state.exerciseReps}
+            handleChange={handleInputChange}
+          />
+          <NumberInputGroup
+            name="exerciseSets"
+            labelText="Sets"
+            value={state.exerciseSets}
+            handleChange={handleInputChange}
+          />
+          
+        </div>
 
-        <NumberInputGroup
-          name="exerciseWeight"
-          labelText="Weight"
-          value={state.exerciseWeight}
-          handleChange={handleInputChange}
-        />
+        <div className="row">
+          <NumberInputGroup
+            name="exerciseWeight"
+            labelText="Weight"
+            value={state.exerciseWeight}
+            handleChange={handleInputChange}
+          />
 
-        <div>
           <UnitSelector
             name="exerciseUnit"
             handleInputChange={handleInputChange}
