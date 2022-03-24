@@ -47,7 +47,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
       triggerCompleteSession()
     }
   
-  }, [currentSession?.completed, sessionId, completeSession])
+  }, [currentSession?.completed, sessionId, completeSession, logintoken])
 
   
   if (data) currentSession = data.session

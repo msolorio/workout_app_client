@@ -35,10 +35,10 @@ function Login() {
     })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (testFlag: boolean=false) => {
     if (
-      state.username === ''
-      || state.password === ''
+      !testFlag
+      && (state.username === '' || state.password === '')
     ) {
       setState({ ...state, errorMessage: 'All fields are required' })
       return
@@ -47,8 +47,8 @@ function Login() {
     try {
       const response = await login({
         variables: {
-          username: state.username,
-          password: state.password
+          username: testFlag ? 'testuser' : state.username,
+          password: testFlag ? '1234' : state.password
         }
       })
 
@@ -97,7 +97,13 @@ function Login() {
         <input
           type="button"
           value="Log In"
-          onClick={handleSubmit}
+          onClick={() => handleSubmit()}
+        />
+
+        <input
+          type="button"
+          value="Log In as the Test User"
+          onClick={() => handleSubmit(true)}
         />
       </form>
     </main>

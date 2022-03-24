@@ -39,7 +39,7 @@ function Header() {
       <li><Link to="/workouts">Workouts</Link></li>
       <li><Link to ="/workouts/create">Create</Link></li>
       <li><Link to="/sessions">Sessions</Link></li>
-      <li onClick={handleLogout}><Link to="/">Logout</Link></li>
+      <li onClick={handleLogout}><Link to="/login">Logout</Link></li>
     </>
   )
 
