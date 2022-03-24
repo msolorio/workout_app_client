@@ -54,7 +54,7 @@ function Header() {
     <header>
       <nav>
         <ul>
-          <li onClick={handleReset}>Reset</li>
+          <li onClick={handleReset}>Reset Test Data</li>
           { loginToken ? loggedInLinks : loggedOutLinks }
         </ul>
       </nav>

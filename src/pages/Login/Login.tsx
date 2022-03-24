@@ -40,8 +40,7 @@ function Login() {
       !testFlag
       && (state.username === '' || state.password === '')
     ) {
-      setState({ ...state, errorMessage: 'All fields are required' })
-      return
+      return setState({ ...state, errorMessage: 'All fields are required' })
     }
 
     try {
@@ -51,6 +50,11 @@ function Login() {
           password: testFlag ? '1234' : state.password
         }
       })
+
+      if (response.data.login.error) {
+        return setState({ ...state, errorMessage: response.data.login.error })
+      }
+      
 
       setState({
         ...state,
@@ -79,6 +83,7 @@ function Login() {
   return (
     <main>
       <h2>Log In</h2>
+      { state.errorMessage && <p>{state.errorMessage}</p> }
       <form action="">
         <TextInputGroup
           name="username"
