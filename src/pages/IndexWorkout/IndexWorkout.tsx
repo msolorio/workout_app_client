@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { storeWorkouts } from '../../features/workouts/workoutsSlice'
 import { selectAllWorkouts, WorkoutType } from '../../features/workouts/workoutsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import { useQuery } from '@apollo/client';
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 
 
 function IndexWorkout() {

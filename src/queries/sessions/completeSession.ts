@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client'
 
 const COMPLETE_SESSION = gql`
-  mutation CompleteSessionMutation($id: ID!) {
-    completeSession(id: $id) {
-      id
-      completed
+  mutation CompleteSessionMutation($token: String!, $id: ID!) {
+    completeSession(token: $token, id: $id) {
+      count
     }
   }
 `

@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
+import { WorkoutType } from '../../features/workouts/workoutsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import CREATE_WORKOUT from '../../queries/workouts/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
-import { WorkoutType } from '../../features/workouts/workoutsSlice'
 
 interface State {
   workoutId: null | string
@@ -17,6 +18,7 @@ function CreateWorkout() {
   const [state, setState] = useState(stateObj)
   const dispatch = useAppDispatch()
   const [createWorkout] = useMutation(CREATE_WORKOUT)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   let allWorkouts = useAppSelector(selectAllWorkouts)
 
@@ -38,7 +40,7 @@ function CreateWorkout() {
   const handleCreateWorkout = async (workoutData: WorkoutType) => {
     try {
       const response = await createWorkout({
-        variables: { ...workoutData }
+        variables: { ...workoutData, token: logintoken }
       });
 
       const createdWorkout = response.data.createWorkout

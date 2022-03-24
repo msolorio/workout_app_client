@@ -36,7 +36,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
     async function triggerCompleteSession() {
       try {
         await completeSession({
-          variables: { id: sessionId }
+          variables: { token: logintoken, id: sessionId }
         })
       } catch (err) {
         console.error('Error marking session as complete:', err)

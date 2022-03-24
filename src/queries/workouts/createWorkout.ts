@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 
 const CREATE_WORKOUT = gql`
   mutation CreateWorkoutMutation(
+    $token: String!
     $name: String!,
     $location: String!,
     $description: String,
@@ -9,6 +10,7 @@ const CREATE_WORKOUT = gql`
     $exercises: [InputExercise!]
   ) {
     createWorkout(
+      token: $token,
       name: $name,
       location: $location,
       description: $description,

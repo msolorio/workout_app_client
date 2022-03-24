@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client';
 import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import UPDATE_WORKOUT from '../../queries/workouts/updateWorkout'
@@ -21,6 +22,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   const [updateWorkout] = useMutation(UPDATE_WORKOUT)
   
   let allWorkouts = useAppSelector(selectAllWorkouts)
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   let currentWorkout = allWorkouts?.find((workout: WorkoutType) => workout.id === workoutId)
 
@@ -52,7 +54,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
     try {
       const response = await updateWorkout({
-        variables: { ...workoutData }
+        variables: { ...workoutData, token: logintoken }
       })
 
       const workoutFromDb = response.data.updateWorkout

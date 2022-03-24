@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { incrementSetForExInst } from '../../features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import INCREMENT_SET from '../../queries/sessions/incrementSet'
 
 interface Props {
@@ -20,7 +21,7 @@ function RepsAndSets({
   exInstId,
   sessionId
 }: Props) {
-
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
   const [incrementSetForExInstance] = useMutation(INCREMENT_SET)
   const dispatch = useAppDispatch()
 
@@ -33,6 +34,7 @@ function RepsAndSets({
 
     await incrementSetForExInstance({
       variables: {
+        token: logintoken,
         id: exInstId,
         setsCompleted: setsCompleted + 1
       }

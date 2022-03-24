@@ -59,7 +59,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
   const handleCreateSession = async () => {
     try {
-      const response = await createSession({ variables: { workoutId: id } })
+      const response = await createSession({ variables: { token: logintoken, workoutId: id } })
       const newSession = response.data.createSession
   
       dispatch(storeNewSession(newSession))

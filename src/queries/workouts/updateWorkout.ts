@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 
 const UPDATE_WORKOUT = gql`
   mutation UpdateWorkoutMutation(
+    $token: String!
     $id: ID!
     $name: String
     $location: String
@@ -10,6 +11,7 @@ const UPDATE_WORKOUT = gql`
     $exercises: [InputUpdateExercise!]
   ) {
     updateWorkout(
+      token: $token
       id: $id
       name: $name
       location: $location

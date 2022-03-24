@@ -1,8 +1,11 @@
 import { gql } from '@apollo/client'
 
 const CREATE_SESSION = gql`
-  mutation CreateSessionMutation($workoutId: ID!) {
-    createSession(workoutId: $workoutId) {
+  mutation CreateSessionMutation($token: String!, $workoutId: ID!) {
+    createSession(
+      token: $token
+      workoutId: $workoutId
+    ) {
       id
       date
       workout {
