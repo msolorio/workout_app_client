@@ -75,6 +75,8 @@ function Login() {
 
     } catch (err) {
       console.error('There was an error logging in.')
+      console.log('err ==>', err)
+      
     }
   }
 
