@@ -151,19 +151,19 @@ button {
   margin: 0 .9em .2em 0;
 }
 
-.margin-bottom {
+.marginBottom {
   margin-bottom: 1em;
 }
 
-.margin-bottom-small {
+.marginBottomSmall {
   margin-bottom: .3em;
 }
 
-.margin-right {
+.marginRight {
   margin-right: 1em;
 }
 
-.margin-right-small {
+.marginRightSmall {
   margin-right: .3em;
 }
 
@@ -171,7 +171,6 @@ button {
   position: relative;
   background: var(--dark-bg-2);
   margin: 0 0 1em;
-  /* border-bottom: .1em solid #ccc; */
   padding: .7em;
   border-radius: .3em;
 }
@@ -192,8 +191,12 @@ button {
   align-items: flex-start;
 }
 
-/* .align-top {
-} */
+.row_centered {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 
 .centerContainer {
   display: flex;
@@ -208,12 +211,15 @@ button {
 
 .button {
   display: block;
-  padding: .4em .9em;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  padding: .5em 1em;
+  border-radius: .3em;
   /* margin: .3em .7em 1em; */
-  background: #ddd;
-  color: var(--dark-text-color);
+  /* background: #ddd; */
+  background: #0c9100;
+  border: none;
+  border-bottom: .2em solid var(--accent-text);
+  color: #d7d7d7;
+  font-weight: 600;
 }
 
 .button-sets {
@@ -228,7 +234,7 @@ button {
 }
 
 .button a {
-  color: var(--dark-text-color);
+  color: inherit;
 }
 
 .accent-text {
@@ -267,6 +273,12 @@ button {
   padding: .4em 2em;
   font-size: 1.5em;
   text-align: center;
+}
+
+.kettlebellImg {
+  width: 1.2em;
+  position: relative;
+  top: .1em;
 }
 
 .nav {
@@ -367,12 +379,22 @@ button {
 }
 
 .form-numInput {
-  width: 5em;
+  width: 3em;
   height: 2em;
   padding: .3em .4em;
   margin: 0 0 .5em;
-  border-radius: .3em;
-  border: .1em solid #888;
+  /* border-radius: .3em; */
+  /* border: .1em solid #888; */
+  border: none;
+  border-bottom: .2em solid #777;
+  background: inherit;
+  color: var(--light-text);
+  font-size: 1em;
+}
+
+.form-numInput:focus {
+  border: none;
+  border-bottom: .2em solid #777;
 }
 
 .form-selectInput {
@@ -380,9 +402,14 @@ button {
   height: 2em;
   padding: .3em .4em;
   margin: 0 0 .5em;
-  border-radius: .3em;
-  border: .1em solid #888;
-  background: #fff;
+  border: none;
+  border-bottom: .2em solid #777;
+  font-size: 1em;
+  background: inherit;
+  color: var(--light-text);
+  /* border-radius: .3em; */
+  /* border: .1em solid #888; */
+  /* background: #fff; */
 }
 
 .form-errorMessage {

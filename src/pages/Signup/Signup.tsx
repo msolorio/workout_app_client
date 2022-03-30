@@ -74,7 +74,8 @@ function Signup() {
   return (
     <main className="main">
       <h2 className="pageHeader">Sign Up</h2>
-      <p className="description">Add a username and password to create an account.</p>
+      <p className="description marginBottom alignCenter">Add a username and password to create an account.</p>
+
       { state.errorMessage && <p className="description_small form-errorMessage">
         {state.errorMessage}
       </p> }
@@ -100,12 +101,14 @@ function Signup() {
           handleChange={handleInputChange}
         />
 
-        <input
-          className="button"
-          type="button"
-          value="Sign Up"
-          onClick={handleSubmit}
-        />
+        <div className="row_centered">
+          <input
+            className="button"
+            type="button"
+            value="Sign Up"
+            onClick={handleSubmit}
+          />
+        </div>
       </form>
     </main>
   )

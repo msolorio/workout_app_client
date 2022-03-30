@@ -66,7 +66,7 @@ function RepsAndSets({
     if (sets) {
       return (
         <span className="description">
-          <span className="margin-right">Sets:</span>
+          <span className="marginRight">Sets:</span>
           <button className="button-sets inline" onClick={handleSetIncrement}>
           {setsCompleted}/{sets}
           </button>

@@ -186,7 +186,7 @@ function WorkoutForm(props: Props) {
       <div>
 
         <div className="section">
-          <h3 className="subHeader">Add Exercise</h3>
+          <h3 className="subHeader alignCenter">Add Exercise</h3>
 
           <TextInputGroup
             name="exerciseName"

@@ -85,6 +85,7 @@ function Login() {
   return (
     <main className="main">
       <h2 className="pageHeader">Log In</h2>
+
       { 
         state.errorMessage && <p className="description_small form-errorMessage">
           {state.errorMessage}
@@ -107,7 +108,7 @@ function Login() {
 
         <span className="centerContainer">
           <input
-            className="button"
+            className="button marginRight"
             type="button"
             value="Log In"
             onClick={() => handleSubmit()}

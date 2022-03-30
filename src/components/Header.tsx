@@ -6,6 +6,8 @@ import { storeSessions, removeSessions } from '../features/sessions/sessionsSlic
 import RESET from '../queries/reset'
 import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
 import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../features/auth/authSlice';
+// import kettlebellImg from './kettlebell.png'
+import kettlebellImg from './weight.png'
 
 function Header() {
 
@@ -62,7 +64,9 @@ function Header() {
 
   return (
     <header>
-      <h1 className="header-title">Gym Buddie</h1>
+      <h1 className="header-title">
+        Gym Buddie <img className="kettlebellImg" src={kettlebellImg} alt="kettlebell" />
+      </h1>
       <nav className="nav">
         <ul className="nav-ul">
           { loginToken ? loggedInLinks : loggedOutLinks }
