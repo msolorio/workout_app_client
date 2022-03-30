@@ -1,5 +1,4 @@
-import { ChangeEvent, MouseEvent } from 'react'
-import { useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react'
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
 import UnitSelector from './UnitSelector'
@@ -171,7 +170,7 @@ function WorkoutForm(props: Props) {
           </label>
 
           <textarea
-            className="form-input"
+            className="form-input form-input_textarea"
             name="workoutDescription"
             cols={30}
             rows={10}
@@ -182,59 +181,66 @@ function WorkoutForm(props: Props) {
         </div>
       </div>
 
-      <div className="section">
-        <h3 className="subHeader">Add Exercise</h3>
+      <div className="divider"></div>
 
-        <TextInputGroup
-          name="exerciseName"
-          labelText="Name"
-          value={state.exerciseName}
-          handleChange={handleInputChange}
-        />
+      <div>
 
+        <div className="section">
+          <h3 className="subHeader">Add Exercise</h3>
 
-        <div className="row">
-          <NumberInputGroup
-            name="exerciseReps"
-            labelText="Reps"
-            value={state.exerciseReps}
-            handleChange={handleInputChange}
-          />
-          <NumberInputGroup
-            name="exerciseSets"
-            labelText="Sets"
-            value={state.exerciseSets}
-            handleChange={handleInputChange}
-          />
-          
-        </div>
-
-        <div className="row">
-          <NumberInputGroup
-            name="exerciseWeight"
-            labelText="Weight"
-            value={state.exerciseWeight}
+          <TextInputGroup
+            name="exerciseName"
+            labelText="Name"
+            value={state.exerciseName}
             handleChange={handleInputChange}
           />
 
-          <UnitSelector
-            name="exerciseUnit"
-            handleInputChange={handleInputChange}
-            value={state.exerciseUnit}
-          />
-        </div>
 
-        <div className="centerContainer">
-          <input
-            className="button"
-            type="button"
-            value="Add Exercise"
-            onClick={handleExerciseAdd}
-          />
+          <div className="row">
+            <NumberInputGroup
+              name="exerciseReps"
+              labelText="Reps"
+              value={state.exerciseReps}
+              handleChange={handleInputChange}
+            />
+            <NumberInputGroup
+              name="exerciseSets"
+              labelText="Sets"
+              value={state.exerciseSets}
+              handleChange={handleInputChange}
+            />
+            
+          </div>
+
+          <div className="row">
+            <NumberInputGroup
+              name="exerciseWeight"
+              labelText="Weight"
+              value={state.exerciseWeight}
+              handleChange={handleInputChange}
+            />
+
+            <UnitSelector
+              name="exerciseUnit"
+              handleInputChange={handleInputChange}
+              value={state.exerciseUnit}
+            />
+          </div>
+
+          <div className="centerContainer">
+            <input
+              className="button"
+              type="button"
+              value="Add Exercise"
+              onClick={handleExerciseAdd}
+            />
+          </div>
         </div>
 
         { renderExercises(state.exercises) }
       </div>
+
+      <div className="divider"></div>
 
       <div className="centerContainer">
         <input

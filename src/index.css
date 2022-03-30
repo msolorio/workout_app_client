@@ -69,10 +69,21 @@ table {
 /* CUSTOM STYLES */
 /* ******************************************************************************** */
 
+/* VARIABLES ***************************************************************** */
+:root {
+  --accent-text: #2bbf1e;
+  --accent-background: #0d9f00;
+  --dark-text-color: #333;
+  --light-text-color: #dcdcdc;
+
+  --dark-bg-1: #121212;
+  --dark-bg-2: #2b2b2b;
+}
+
 /* GENERAL STYLES ***************************************************************** */
 * {
   box-sizing: border-box;
-  color: #333;
+  /* color: #dedede; */
 }
 
 body, html, #root {
@@ -84,11 +95,16 @@ html {
 }
 
 body {
-  background: #292929;
+  background: #bbb;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 .window {
@@ -97,11 +113,13 @@ a {
 
 .mobileContainer {
   background: #fff;
-  max-width: 412px;
+  max-width: 320px;
   margin: 0 auto;
 }
 
 .main {
+  background: var(--dark-bg-1);
+  color: var(--light-text-color);
   position: relative;
   margin: 0 auto;
   max-width: 400px;
@@ -120,9 +138,10 @@ a {
 }
 
 .description {
+  display: flex;
   font-size: .9em;
   line-height: 1.3em;
-  margin: 0 .9em .6em 0;
+  margin: 0 .9em 0 0;
 }
 
 .description_small {
@@ -132,10 +151,29 @@ a {
   margin: 0 .9em .2em 0;
 }
 
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
+.margin-bottom-small {
+  margin-bottom: .3em;
+}
+
+.margin-right {
+  margin-right: 1em;
+}
+
+.margin-right-small {
+  margin-right: .3em;
+}
+
 .section {
+  position: relative;
+  background: var(--dark-bg-2);
   margin: 0 0 1em;
-  border-bottom: .1em solid #ccc;
-  padding: .3em 0 1em 0;
+  /* border-bottom: .1em solid #ccc; */
+  padding: .7em;
+  border-radius: .3em;
 }
 
 .shortText {
@@ -151,7 +189,11 @@ a {
 .row {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
+
+/* .align-top {
+} */
 
 .centerContainer {
   display: flex;
@@ -169,8 +211,29 @@ a {
   padding: .4em .9em;
   border: 1px solid #ccc;
   border-radius: 3px;
-  margin: .3em .7em 1em;
+  /* margin: .3em .7em 1em; */
   background: #ddd;
+  color: var(--dark-text-color);
+}
+
+.button-sets {
+  background: var(--light-text-color);
+  color: var(--dark-text-color);
+  font-size: 1.1em;
+  border: none;
+  padding: .4em .6em .3em;
+  border-radius: .6em;
+  position: relative;
+  top: -.45em;
+}
+
+.button a {
+  color: var(--dark-text-color);
+}
+
+.accent-text {
+  color: var(--accent-text);
+  font-weight: 600;
 }
 
 .inline {
@@ -184,7 +247,7 @@ a {
 }
 
 .divider {
-  border-bottom: .1em solid #ccc;
+  border-bottom: .2em solid var(--accent-text);
   margin: 0 0 1em;
 }
 
@@ -198,15 +261,17 @@ a {
 
 /* HEADER ***************************************************************** */
 .header-title {
-  background: #ccc;
+  background: var(--accent-background);
+  /* border-bottom: .1em solid #5ee652; */
+  border-bottom: .12em solid #57db4b;
   padding: .4em 2em;
   font-size: 1.5em;
   text-align: center;
 }
 
 .nav {
-  background: #eee;
-  padding: .7em .1em;
+  background: var(--light-text-color);
+  padding: .7em .4em;
 }
 
 .nav-ul {
@@ -218,6 +283,7 @@ a {
   width: 100%;
   font-size: .8em;
   text-align: center;
+  color: #000;
 }
 
 .nav-a {
@@ -234,11 +300,18 @@ a {
   color: #555;
 }
 
-.checkbox {
+/* .checkbox {
   position: relative;
   top: -.2em;
   left: -.4em;
   margin-right: .2em;
+} */
+
+.checkImg {
+  width: 25px;
+  position: absolute;
+  top: 1em;
+  right: .8em;
 }
 
 /* FORM COMPONENTS ***************************************************************** */
@@ -269,8 +342,28 @@ a {
 .form-input {
   padding: .3em .4em;
   margin: 0 0 .5em;
-  border-radius: .3em;
-  border: .1em solid #888;
+  /* border-radius: .3em; */
+  /* border: .1em solid #888; */
+  height: 2em;
+  border: none;
+  background: inherit;
+  border-bottom: .2em solid #777;
+  color: var(--light-text);
+  font-size: 1em;
+}
+
+.form-input:focus {
+  outline: none;
+  border-bottom: .2em solid #ccc;
+}
+
+.form-input_textarea {
+  border: .2em solid #777;
+  border-radius: .6em;
+}
+
+.form-input_textarea:focus {
+  border: .2em solid #ccc;
 }
 
 .form-numInput {

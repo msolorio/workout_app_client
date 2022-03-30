@@ -24,7 +24,7 @@ function Exercise(props: Props) {
   }
 
   return (
-    <div>
+    <div className="section">
       <TextInputNoLabel
         name="name"
         placeholder="Exercise Name"

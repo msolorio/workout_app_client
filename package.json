@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-prod": "env-cmd -f ./.envdir/.prod.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.2",
-    "apollo": "^2.33.6"
+    "apollo": "^2.33.6",
+    "env-cmd": "^10.1.0"
   }
 }

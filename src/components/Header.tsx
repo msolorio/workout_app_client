@@ -62,7 +62,7 @@ function Header() {
 
   return (
     <header>
-      <h1 className="header-title">Workout App</h1>
+      <h1 className="header-title">Gym Buddie</h1>
       <nav className="nav">
         <ul className="nav-ul">
           { loginToken ? loggedInLinks : loggedOutLinks }

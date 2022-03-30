@@ -11,9 +11,13 @@ import store from './app/store'
 import './index.css';
 import App from './App';
 
+const API_ENDPOINT = process?.env.REACT_APP_API_ENDPOINT || 'http://localhost:4000'
+
+console.log('API_ENDPOINT ==>', API_ENDPOINT)
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: API_ENDPOINT,
+  // uri: 'http://localhost:4000',
   cache: new InMemoryCache({
     addTypename: false
   })

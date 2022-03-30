@@ -90,8 +90,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       { length ? <p className="cornerText description">{length} minutes</p> : '' }
 
 
-      <div className="centerContainer">
-        <button className="button" onClick={handleCreateSession}>
+      <div className="centerContainer margin-bottom">
+        <button className="button margin-right" onClick={handleCreateSession}>
           Start Session
         </button>
 
@@ -100,9 +100,9 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
         </button>
       </div>
 
-      { location && <p className="description_small">{location}</p> }
+      { location && <p className="description_small margin-bottom">Location: {location}</p> }
 
-      { description && <p className="description">{description}</p> }
+      { description && <p className="description margin-bottom">{description}</p> }
 
       <div className="divider" />
 
