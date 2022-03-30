@@ -103,7 +103,7 @@ function Signup() {
 
         <div className="row_centered">
           <input
-            className="button"
+            className="button button_accent"
             type="button"
             value="Sign Up"
             onClick={handleSubmit}

@@ -68,22 +68,27 @@ table {
 /* ******************************************************************************** */
 /* CUSTOM STYLES */
 /* ******************************************************************************** */
+/* FONTS ************************************************************************** */
+@font-face {
+  font-family: 'UbuntuRegular';
+  src: url("./fonts/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
 
-/* VARIABLES ***************************************************************** */
+/* VARIABLES ********************************************************************** */
 :root {
   --accent-text: #2bbf1e;
-  --accent-background: #0d9f00;
+  --accent-background: #13b105;
   --dark-text-color: #333;
   --light-text-color: #dcdcdc;
 
   --dark-bg-1: #121212;
-  --dark-bg-2: #2b2b2b;
+  --dark-bg-2: #383838;
 }
 
 /* GENERAL STYLES ***************************************************************** */
 * {
   box-sizing: border-box;
-  /* color: #dedede; */
 }
 
 body, html, #root {
@@ -92,10 +97,7 @@ body, html, #root {
 
 html {
   font-size: 16px;
-}
-
-body {
-  background: #bbb;
+  background: #f4f4f4;
 }
 
 a {
@@ -103,12 +105,9 @@ a {
   color: inherit;
 }
 
-button {
-  cursor: pointer;
-}
-
 .window {
   height: 100%;
+  background: #f4f4f4;
 }
 
 .mobileContainer {
@@ -124,15 +123,17 @@ button {
   margin: 0 auto;
   max-width: 400px;
   padding: 0 .9em .4em;
-  min-height: 900px;
+  min-height: 800px;
 }
 
 .pageHeader {
+  font-family: UbuntuRegular;
   text-align: center;
   padding: 1em 0 1.2em;
 }
 
 .subHeader {
+  font-family: UbuntuRegular;
   margin: 0 0 .4em;
   line-height: 1.3em;
 }
@@ -197,29 +198,51 @@ button {
   justify-content: center;
 }
 
-
-.centerContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.centerContainer_spread {
+.row_centered_spread {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .button {
+  font-family: UbuntuRegular;
   display: block;
   padding: .5em 1em;
-  border-radius: .3em;
-  /* margin: .3em .7em 1em; */
-  /* background: #ddd; */
-  background: #0c9100;
+  border-radius: .25em;
   border: none;
-  border-bottom: .2em solid var(--accent-text);
-  color: #d7d7d7;
   font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.button:active {
+  top: .1em;
+}
+
+.button_standard {
+  background: #e2e9e3;
+  border-bottom: .2em solid grey;
+  color: var(--dark-text-color);
+}
+
+.button_standard:hover,
+.button_standard:active,
+.button_standard:focus {
+  outline: none;
+  background: #d3ded5;
+}
+
+.button_accent {
+  background: var(--accent-background);
+  border-bottom: .2em solid #32dd22;
+  color: #f5f5f5;
+}
+
+.button_accent:hover,
+.button_accent:active,
+.button_accent:focus {
+  outline: none;
+  background: #0ea001;
 }
 
 .button-sets {
@@ -267,8 +290,8 @@ button {
 
 /* HEADER ***************************************************************** */
 .header-title {
+  font-family: UbuntuRegular;
   background: var(--accent-background);
-  /* border-bottom: .1em solid #5ee652; */
   border-bottom: .12em solid #57db4b;
   padding: .4em 2em;
   font-size: 1.5em;
@@ -278,17 +301,20 @@ button {
 .kettlebellImg {
   width: 1.2em;
   position: relative;
-  top: .1em;
+  top: .15em;
+  left: -.1em;
 }
 
 .nav {
-  background: var(--light-text-color);
-  padding: .7em .4em;
+  font-family: UbuntuRegular;
+  background: #f7f7f7;
+  border-bottom: .2em solid grey;
 }
 
 .nav-ul {
   display: flex;
   justify-content: space-between;
+  padding: 0 .6em;
 }
 
 .nav-li {
@@ -296,11 +322,25 @@ button {
   font-size: .8em;
   text-align: center;
   color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+}
+
+.nav-li:hover {
+  color: var(--accent-text);
 }
 
 .nav-a {
   text-decoration: none;
-  color: #000;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
 .nav-link {
@@ -311,13 +351,6 @@ button {
   padding: 10px 0;
   color: #555;
 }
-
-/* .checkbox {
-  position: relative;
-  top: -.2em;
-  left: -.4em;
-  margin-right: .2em;
-} */
 
 .checkImg {
   width: 25px;
@@ -340,11 +373,12 @@ button {
 .form-group-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 0 .9em .8em 0;
 }
 
 .form-label {
-  margin: 0 .5em .4em 0;
+  margin: 0 0 .4em 0;
 }
 
 .form-label_short {
@@ -354,8 +388,6 @@ button {
 .form-input {
   padding: .3em .4em;
   margin: 0 0 .5em;
-  /* border-radius: .3em; */
-  /* border: .1em solid #888; */
   height: 2em;
   border: none;
   background: inherit;
@@ -372,9 +404,12 @@ button {
 .form-input_textarea {
   border: .2em solid #777;
   border-radius: .6em;
+  height: 6em;
+  font-size: .85em;
 }
 
 .form-input_textarea:focus {
+  outline: none;
   border: .2em solid #ccc;
 }
 
@@ -383,8 +418,6 @@ button {
   height: 2em;
   padding: .3em .4em;
   margin: 0 0 .5em;
-  /* border-radius: .3em; */
-  /* border: .1em solid #888; */
   border: none;
   border-bottom: .2em solid #777;
   background: inherit;
@@ -393,8 +426,9 @@ button {
 }
 
 .form-numInput:focus {
+  outline: none;
   border: none;
-  border-bottom: .2em solid #777;
+  border-bottom: .2em solid #ccc;
 }
 
 .form-selectInput {
@@ -407,33 +441,17 @@ button {
   font-size: 1em;
   background: inherit;
   color: var(--light-text);
-  /* border-radius: .3em; */
-  /* border: .1em solid #888; */
-  /* background: #fff; */
+}
+
+.form-selectInput:focus {
+  outline: none;
+  border: none;
+  border-bottom: .2em solid #ccc;
 }
 
 .form-errorMessage {
-  background: #fdcaca;
-  border: .1em solid #eaa6a6;
-  padding: .2em .6em;
+  background: #545454;
+  padding: .4em .6em .3em;
   border-radius: 4px;
-  margin: 0 0 .5em;
+  margin: 0 0 .9em;
 }
-
-/* 
-.form-button {
-  margin: 0 auto;
-  display: block;
-  padding: .4em 1em;
-  border-radius: .3em;
-  background: #c0c0c0;
-  border: none;
-}
-
-.form-buttonOption {
-  width: 100%;
-}
-
-.form-buttonSubmit {
-  margin-top: 1.5em;
-} */

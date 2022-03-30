@@ -25,25 +25,29 @@ function Exercise(props: Props) {
 
   return (
     <div className="section">
-      <TextInputNoLabel
-        name="name"
-        placeholder="Exercise Name"
-        value={props.exercise.name}
-        handleChange={handleExerciseUpdate}
-      />
-      <NumberInputGroup
-        name="reps"
-        labelText="Reps"
-        value={props.exercise.reps}
-        handleChange={handleExerciseUpdate}
-      />
-      <NumberInputGroup
-        name="sets"
-        labelText="Sets"
-        value={props.exercise.sets}
-        handleChange={handleExerciseUpdate}
-      />
-      <div>
+      <div className="marginBottom">
+        <TextInputNoLabel
+          name="name"
+          placeholder="Exercise Name"
+          value={props.exercise.name}
+          handleChange={handleExerciseUpdate}
+        />
+      </div>
+      <div className="row">
+        <NumberInputGroup
+          name="reps"
+          labelText="Reps"
+          value={props.exercise.reps}
+          handleChange={handleExerciseUpdate}
+        />
+        <NumberInputGroup
+          name="sets"
+          labelText="Sets"
+          value={props.exercise.sets}
+          handleChange={handleExerciseUpdate}
+        />
+      </div>
+      <div className="row marginBottom">
         <NumberInputNoLabel
           name="weight"
           value={props.exercise.weight as number}
@@ -56,7 +60,14 @@ function Exercise(props: Props) {
           value={props.exercise.unit || ''}
         />
       </div>
-      <button onClick={handleRemoveClick}>Remove</button>
+      <div className="row_centered">
+        <button 
+          className="button button_standard"
+          onClick={handleRemoveClick}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   )
 }

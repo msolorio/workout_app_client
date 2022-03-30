@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import TextInputGroup from '../components/TextInputGroup';
 import NumberInputGroup from '../components/NumberInputGroup';
+import NumberInputNoLabel from '../components/NumberInputNoLabel';
 import UnitSelector from './UnitSelector'
 import Exercise from './Exercise';
 import { WorkoutType } from '../features/workouts/workoutsSlice'
@@ -181,7 +182,7 @@ function WorkoutForm(props: Props) {
         </div>
       </div>
 
-      <div className="divider"></div>
+      {/* <div className="divider"></div> */}
 
       <div>
 
@@ -212,10 +213,9 @@ function WorkoutForm(props: Props) {
             
           </div>
 
-          <div className="row">
-            <NumberInputGroup
+          <div className="row marginBottom">
+            <NumberInputNoLabel
               name="exerciseWeight"
-              labelText="Weight"
               value={state.exerciseWeight}
               handleChange={handleInputChange}
             />
@@ -227,9 +227,9 @@ function WorkoutForm(props: Props) {
             />
           </div>
 
-          <div className="centerContainer">
+          <div className="row_centered">
             <input
-              className="button"
+              className="button button_standard"
               type="button"
               value="Add Exercise"
               onClick={handleExerciseAdd}
@@ -237,14 +237,16 @@ function WorkoutForm(props: Props) {
           </div>
         </div>
 
+        <div className="divider"></div>
+
         { renderExercises(state.exercises) }
       </div>
 
-      <div className="divider"></div>
+      { state.exercises.length ? <div className="divider"></div> : null }
 
-      <div className="centerContainer">
+      <div className="row_centered marginBottom">
         <input
-          className="button"
+          className="button button_accent"
           type="button"
           value={props.submitBtnText}
           onClick={handleSubmit}

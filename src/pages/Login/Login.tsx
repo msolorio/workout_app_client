@@ -106,18 +106,18 @@ function Login() {
           handleChange={handleInputChange}
         />
 
-        <span className="centerContainer">
+        <span className="row_centered">
           <input
-            className="button marginRight"
+            className="button button_standard marginRight"
             type="button"
             value="Log In"
             onClick={() => handleSubmit()}
           />
 
           <input
-            className="button"
+            className="button button_accent"
             type="button"
-            value="Log In as the Test User"
+            value="Log In as Test User"
             onClick={() => handleSubmit(true)}
           />
         </span>

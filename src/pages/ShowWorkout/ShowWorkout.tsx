@@ -90,12 +90,12 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
       { length ? <p className="cornerText description">{length} minutes</p> : '' }
 
 
-      <div className="centerContainer marginBottom">
-        <button className="button marginRight" onClick={handleCreateSession}>
+      <div className="row_centered marginBottom">
+        <button className="button button_accent marginRight" onClick={handleCreateSession}>
           Start Session
         </button>
 
-        <button className="button">
+        <button className="button button_standard">
           <Link to={`/workouts/${id}/edit`}>Edit Workout</Link>
         </button>
       </div>

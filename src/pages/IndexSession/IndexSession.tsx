@@ -34,7 +34,7 @@ function IndexSession() {
         <div className="section">
           {/* <h2 className="subHeader">{displayDate}</h2> */}
           <DateWidget timestamp={session.date} />
-          <p className="description marginBottom-small">{session.workout.name}</p>
+          <p className="description marginBottomSmall">{session.workout.name}</p>
           <p className="description">{ session.completed ? <span className="accent-text">completed</span> : <span>in-progress</span> }</p>
         </div>
       </Link>
@@ -43,7 +43,7 @@ function IndexSession() {
 
   return (
     <main className="main">
-      <h2 className="pageHeader">Your Sessions</h2>
+      <h2 className="pageHeader">Your Session</h2>
       <ul>{sessionsJSX}</ul>
     </main>
   )

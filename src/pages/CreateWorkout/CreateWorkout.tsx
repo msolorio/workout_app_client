@@ -59,7 +59,7 @@ function CreateWorkout() {
 
   return (
     <main className="main">
-      <h2 className="pageHeader">New Workout</h2>
+      <h2 className="pageHeader">Create New Workout</h2>
       <WorkoutForm
         handleSubmit={handleCreateWorkout}
         submitBtnText="Create Workout"

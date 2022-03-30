@@ -11,6 +11,7 @@ function TextInputNoLabel(props: Props) {
   return (
     <div>
       <input 
+        className="form-input"
         type="text" 
         name={props.name}
         placeholder={props.placeholder}

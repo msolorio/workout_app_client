@@ -72,8 +72,8 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   if (state.redirectToWorkout) return <Redirect to={`/workouts/${workoutId}`} />
 
   return (
-    <main>
-      <h2>Edit Workout</h2>
+    <main className="main">
+      <h2 className="pageHeader">Edit Your Workout</h2>
       <WorkoutForm
         handleSubmit={handleUpdateWorkout}
         submitBtnText="Save Workout"

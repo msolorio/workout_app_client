@@ -10,7 +10,7 @@ function DateWidget({ timestamp }: Props) {
   const day = date.getDate()
 
   return (
-    <h2 className="subHeader">{month} {day}</h2>
+    <h2 className="subHeader accent-text">{month} {day}</h2>
   )
 }
 
