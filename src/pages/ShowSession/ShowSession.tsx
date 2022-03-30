@@ -9,6 +9,7 @@ import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
 import SESSION from '../../queries/sessions/getOneSession'
 import COMPLETE_SESSION from '../../queries/sessions/completeSession'
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 interface Props {
   sessionId: string
@@ -52,7 +53,7 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   
   if (data) currentSession = data.session
   
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <LoadingScreen />
   
   if (error) {
     console.log('Something went wrong')

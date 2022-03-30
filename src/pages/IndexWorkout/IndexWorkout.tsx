@@ -6,7 +6,7 @@ import { selectAllWorkouts, WorkoutType } from '../../features/workouts/workouts
 import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import { useQuery } from '@apollo/client';
-
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 function IndexWorkout() {
   const dispatch = useAppDispatch()
@@ -22,7 +22,7 @@ function IndexWorkout() {
     if (data) dispatch(storeWorkouts(data.workouts))
   })
 
-  if (loading) return <h2>Loading...</h2>  
+  if (loading) return <LoadingScreen />
   if (error) return <h2>Something went wrong. Please try again.</h2>
 
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {

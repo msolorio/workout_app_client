@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import CREATE_WORKOUT from '../../queries/workouts/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 interface State {
   workoutId: null | string
@@ -30,7 +31,7 @@ function CreateWorkout() {
     if (data) dispatch(storeWorkouts(data.workouts))
   })
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <LoadingScreen />
 
   if (error) {
     console.log('Something went wrong')

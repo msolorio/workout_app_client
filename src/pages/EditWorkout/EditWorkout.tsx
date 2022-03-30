@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import UPDATE_WORKOUT from '../../queries/workouts/updateWorkout'
 import WorkoutForm from '../../components/WorkoutForm'
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 interface Props {
   workoutId: string
@@ -38,7 +39,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
     currentWorkout = data.workouts.find((workout: WorkoutType) => workout.id === workoutId)
   }
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <LoadingScreen />
 
   if (error) {
     console.log('Something went wrong')

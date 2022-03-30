@@ -7,7 +7,7 @@ import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import { RootState } from '../../app/store'
 import SESSIONS from '../../queries/sessions/getSessions'
 import DateWidget from '../../components/DateWidget'
-
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 function IndexSession() {
   const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ function IndexSession() {
     }
   })
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <LoadingScreen />
   if (error) return <h2>Something went wrong. Please try again.</h2>
 
   const sessionsJSX = sessions.map((session: SessionType) => {

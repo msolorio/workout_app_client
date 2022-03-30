@@ -10,7 +10,7 @@ import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
 import ONE_WORKOUT from '../../queries/workouts/getOneWorkout'
 import CREATE_SESSION from '../../queries/sessions/createSession'
 import Exercise from './Exercise'
-
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 interface Props {
   workoutId: string
@@ -35,7 +35,7 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
   if (data) currentWorkout = data.workout
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <LoadingScreen />
 
   if (error) {
     console.log('Something went wrong')
