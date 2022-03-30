@@ -83,7 +83,7 @@ table {
   --light-text-color: #dcdcdc;
 
   --dark-bg-1: #121212;
-  --dark-bg-2: #383838;
+  --dark-bg-2: #2b2b2b;
 }
 
 /* GENERAL STYLES ***************************************************************** */
@@ -113,6 +113,7 @@ a {
 .mobileContainer {
   background: #fff;
   max-width: 320px;
+  min-width: 320px;
   margin: 0 auto;
 }
 
@@ -123,7 +124,7 @@ a {
   margin: 0 auto;
   max-width: 400px;
   padding: 0 .9em .4em;
-  min-height: 800px;
+  min-height: 500px;
 }
 
 .pageHeader {
@@ -174,6 +175,10 @@ a {
   margin: 0 0 1em;
   padding: .7em;
   border-radius: .3em;
+}
+
+.section:hover {
+  background: #363636;
 }
 
 .shortText {
@@ -254,6 +259,7 @@ a {
   border-radius: .6em;
   position: relative;
   top: -.45em;
+  cursor: pointer;
 }
 
 .button a {
@@ -394,6 +400,7 @@ a {
   border-bottom: .2em solid #777;
   color: var(--light-text);
   font-size: 1em;
+  cursor: pointer;
 }
 
 .form-input:focus {
@@ -406,6 +413,7 @@ a {
   border-radius: .6em;
   height: 6em;
   font-size: .85em;
+  cursor: pointer;
 }
 
 .form-input_textarea:focus {
@@ -423,6 +431,7 @@ a {
   background: inherit;
   color: var(--light-text);
   font-size: 1em;
+  cursor: pointer;
 }
 
 .form-numInput:focus {
@@ -441,6 +450,7 @@ a {
   font-size: 1em;
   background: inherit;
   color: var(--light-text);
+  cursor: pointer;
 }
 
 .form-selectInput:focus {

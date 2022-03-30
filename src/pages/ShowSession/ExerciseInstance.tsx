@@ -23,8 +23,7 @@ function ExerciseInstance({ exInst, sessionId }: Props) {
     <div className="section">
       <div className="row">
         <label htmlFor="completed" hidden>completed</label>
-        {/* <input className="checkbox" type="checkbox" name="completed" checked={completed} readOnly /> */}
-        <h2 className="subHeader accent-text">{name}</h2>
+        <h2 className="subHeader accent-text marginBottom">{name}</h2>
         { completed && <img src={checkImg} alt="checkbox" className="checkImg" /> }
       </div>
       <span>

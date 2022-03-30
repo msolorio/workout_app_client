@@ -1,29 +1,27 @@
+// import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { storeWorkouts, removeWorkouts } from '../features/workouts/workoutsSlice'
-import { storeSessions, removeSessions } from '../features/sessions/sessionsSlice'
+import { removeWorkouts } from '../features/workouts/workoutsSlice'
+import { removeSessions } from '../features/sessions/sessionsSlice'
 import RESET from '../queries/reset'
 import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
 import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../features/auth/authSlice';
-// import kettlebellImg from './kettlebell.png'
 import kettlebellImg from './weight.png'
 
 function Header() {
-
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch() 
   const [resetData] = useMutation(RESET)
 
   const loginToken: string = useAppSelector(selectLoginTokenInRdx)
 
   const handleReset = async () => {
     try {
-      const response = await resetData()
-      const workouts = response.data.seed.workouts
-      const sessions = response.data.seed.sessions
-  
-      dispatch(storeWorkouts(workouts))
-      dispatch(storeSessions(sessions))
+      await resetData()
+      dispatch(removeWorkouts())
+      dispatch(removeSessions())
+      removeLoginTokenInLocalStorage()
+      dispatch(removeLoginTokenInRdx())
     } catch (err) {
       console.error(err)
     }
@@ -70,7 +68,9 @@ function Header() {
       <nav className="nav">
         <ul className="nav-ul">
           { loginToken ? loggedInLinks : loggedOutLinks }
-          <li className="nav-li" onClick={handleReset}>Reset</li>
+          <li className="nav-li" onClick={handleReset}>
+            <Link to="/login">Reset</Link>
+          </li>
         </ul>
       </nav>
     </header>
