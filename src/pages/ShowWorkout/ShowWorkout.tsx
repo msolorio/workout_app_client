@@ -95,9 +95,11 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
           Start Session
         </button>
 
-        <button className="button button_standard">
-          <Link to={`/workouts/${id}/edit`}>Edit Workout</Link>
-        </button>
+        <Link to={`/workouts/${id}/edit`}>
+          <button className="button button_standard">
+            Edit Workout
+          </button>
+        </Link>
       </div>
 
       { location && <p className="description_small marginBottom">Location: {location}</p> }

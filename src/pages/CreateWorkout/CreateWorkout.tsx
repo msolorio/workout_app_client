@@ -17,12 +17,20 @@ interface State {
 function CreateWorkout() {
   const stateObj: State = { workoutId: null }
   const [state, setState] = useState(stateObj)
+
+  // hooks ///////////////////////////////////////////////////////////////////////////
+  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
+  let allWorkouts = useAppSelector(selectAllWorkouts)
   const dispatch = useAppDispatch()
   const [createWorkout] = useMutation(CREATE_WORKOUT)
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
-  let allWorkouts = useAppSelector(selectAllWorkouts)
 
+
+  // Fetching / Setting Data /////////////////////////////////////////////////////////
+
+  // TODO:
+  // - General fetching / setting of workout data can be moved higher up
+  // - Move initial fetching of user's workouts, sessions to app
   const { loading, error, data } = useQuery(WORKOUTS, {
     skip: !!allWorkouts.length
   })
@@ -35,9 +43,11 @@ function CreateWorkout() {
 
   if (error) {
     console.log('Something went wrong')
-    return <Redirect to="/workouts" />
   }
 
+
+
+  // component methods //////////////////////////////////////////////////////////////
   const handleCreateWorkout = async (workoutData: WorkoutType) => {
     try {
       const response = await createWorkout({
@@ -56,6 +66,8 @@ function CreateWorkout() {
   }
 
 
+
+  // render /////////////////////////////////////////////////////////////////////////
   if (state.workoutId) return <Redirect to={`/workouts/${state.workoutId}`} />
 
   return (

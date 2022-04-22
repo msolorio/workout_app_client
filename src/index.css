@@ -255,11 +255,18 @@ a {
   color: var(--dark-text-color);
   font-size: 1.1em;
   border: none;
+  border-bottom: .19em solid grey;
   padding: .4em .6em .3em;
   border-radius: .6em;
   position: relative;
   top: -.45em;
   cursor: pointer;
+}
+
+.button-sets:hover,
+.button-sets:active {
+  outline: none;
+  background: #c4c7c4;
 }
 
 .button a {

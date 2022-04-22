@@ -4,13 +4,13 @@ import { storeLoginTokenInRdx, removeLoginTokenInRdx } from './features/auth/aut
 import { getLoginTokenFromLocalStorage } from './utils/authUtils';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Routes from './Routes'
+import Routes from './Routes/index'
 
 function App() {
   const dispatch = useAppDispatch()
 
+  // Temporary fix for this react bug - https://stackoverflow.com/questions/70368760/react-uncaught-referenceerror-process-is-not-defined/70791920#70791920
   useEffect(() => {    
-    // Temporary fix for this bug in react - https://stackoverflow.com/questions/70368760/react-uncaught-referenceerror-process-is-not-defined/70791920#70791920
     // @ts-ignore
     window.process = { ...window.process, }
   })

@@ -12,7 +12,7 @@ import './index.css'
 import App from './App'
 import './fonts/Ubuntu-Regular.ttf'
 
-const API_ENDPOINT = process?.env.REACT_APP_API_ENDPOINT || 'http://localhost:4000'
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
 const client = new ApolloClient({
   uri: API_ENDPOINT,
