@@ -14,6 +14,7 @@ function IndexSession() {
   const sessions = useAppSelector((state: RootState) => state.sessions.sessions)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
+  // TODO: Move to App //////////////////////////////////////////////////////
   const { loading, error, data } = useQuery(SESSIONS, {
     skip: !!sessions.length,
     variables: { token: logintoken }
@@ -27,6 +28,7 @@ function IndexSession() {
 
   if (loading) return <LoadingScreen />
   if (error) return <h2>Something went wrong. Please try again.</h2>
+  ///////////////////////////////////////////////////////////////////////////
 
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (

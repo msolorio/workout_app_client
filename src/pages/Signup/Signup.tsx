@@ -18,12 +18,16 @@ function Signup() {
     username: '',
     password1: '',
     password2: '',
+
+    // TODO: move to custom hook
     errorMessage: '',
     redirectToLogin: false
   }
   const [state, setState] = useState(stateObj)
 
+  // TODO: move to custom hook
   const [signup] = useMutation(SIGNUP_USER)
+
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     setState({
@@ -35,6 +39,8 @@ function Signup() {
 
 
   const handleSubmit = async () => {
+
+    // Move to custom hook
     if (
       state.username === ''
       || state.password1 === ''

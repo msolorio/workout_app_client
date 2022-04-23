@@ -13,6 +13,7 @@ function IndexWorkout() {
   const workouts = useAppSelector(selectAllWorkouts)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)  
 
+  // TODO: Move to App //////////////////////////////////////////////////////
   const { loading, error, data } = useQuery(WORKOUTS, {
     skip: !!workouts.length,
     variables: { token: logintoken }
@@ -24,6 +25,7 @@ function IndexWorkout() {
 
   if (loading) return <LoadingScreen />
   if (error) return <h2>Something went wrong. Please try again.</h2>
+  ///////////////////////////////////////////////////////////////////////////
 
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (

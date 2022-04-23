@@ -20,11 +20,13 @@ function Login() {
     username: '',
     password: '',
     errorMessage: '',
+    // TODO: move to custom hook
     redirectToWorkouts: false
   }
 
   const [state, setState] = useState(stateObj)
 
+  // TODO: move to custom hook
   const [login] = useMutation(LOGIN_USER)
   const dispatch = useAppDispatch()
 
@@ -35,19 +37,26 @@ function Login() {
     })
   }
 
-  const handleSubmit = async (testFlag: boolean=false) => {
+  const handleSubmit = async (testUser: boolean=false) => {
+
+
+    // Clean up - set username and password in state if testUser flag is true
     if (
-      !testFlag
+      !testUser
       && (state.username === '' || state.password === '')
     ) {
       return setState({ ...state, errorMessage: 'All fields are required' })
     }
 
+    // TODO:
+    // - Create higher order function for error handling
+    // - Use everywhere we make a query
     try {
+      // TODO: GraphQL - Move to custom hook
       const response = await login({
         variables: {
-          username: testFlag ? 'testuser' : state.username,
-          password: testFlag ? '1234' : state.password
+          username: testUser ? 'testuser' : state.username,
+          password: testUser ? '1234' : state.password
         }
       })
 
@@ -63,9 +72,11 @@ function Login() {
         errorMessage: ''
       })
 
+      // TODO: Setting local storage - Move to custom hook
       const loginToken = response.data.login.token
-
       setLoginTokenInLocalStorage(loginToken)
+
+      // TODO: Redux - Move to custom hook
       dispatch(storeLoginTokenInRdx(loginToken))
 
       setState({

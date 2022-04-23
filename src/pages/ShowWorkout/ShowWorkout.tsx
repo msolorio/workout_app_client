@@ -17,17 +17,23 @@ interface Props {
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
+  // Move to custom hook
   const dispatch = useAppDispatch()
   const [createSession] = useMutation(CREATE_SESSION)
+
+
   const { workoutId } = match.params
 
   const [state, setState] = useState({ sessionId: null })
   
+  // Fetching data from redux - Move to custom hook
   const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)
   
+  // Manipulating data - Create redux selector to getWorkoutById
   let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
 
+  // Can be removed once data is fetched / set in App ////////////////
   const { loading, error, data } = useQuery(ONE_WORKOUT, {
     skip: !!currentWorkout,
     variables: { token: logintoken, workoutId: workoutId }
@@ -41,7 +47,9 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
     console.log('Something went wrong')
     return <Redirect to="/workouts" />
   }
-  
+  //////////////////////////////////////////////////////////////////
+
+
   if (!currentWorkout) {
     console.log('No workout found with that id')
     return <Redirect to="/workouts" />
@@ -58,6 +66,8 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleCreateSession = async () => {
+
+    // GraphQL and redux storage - Move to custom hook
     try {
       const response = await createSession({ variables: { token: logintoken, workoutId: id } })
       const newSession = response.data.createSession

@@ -17,16 +17,18 @@ interface Props {
 function EditWorkout({ match }: RouteComponentProps<Props>) {
   
   const workoutId = match.params.workoutId
+
+  // TODO: Move to custom hook
   const [state, setState] = useState({ redirectToWorkout: false })
   const dispatch = useAppDispatch()
-  
   const [updateWorkout] = useMutation(UPDATE_WORKOUT)
-  
   let allWorkouts = useAppSelector(selectAllWorkouts)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
+  // TODO: Use redux selector method
   let currentWorkout = allWorkouts?.find((workout: WorkoutType) => workout.id === workoutId)
 
+  // TODO: Can remove once data fetch / set is moved to App /////////////////////////////
   const { loading, error, data } = useQuery(WORKOUTS, {
     skip: !!allWorkouts.length
   })
@@ -45,6 +47,8 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
     console.log('Something went wrong')
     return <Redirect to="/workouts" />
   }
+  ///////////////////////////////////////////////////////////////////////////////////////
+
 
   if (!currentWorkout) {
     console.log('No workout found with that id')
