@@ -1,31 +1,10 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { storeWorkouts } from '../../features/workouts/workoutsSlice'
-import { selectAllWorkouts, WorkoutType } from '../../features/workouts/workoutsSlice'
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
-import WORKOUTS from '../../queries/workouts/getWorkouts'
-import { useQuery } from '@apollo/client';
-import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import { WorkoutType } from '../../redux/app/features/workouts/workoutsSlice'
+import { useAppSelector } from '../../redux/app/hooks'
+import { selectAllWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
 
 function IndexWorkout() {
-  const dispatch = useAppDispatch()
-  const workouts = useAppSelector(selectAllWorkouts)
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)  
-
-  // TODO: Move to App //////////////////////////////////////////////////////
-  const { loading, error, data } = useQuery(WORKOUTS, {
-    skip: !!workouts.length,
-    variables: { token: logintoken }
-  })
-
-  useEffect(() => {
-    if (data) dispatch(storeWorkouts(data.workouts))
-  })
-
-  if (loading) return <LoadingScreen />
-  if (error) return <h2>Something went wrong. Please try again.</h2>
-  ///////////////////////////////////////////////////////////////////////////
+  const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
 
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (
@@ -40,7 +19,7 @@ function IndexWorkout() {
 
   return (
     <main className="main">
-      <h2 className="pageHeader">Your Workouts</h2>
+      <h2 className="pageHeader">My Workouts</h2>
       <ul>{workoutsJSX}</ul>
     </main>
   )

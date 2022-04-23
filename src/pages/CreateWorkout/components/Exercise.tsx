@@ -1,4 +1,4 @@
-import { ExerciseType } from '../../../features/exercises/exercisesSlice'
+import { ExerciseType } from '../../../redux/app/features/exercises/exercisesSlice'
 
 interface Props {
   exercise: ExerciseType

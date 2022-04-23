@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
-import { WorkoutType } from '../../features/workouts/workoutsSlice'
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { storeNewWorkout, selectAllWorkouts, storeWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
+import { WorkoutType } from '../../redux/app/features/workouts/workoutsSlice'
+import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import CREATE_WORKOUT from '../../queries/workouts/createWorkout'
 import WorkoutForm from '../../components/WorkoutForm'

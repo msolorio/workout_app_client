@@ -2,7 +2,8 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit'
-import checkIfSeshComplete from '../../utils/checkIfSeshComplete'
+import { RootState } from '../../store'
+import checkIfSeshComplete from '../../../../utils/checkIfSeshComplete'
 // import { RootState } from '../../app/store'
 
 import { WorkoutType } from '../workouts/workoutsSlice'
@@ -78,6 +79,8 @@ const sessionsSlice = createSlice({
     }
   }
 })
+
+export const selectAllSessions = (state: RootState) => state.sessions.sessions
 
 export const {
   incrementSetForExInst,

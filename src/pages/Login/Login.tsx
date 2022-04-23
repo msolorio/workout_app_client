@@ -1,12 +1,13 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
-import { useAppDispatch } from '../../app/hooks'
-import { storeLoginTokenInRdx } from '../../features/auth/authSlice'
+import { useAppDispatch } from '../../redux/app/hooks'
+import { storeLoginTokenInRdx } from '../../redux/app/features/auth/authSlice'
 import TextInputGroup from '../../components/TextInputGroup'
 import PasswordInputGroup from '../../components/PasswordInputGroup'
 import { setLoginTokenInLocalStorage } from '../../utils/authUtils'
 import LOGIN_USER from '../../queries/users/loginUser'
+import useInitData from '../../utils/hooks/useInitData'
 
 interface State {
   username: string
@@ -16,6 +17,8 @@ interface State {
 }
 
 function Login() {
+  const { dataFetchSuccess } = useInitData()
+
   const stateObj: State = {
     username: '',
     password: '',
@@ -90,8 +93,10 @@ function Login() {
       
     }
   }
+  // TODO: if dataFetchError show message on login page
 
-  if (state.redirectToWorkouts) return <Redirect to="/workouts" />
+  // if (state.redirectToWorkouts) return <Redirect to="/workouts" />
+  if (dataFetchSuccess) return <Redirect to="/workouts" />
 
   return (
     <main className="main">

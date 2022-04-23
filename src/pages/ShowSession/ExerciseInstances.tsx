@@ -1,4 +1,4 @@
-import { ExerciseInstanceType } from '../../features/exerciseInstance/exerciseInstancesSlice'
+import { ExerciseInstanceType } from '../../redux/app/features/exerciseInstance/exerciseInstancesSlice'
 import ExerciseInstance from './ExerciseInstance'
 
 interface Props {

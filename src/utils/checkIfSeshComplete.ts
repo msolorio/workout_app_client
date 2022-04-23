@@ -1,5 +1,5 @@
-import { SessionType } from '../features/sessions/sessionsSlice'
-import { ExerciseInstanceType } from '../features/exerciseInstance/exerciseInstancesSlice'
+import { SessionType } from '../redux/app/features/sessions/sessionsSlice'
+import { ExerciseInstanceType } from '../redux/app/features/exerciseInstance/exerciseInstancesSlice'
 
 function checkIfSeshComplete(session: SessionType): boolean {
   return session.exerciseInstances.every((exInstance: ExerciseInstanceType) => {

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { storeSessions, SessionType } from '../../features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
-import { RootState } from '../../app/store'
+import { useAppSelector, useAppDispatch } from '../../redux/app/hooks'
+import { storeSessions, SessionType } from '../../redux/app/features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
+import { RootState } from '../../redux/app/store'
 import SESSIONS from '../../queries/sessions/getSessions'
 import DateWidget from '../../components/DateWidget'
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
@@ -45,7 +45,7 @@ function IndexSession() {
 
   return (
     <main className="main">
-      <h2 className="pageHeader">Your Session</h2>
+      <h2 className="pageHeader">My Session</h2>
       <ul>{sessionsJSX}</ul>
     </main>
   )

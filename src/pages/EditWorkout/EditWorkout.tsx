@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client';
-import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../features/workouts/workoutsSlice'
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
+import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import UPDATE_WORKOUT from '../../queries/workouts/updateWorkout'
 import WorkoutForm from '../../components/WorkoutForm'

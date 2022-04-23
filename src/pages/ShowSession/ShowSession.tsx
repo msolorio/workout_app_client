@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
-import { useAppSelector } from '../../app/hooks'
-import { SessionType } from '../../features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../features/auth/authSlice';
-import { RootState } from '../../app/store'
+import { useAppSelector } from '../../redux/app/hooks'
+import { SessionType } from '../../redux/app/features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
+import { RootState } from '../../redux/app/store'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
 import SESSION from '../../queries/sessions/getOneSession'

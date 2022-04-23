@@ -7,10 +7,10 @@ import {
   ApolloProvider,
 } from '@apollo/client'
 import { Provider } from 'react-redux'
-import store from './app/store'
-import './index.css'
-import App from './App'
-import './fonts/Ubuntu-Regular.ttf'
+import store from './redux/app/store'
+import './assets/css/index.css'
+import App from './App/App'
+import './assets/fonts/Ubuntu-Regular.ttf'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
