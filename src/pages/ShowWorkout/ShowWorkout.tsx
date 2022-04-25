@@ -1,54 +1,36 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import { useQuery, useMutation } from '@apollo/client'
+import {useMutation } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../redux/app/hooks'
-import { WorkoutType, selectAllWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
-import { storeNewSession } from '../../redux/app/features/sessions/sessionsSlice'
-import { ExerciseType } from '../../redux/app/features/exercises/exercisesSlice'
-import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
-import ONE_WORKOUT from '../../queries/workouts/getOneWorkout'
+import { useAppDispatch, useAppSelector } from '../../model/services/redux/app/hooks'
+import { WorkoutType, selectAllWorkouts } from '../../model/services/redux/features/workouts/workoutsSlice'
+import { storeNewSession } from '../../model/services/redux/features/sessions/sessionsSlice'
+import { ExerciseType } from '../../model/services/redux/features/exercises/exercisesSlice'
+import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
 import CREATE_SESSION from '../../queries/sessions/createSession'
 import Exercise from './Exercise'
-import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import model from '../../model/clientOps'
 
 interface Props {
   workoutId: string
 }
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
+  const { workoutId } = match.params
+
+  const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
+  
+  const [state, setState] = useState({ sessionId: null })
+
   // Move to custom hook
   const dispatch = useAppDispatch()
   const [createSession] = useMutation(CREATE_SESSION)
 
 
-  const { workoutId } = match.params
 
-  const [state, setState] = useState({ sessionId: null })
   
   // Fetching data from redux - Move to custom hook
-  const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)
-  
-  // Manipulating data - Create redux selector to getWorkoutById
-  let currentWorkout: WorkoutType | undefined = workouts.find((workout) => workout.id === workoutId)
-
-  // Can be removed once data is fetched / set in App ////////////////
-  const { loading, error, data } = useQuery(ONE_WORKOUT, {
-    skip: !!currentWorkout,
-    variables: { token: logintoken, workoutId: workoutId }
-  })
-
-  if (data) currentWorkout = data.workout
-
-  if (loading) return <LoadingScreen />
-
-  if (error) {
-    console.log('Something went wrong')
-    return <Redirect to="/workouts" />
-  }
-  //////////////////////////////////////////////////////////////////
-
 
   if (!currentWorkout) {
     console.log('No workout found with that id')

@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client';
-import { WorkoutType, updateWorkoutRdx, selectAllWorkouts, storeWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
-import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/app/hooks'
-import WORKOUTS from '../../queries/workouts/getWorkouts'
-import UPDATE_WORKOUT from '../../queries/workouts/updateWorkout'
+import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
 import WorkoutForm from '../../components/WorkoutForm'
-import LoadingScreen from '../LoadingScreen/LoadingScreen'
+import model from '../../model/clientOps'
 
 interface Props {
   workoutId: string
@@ -15,40 +10,11 @@ interface Props {
 
 
 function EditWorkout({ match }: RouteComponentProps<Props>) {
-  
   const workoutId = match.params.workoutId
-
-  // TODO: Move to custom hook
   const [state, setState] = useState({ redirectToWorkout: false })
-  const dispatch = useAppDispatch()
-  const [updateWorkout] = useMutation(UPDATE_WORKOUT)
-  let allWorkouts = useAppSelector(selectAllWorkouts)
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
-  // TODO: Use redux selector method
-  let currentWorkout = allWorkouts?.find((workout: WorkoutType) => workout.id === workoutId)
-
-  // TODO: Can remove once data fetch / set is moved to App /////////////////////////////
-  const { loading, error, data } = useQuery(WORKOUTS, {
-    skip: !!allWorkouts.length
-  })
-
-  useEffect(() => {
-    if (data) dispatch(storeWorkouts(data.workouts))
-  })
-
-  if (data) {
-    currentWorkout = data.workouts.find((workout: WorkoutType) => workout.id === workoutId)
-  }
-
-  if (loading) return <LoadingScreen />
-
-  if (error) {
-    console.log('Something went wrong')
-    return <Redirect to="/workouts" />
-  }
-  ///////////////////////////////////////////////////////////////////////////////////////
-
+  const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
+  const updateWorkout = model.Workout.useUpdateWorkout()
 
   if (!currentWorkout) {
     console.log('No workout found with that id')
@@ -57,20 +23,9 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
-    try {
-      const response = await updateWorkout({
-        variables: { ...workoutData, token: logintoken }
-      })
-
-      const workoutFromDb = response.data.updateWorkout
-
-      dispatch(updateWorkoutRdx(workoutFromDb))
-
-      setState({ redirectToWorkout: true })
-    }
-    catch (err) {
-      console.error(err)
-    }
+    await updateWorkout(workoutData)
+    
+    setState({ redirectToWorkout: true })
   }
 
 

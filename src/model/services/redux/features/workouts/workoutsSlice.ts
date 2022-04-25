@@ -2,7 +2,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
+import { RootState } from '../../app/store'
 import { ExerciseType } from '../exercises/exercisesSlice'
 
 export interface WorkoutType {
@@ -58,6 +58,14 @@ const workoutsSlice = createSlice({
 })
 
 export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
+
+export const selectWorkoutById = (workoutId: string) => {
+  return (state: RootState) => {
+    return state.workouts.workouts?.find((workout: WorkoutType) => {
+      return workout.id === workoutId
+    })
+  }
+}
 
 export const {
   storeWorkouts,

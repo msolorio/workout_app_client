@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
-import { useQuery, useMutation } from '@apollo/client'
-import { useAppSelector } from '../../redux/app/hooks'
-import { SessionType } from '../../redux/app/features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
-import { RootState } from '../../redux/app/store'
+import { useMutation } from '@apollo/client'
+import { useAppSelector } from '../../model/services/redux/app/hooks'
+import { SessionType } from '../../model/services/redux/features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
+import { RootState } from '../../model/services/redux/app/store'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
-import SESSION from '../../queries/sessions/getOneSession'
 import COMPLETE_SESSION from '../../queries/sessions/completeSession'
-import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 interface Props {
   sessionId: string
@@ -30,15 +28,6 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   // TODO: Create redux selector to getSessionById
   let currentSession: SessionType | undefined = sessions && sessions.find((session) => session.id === sessionId)
 
-  // TODO: Can remove after sessions data is fetched and stored at App
-  const { loading, error, data } = useQuery(SESSION, {
-    skip: !!currentSession,
-    variables: {
-      token: logintoken,
-      sessionId
-    }
-  })
-
   // TODO: GraphQL query - Move to custom hook //////////////////////////////////////
   useEffect(() => {
     async function triggerCompleteSession() {
@@ -57,16 +46,6 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   
   }, [currentSession?.completed, sessionId, completeSession, logintoken])
 
-  
-  if (data) currentSession = data.session
-  
-  if (loading) return <LoadingScreen />
-  
-  if (error) {
-    console.log('Something went wrong')
-    return <Redirect to="/sessions" />
-  }
-  /////////////////////////////////////////////////////////////////////////
 
   if (!currentSession) {
     console.log('No session found with that id')

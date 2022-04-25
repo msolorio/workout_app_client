@@ -2,8 +2,8 @@ import {
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
-import checkIfSeshComplete from '../../../../utils/checkIfSeshComplete'
+import { RootState } from '../../app/store'
+import checkIfSeshComplete from '../../../../../utils/checkIfSeshComplete'
 // import { RootState } from '../../app/store'
 
 import { WorkoutType } from '../workouts/workoutsSlice'

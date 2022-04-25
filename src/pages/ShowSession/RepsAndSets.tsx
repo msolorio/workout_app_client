@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
-import { useAppDispatch, useAppSelector } from '../../redux/app/hooks'
-import { incrementSetForExInst } from '../../redux/app/features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../redux/app/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../model/services/redux/app/hooks'
+import { incrementSetForExInst } from '../../model/services/redux/features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
 import INCREMENT_SET from '../../queries/sessions/incrementSet'
 
 interface Props {

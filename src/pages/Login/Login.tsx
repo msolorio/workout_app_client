@@ -1,8 +1,8 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
-import { useAppDispatch } from '../../redux/app/hooks'
-import { storeLoginTokenInRdx } from '../../redux/app/features/auth/authSlice'
+import { useAppDispatch } from '../../model/services/redux/app/hooks'
+import { storeLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice'
 import TextInputGroup from '../../components/TextInputGroup'
 import PasswordInputGroup from '../../components/PasswordInputGroup'
 import { setLoginTokenInLocalStorage } from '../../utils/authUtils'

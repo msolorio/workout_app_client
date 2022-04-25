@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
-import { WorkoutType } from '../../redux/app/features/workouts/workoutsSlice'
-import { useAppSelector } from '../../redux/app/hooks'
-import { selectAllWorkouts } from '../../redux/app/features/workouts/workoutsSlice'
+import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
+import model from '../../model/clientOps'
 
 function IndexWorkout() {
-  const workouts: WorkoutType[] = useAppSelector(selectAllWorkouts)
+  const workouts = model.Workout.useGetMyWorkouts()
 
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (

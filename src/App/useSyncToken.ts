@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../redux/app/hooks'
-import { storeLoginTokenInRdx, removeLoginTokenInRdx } from '../redux/app/features/auth/authSlice';
+import { useAppDispatch } from '../model/services/redux/app/hooks'
+import { storeLoginTokenInRdx, removeLoginTokenInRdx } from '../model/services/redux/features/auth/authSlice';
 import { getLoginTokenFromLocalStorage } from '../utils/authUtils';
 
 function useSyncToken(): void {

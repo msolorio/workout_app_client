@@ -1,12 +1,12 @@
 // import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client'
-import { useAppDispatch, useAppSelector } from '../redux/app/hooks'
-import { removeWorkouts } from '../redux/app/features/workouts/workoutsSlice'
-import { removeSessions } from '../redux/app/features/sessions/sessionsSlice'
+import { useAppDispatch, useAppSelector } from '../model/services/redux/app/hooks'
+import { removeWorkouts } from '../model/services/redux/features/workouts/workoutsSlice'
+import { removeSessions } from '../model/services/redux/features/sessions/sessionsSlice'
 import RESET from '../queries/reset'
 import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
-import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../redux/app/features/auth/authSlice';
+import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../model/services/redux/features/auth/authSlice';
 import kettlebellImg from './weight.png'
 
 function Header() {

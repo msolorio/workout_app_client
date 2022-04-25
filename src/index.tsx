@@ -7,7 +7,7 @@ import {
   ApolloProvider,
 } from '@apollo/client'
 import { Provider } from 'react-redux'
-import store from './redux/app/store'
+import store from './model/services/redux/app/store'
 import './assets/css/index.css'
 import App from './App/App'
 import './assets/fonts/Ubuntu-Regular.ttf'
