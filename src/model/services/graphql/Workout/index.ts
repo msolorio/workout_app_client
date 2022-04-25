@@ -1,9 +1,9 @@
 import useCreateWorkout from './useCreateWorkout'
 import useUpdateWorkout from './useUpdateWorkout'
 
-const WorkoutGql = {
-  useCreateWorkout: useCreateWorkout,
-  useUpdateWorkout: useUpdateWorkout
+const Workout = {
+  useCreateWorkout,
+  useUpdateWorkout
 }
 
-export default WorkoutGql
+export default Workout

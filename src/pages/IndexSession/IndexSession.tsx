@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../../model/services/redux/app/hooks'
 import { SessionType } from '../../model/services/redux/features/sessions/sessionsSlice'
-import { RootState } from '../../model/services/redux/app/store'
 import DateWidget from '../../components/DateWidget'
+import model from '../../model/clientOps'
 
 function IndexSession() {
-  const sessions = useAppSelector((state: RootState) => state.sessions.sessions)
+  const sessions = model.Session.useGetMySessions()
 
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (

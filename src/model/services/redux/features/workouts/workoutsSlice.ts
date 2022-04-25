@@ -61,9 +61,7 @@ export const selectAllWorkouts = (state: RootState) => state.workouts.workouts
 
 export const selectWorkoutById = (workoutId: string) => {
   return (state: RootState) => {
-    return state.workouts.workouts?.find((workout: WorkoutType) => {
-      return workout.id === workoutId
-    })
+    return state.workouts.workouts?.find((workout: WorkoutType) => workout.id === workoutId)
   }
 }
 

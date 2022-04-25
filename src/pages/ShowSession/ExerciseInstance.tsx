@@ -4,10 +4,13 @@ import checkImg from './check.png'
 
 interface Props {
   exInst: ExerciseInstanceType
-  sessionId: string
+  handleSetIncrement: any
 }
 
-function ExerciseInstance({ exInst, sessionId }: Props) {
+function ExerciseInstance({
+  exInst,
+  handleSetIncrement
+}: Props) {
   const exInstId = exInst.id
   const {
     name,
@@ -35,7 +38,7 @@ function ExerciseInstance({ exInst, sessionId }: Props) {
             sets={sets}
             repsCompleted={exInst.repsCompleted}
             setsCompleted={exInst.setsCompleted}
-            sessionId={sessionId}
+            handleSetIncrement={handleSetIncrement}
           />
         </div>
       </span>

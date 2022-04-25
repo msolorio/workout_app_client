@@ -1,13 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import {useMutation } from '@apollo/client'
 import { RouteComponentProps } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../model/services/redux/app/hooks'
-import { WorkoutType, selectAllWorkouts } from '../../model/services/redux/features/workouts/workoutsSlice'
-import { storeNewSession } from '../../model/services/redux/features/sessions/sessionsSlice'
+import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
 import { ExerciseType } from '../../model/services/redux/features/exercises/exercisesSlice'
-import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
-import CREATE_SESSION from '../../queries/sessions/createSession'
 import Exercise from './Exercise'
 import model from '../../model/clientOps'
 
@@ -17,20 +12,13 @@ interface Props {
 
 function ShowWorkout({ match }: RouteComponentProps<Props>) {
   const { workoutId } = match.params
-
   const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
-  
-  const [state, setState] = useState({ sessionId: null })
+  const createSession = model.Session.useCreateSession()
 
-  // Move to custom hook
-  const dispatch = useAppDispatch()
-  const [createSession] = useMutation(CREATE_SESSION)
+  const [state, setState] = useState({
+    sessionId: null
+  })
 
-
-
-  
-  // Fetching data from redux - Move to custom hook
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   if (!currentWorkout) {
     console.log('No workout found with that id')
@@ -48,21 +36,13 @@ function ShowWorkout({ match }: RouteComponentProps<Props>) {
 
 
   const handleCreateSession = async () => {
-
-    // GraphQL and redux storage - Move to custom hook
-    try {
-      const response = await createSession({ variables: { token: logintoken, workoutId: id } })
-      const newSession = response.data.createSession
+    const workoutId = id
+    const createdSession = await createSession(workoutId as string)
   
-      dispatch(storeNewSession(newSession))
-  
-      setState({
-        ...state,
-        sessionId: newSession.id
-      })
-    } catch(err) {
-      console.log('err creating session ==>', err)
-    }
+    setState({
+      ...state,
+      sessionId: createdSession.id
+    })
   }
 
 

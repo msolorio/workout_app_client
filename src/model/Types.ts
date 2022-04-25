@@ -7,6 +7,14 @@ export interface WorkoutType {
   exercises?: ExerciseType[]
 }
 
+export interface SessionType {
+  id: string,
+  workout: WorkoutType,
+  exerciseInstances: ExerciseInstanceType[]
+  date: number
+  completed: boolean
+}
+
 export interface ExerciseType {
   id?: string
   name: string
@@ -15,4 +23,11 @@ export interface ExerciseType {
   weight: number | null
   unit: string | null
   workout?: WorkoutType | null
+}
+
+export interface ExerciseInstanceType {
+  id: string
+  exercise: ExerciseType
+  setsCompleted: number
+  repsCompleted: number
 }

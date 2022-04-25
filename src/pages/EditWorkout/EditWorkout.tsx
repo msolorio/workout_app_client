@@ -16,18 +16,18 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
   const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
   const updateWorkout = model.Workout.useUpdateWorkout()
 
-  if (!currentWorkout) {
-    console.log('No workout found with that id')
-    return <Redirect to="/workouts" />
-  }
-
-
+  
+  
   const handleUpdateWorkout = async (workoutData: WorkoutType) => {
     await updateWorkout(workoutData)
     
     setState({ redirectToWorkout: true })
   }
-
+  
+  if (!currentWorkout) {
+    console.log('No workout found with that id')
+    return <Redirect to="/workouts" />
+  }
 
   if (state.redirectToWorkout) return <Redirect to={`/workouts/${workoutId}`} />
 

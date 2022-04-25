@@ -1,16 +1,10 @@
-import { useMutation } from '@apollo/client'
-import { useAppDispatch, useAppSelector } from '../../model/services/redux/app/hooks'
-import { incrementSetForExInst } from '../../model/services/redux/features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
-import INCREMENT_SET from '../../queries/sessions/incrementSet'
-
 interface Props {
   reps: number
   sets: number | null
   repsCompleted: number
   setsCompleted: number
   exInstId: string
-  sessionId: string
+  handleSetIncrement: any
 }
 
 function RepsAndSets({
@@ -19,47 +13,30 @@ function RepsAndSets({
   repsCompleted,
   setsCompleted,
   exInstId,
-  sessionId
+  handleSetIncrement
 }: Props) {
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
-  const [incrementSetForExInstance] = useMutation(INCREMENT_SET)
-  const dispatch = useAppDispatch()
-
   if (!sets && reps) {
     return <p>Reps: <button>{repsCompleted}/{reps}</button></p>
   }
 
-  const handleSetIncrement = async () => {    
-    if (!sets || setsCompleted >= sets) return
-
-    await incrementSetForExInstance({
-      variables: {
-        token: logintoken,
-        id: exInstId,
-        setsCompleted: setsCompleted + 1
-      }
-    })
-
-    dispatch(incrementSetForExInst({
-      exInstId: exInstId,
-      sessionId: sessionId
-    }))
+  const handleSetClick = async () => {    
+    handleSetIncrement(exInstId, setsCompleted, sets)
   }
 
   const handleRepIncrement = async () => {
-    if (repsCompleted >= reps) return
+    // if (repsCompleted >= reps) return
 
-    await incrementSetForExInstance({
-      variables: {
-        id: exInstId,
-        repsCompleted: repsCompleted + 1
-      }
-    })
+    // await incrementSetForExInstance({
+    //   variables: {
+    //     id: exInstId,
+    //     repsCompleted: repsCompleted + 1
+    //   }
+    // })
 
-    dispatch(incrementSetForExInst({
-      exInstId: exInstId,
-      sessionId: sessionId
-    }))
+    // dispatch(incrementSetForExInst({
+    //   exInstId: exInstId,
+    //   sessionId: sessionId
+    // }))
   }
 
   function renderSets() {
@@ -67,7 +44,7 @@ function RepsAndSets({
       return (
         <span className="description">
           <span className="marginRight">Sets:</span>
-          <button className="button-sets inline" onClick={handleSetIncrement}>
+          <button className="button-sets inline" onClick={handleSetClick}>
           {setsCompleted}/{sets}
           </button>
         </span>

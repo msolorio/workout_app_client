@@ -3,17 +3,20 @@ import ExerciseInstance from './ExerciseInstance'
 
 interface Props {
   exInstances: ExerciseInstanceType[]
-  sessionId: string
+  handleSetIncrement: any
 }
 
-function ExerciseInstances({ exInstances, sessionId }: Props) {
+function ExerciseInstances({
+  exInstances,
+  handleSetIncrement
+}: Props) {
   function renderInstances() {
     return exInstances.map((exInst) => {
       return (
         <ExerciseInstance
           key={exInst.id}
           exInst={exInst}
-          sessionId={sessionId}
+          handleSetIncrement={handleSetIncrement}
         />
       )
     })

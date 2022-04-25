@@ -40,11 +40,11 @@ export const CREATE_WORKOUT = gql`
 
 function useCreateWorkout() {
   const [mutation] = useMutation(CREATE_WORKOUT)
-  const logintoken: string = useAppSelector(selectLoginTokenInRdx)
+  const token: string = useAppSelector(selectLoginTokenInRdx)
 
   return async function createWorkoutGql(workoutData: WorkoutType) {
     const response = await mutation({
-      variables: { ...workoutData, token: logintoken }
+      variables: { ...workoutData, token }
     });
 
     return response.data.createWorkout

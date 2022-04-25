@@ -82,6 +82,12 @@ const sessionsSlice = createSlice({
 
 export const selectAllSessions = (state: RootState) => state.sessions.sessions
 
+export const selectSessionById = (sessionId: string) => {
+  return (state: RootState) => {
+    return state.sessions.sessions?.find((session: SessionType) => session.id === sessionId)
+  }
+}
+
 export const {
   incrementSetForExInst,
   storeNewSession,
