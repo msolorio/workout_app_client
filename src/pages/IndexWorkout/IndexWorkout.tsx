@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
-import model from '../../model/clientOps'
+import model from '../../model'
 
 function IndexWorkout() {
   const workouts = model.Workout.useGetMyWorkouts()

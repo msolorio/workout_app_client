@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
 import { ExerciseType } from '../../model/services/redux/features/exercises/exercisesSlice'
 import Exercise from './Exercise'
-import model from '../../model/clientOps'
+import model from '../../model'
 
 interface Props {
   workoutId: string

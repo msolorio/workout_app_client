@@ -1,7 +1,7 @@
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import DateWidget from '../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
-import model from '../../model/clientOps'
+import model from '../../model'
 import { SessionType } from '../../model/Types'
 
 interface Props {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { SessionType } from '../../model/services/redux/features/sessions/sessionsSlice'
 import DateWidget from '../../components/DateWidget'
-import model from '../../model/clientOps'
+import model from '../../model'
 
 function IndexSession() {
   const sessions = model.Session.useGetMySessions()
