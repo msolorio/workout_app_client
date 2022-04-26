@@ -7,8 +7,6 @@ import {
 import {
   getLoginTokenFromLocalStorage
 } from '../../../../utils/authUtils';
-import { removeWorkouts } from '../reduxApi/features/workouts/workoutsSlice'
-import { removeSessions } from '../reduxApi/features/sessions/sessionsSlice'
 
 const App = {
   useSyncToken() {
@@ -31,16 +29,6 @@ const App = {
 
   useGetLoginToken() {
     return useAppSelector(selectLoginTokenInRdx)
-  },
-  
-  useResetData() {
-    const dispatch = useAppDispatch()
-
-    return function resetDataRdx() {
-      dispatch(removeWorkouts())
-      dispatch(removeSessions())
-      dispatch(removeLoginTokenInRdx())
-    }
   }
 }
 

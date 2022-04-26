@@ -48,11 +48,11 @@ const App = {
 
   useResetData() {
     const resetDataGql = gql.App.useResetData()
-    const resetDataRdx = rdx.App.useResetData()
+    const logoutUserRdx = rdx.User.useLogoutUser()
 
     return async function resetData() {
       removeLoginTokenInLocalStorage()
-      resetDataRdx()
+      logoutUserRdx()
       await resetDataGql()
     }
   }
