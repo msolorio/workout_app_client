@@ -8,7 +8,7 @@ interface State {
   username: string
   password: string
   errorMessage: string
-  redirectToWorkouts: boolean
+  loggedIn: boolean
 }
 
 function Login() {
@@ -19,14 +19,17 @@ function Login() {
     username: '',
     password: '',
     errorMessage: '',
-    redirectToWorkouts: false
+    loggedIn: false
   }
 
   const [state, setState] = useState(stateObj)
 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-    setState({ ...state, [event.target.name]: event.target.value })
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    })
   }
 
 
@@ -43,21 +46,19 @@ function Login() {
       return setState({ ...state, errorMessage: 'All fields are required' })
     }
 
-    const { error } = await loginUser(username, password)
+    const { error, success } = await loginUser(username, password)
 
-    if (error) return setState({ ...state, errorMessage: error })
-      
-    setState({
-      ...state,
-      username: '',
-      password: '',
-      errorMessage: '',
-      redirectToWorkouts: true
-    })
+    if (error) {
+      return setState({ ...state, errorMessage: error })
+    }
+    
+    if (success) {
+      setState({ ...state, loggedIn: true })
+    }
   }
 
 
-  if (dataFetchSuccess) return <Redirect to="/workouts" />
+  if (state.loggedIn && dataFetchSuccess) return <Redirect to="/workouts" />
 
   return (
     <main className="main">

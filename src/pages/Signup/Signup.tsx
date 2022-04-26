@@ -1,32 +1,29 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
-import { useMutation } from '@apollo/client';
 import TextInputGroup from '../../components/TextInputGroup'
 import PasswordInputGroup from '../../components/PasswordInputGroup'
-import SIGNUP_USER from '../../queries/users/signupUser'
+import model from '../../model'
 
 interface State {
   username: string
   password1: string
   password2: string
   errorMessage: string
-  redirectToLogin: boolean
+  loggedIn: boolean
 }
 
 function Signup() {
+  model.App.useInitData()
+  const signupUser = model.User.signupUser()
+
   const stateObj: State = {
     username: '',
     password1: '',
     password2: '',
-
-    // TODO: move to custom hook
     errorMessage: '',
-    redirectToLogin: false
+    loggedIn: false
   }
   const [state, setState] = useState(stateObj)
-
-  // TODO: move to custom hook
-  const [signup] = useMutation(SIGNUP_USER)
 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
@@ -37,45 +34,31 @@ function Signup() {
   }
 
 
-
   const handleSubmit = async () => {
-
-    // Move to custom hook
     if (
       state.username === ''
       || state.password1 === ''
       || state.password2 === ''
     ) {
-      setState({ ...state, errorMessage: 'All fields are required' })
-      return
+      return setState({ ...state, errorMessage: 'All fields are required' })
     }
 
     if (state.password1 !== state.password2) {
-      setState({ ...state, errorMessage: 'Both password fields must match.'})
-      return
+      return setState({ ...state, errorMessage: 'Both password fields must match.' })
     }
 
-    try {
-      const response = await signup({
-        variables: {
-          username: state.username,
-          password: state.password1
-        }
-      })
+    const { error, success } = await signupUser(state.username, state.password1)
 
-      if (response.data.signup.error) {
-        setState({ ...state, errorMessage: response.data.signup.error })
-        return
-      }
+    if (error) {
+      return setState({ ...state, errorMessage: error })
+    }
 
-      setState({ ...state, redirectToLogin: true })
-
-    } catch (err) {
-      console.error('There was an error signing up.')
+    if (success) {
+      return setState({ ...state, loggedIn: true })
     }
   }
 
-  if (state.redirectToLogin) return <Redirect to="/login" />
+  if (state.loggedIn) return <Redirect to="/workouts" />
 
   return (
     <main className="main">

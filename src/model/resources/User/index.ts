@@ -10,14 +10,37 @@ const User = {
     return async function loginUser(username: string, password: string) {
       const { error, token } = await loginUserGql(username, password)
 
+      if (token) {
+        setLoginTokenInLocalStorage(token)
+        storeLoginTokenRdx(token)
+        
+        return { error: null, success: true }
+      }
+      
+
       if (error) return { error, sucess: false }
+
+      return { error: 'There was an error logging in', success: false }
+    }
+  },
+
+  signupUser() {
+    const signupUserGql = gql.User.useSignupUser()
+    const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
+
+    return async function signupUser(username: string, password: string) {
+      const { error, token } = await signupUserGql(username, password)
 
       if (token) {
         setLoginTokenInLocalStorage(token)
         storeLoginTokenRdx(token)
+
+        return { error: null, success: true }
       }
 
-      return { success: true }
+      if (error) return { error, success: false }
+
+      return { error: 'There was an error signing up', success: false }
     }
   }
 }

@@ -10,14 +10,17 @@ const App = {
 
     const storeWorkouts = rdx.Workout.useStoreWorkouts()
     const storeSessions = rdx.Session.useStoreSessions()
-    
+
+
     useEffect(() => {
+      console.log('called useEffect')
+
       if (workouts) storeWorkouts(workouts)
       if (sessions) storeSessions(sessions)
     })
 
     return {
-      dataFetchSuccess: workouts.length && sessions.length,
+      dataFetchSuccess: workouts && sessions,
       workouts,
       sessions
     }

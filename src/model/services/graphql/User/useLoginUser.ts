@@ -25,7 +25,10 @@ function useLoginUser() {
       }
     })
 
-    return response.data.login
+    const error: string = response.data.login.error
+    const token: string = response.data.login.token
+
+    return { error, token }
   }
 }
 

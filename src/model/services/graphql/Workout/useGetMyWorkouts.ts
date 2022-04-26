@@ -33,7 +33,9 @@ function useGetMyWorkouts() {
     variables: { token }
   })
 
-  return data?.workouts.length ? data.workouts : workoutsRdx
+  const workouts = data?.workouts || workoutsRdx || null
+
+  return workouts
 }
 
 export default useGetMyWorkouts

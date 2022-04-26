@@ -43,7 +43,9 @@ function useGetMySessions() {
     variables: { token }
   })
 
-  return data?.sessions.length ? data.sessions : sessionsRdx
+  const sessions = data?.sessions || sessionsRdx || null
+
+  return sessions
 }
 
 export default useGetMySessions
