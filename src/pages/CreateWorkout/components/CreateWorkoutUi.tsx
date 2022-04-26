@@ -1,15 +1,16 @@
 import WorkoutForm from '../../../components/form/WorkoutForm'
+import { WorkoutType } from '../../../model/Types'
 
 interface Props {
-  handleCreateWorkout: any
+  handleCreateWorkout: (workoutData: WorkoutType) => void
 }
 
-function CreateWorkoutUi(props: Props) {
+function CreateWorkoutUi({ handleCreateWorkout }: Props) {
   return (
     <main className="main">
       <h2 className="pageHeader">Create New Workout</h2>
       <WorkoutForm
-        handleSubmit={props.handleCreateWorkout}
+        handleSubmit={handleCreateWorkout}
         submitBtnText="Create Workout"
       />
     </main>
