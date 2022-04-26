@@ -1,12 +1,7 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
-import { useMutation } from '@apollo/client';
-import { useAppDispatch } from '../../model/services/redux/reduxApi/app/hooks'
-import { storeLoginTokenInRdx } from '../../model/services/redux/reduxApi/features/auth/authSlice'
 import TextInputGroup from '../../components/TextInputGroup'
 import PasswordInputGroup from '../../components/PasswordInputGroup'
-import { setLoginTokenInLocalStorage } from '../../utils/authUtils'
-import LOGIN_USER from '../../queries/users/loginUser'
 import model from '../../model'
 
 interface State {
@@ -18,6 +13,7 @@ interface State {
 
 function Login() {
   const { dataFetchSuccess } = model.App.useInitData()
+  const loginUser = model.User.loginUser()
 
   const stateObj: State = {
     username: '',
@@ -28,70 +24,38 @@ function Login() {
 
   const [state, setState] = useState(stateObj)
 
-  // TODO: move to custom hook
-  const [login] = useMutation(LOGIN_USER)
-  const dispatch = useAppDispatch()
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value
-    })
+    setState({ ...state, [event.target.name]: event.target.value })
   }
 
+
   const handleSubmit = async (testUser: boolean=false) => {
+    let username: string = state.username
+    let password: string = state.password
 
+    if (testUser) {
+      username = 'testuser'
+      password = '1234'
+    }
 
-    // Clean up - set username and password in state if testUser flag is true
-    if (
-      !testUser
-      && (state.username === '' || state.password === '')
-    ) {
+    if (username === '' || password === '') {
       return setState({ ...state, errorMessage: 'All fields are required' })
     }
 
-    // TODO:
-    // - Create higher order function for error handling
-    // - Use everywhere we make a query
-    try {
-      // TODO: GraphQL - Move to custom hook
-      const response = await login({
-        variables: {
-          username: testUser ? 'testuser' : state.username,
-          password: testUser ? '1234' : state.password
-        }
-      })
+    const { error } = await loginUser(username, password)
 
-      if (response.data.login.error) {
-        return setState({ ...state, errorMessage: response.data.login.error })
-      }
+    if (error) return setState({ ...state, errorMessage: error })
       
-
-      setState({
-        ...state,
-        username: '',
-        password: '',
-        errorMessage: ''
-      })
-
-      // TODO: Setting local storage - Move to custom hook
-      const loginToken = response.data.login.token
-      setLoginTokenInLocalStorage(loginToken)
-
-      // TODO: Redux - Move to custom hook
-      dispatch(storeLoginTokenInRdx(loginToken))
-
-      setState({
-        ...state,
-        redirectToWorkouts: true
-      })
-
-    } catch (err) {
-      console.error('There was an error logging in.')
-      console.log('err ==>', err)
-      
-    }
+    setState({
+      ...state,
+      username: '',
+      password: '',
+      errorMessage: '',
+      redirectToWorkouts: true
+    })
   }
+
 
   if (dataFetchSuccess) return <Redirect to="/workouts" />
 

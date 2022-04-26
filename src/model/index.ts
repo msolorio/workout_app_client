@@ -1,13 +1,15 @@
-import Workout from './clientOps/Workout'
-import Session from './clientOps/Session'
-import ExerciseInstance from './clientOps/ExerciseInstance'
-import App from './clientOps/App'
+import Workout from './resources/Workout'
+import Session from './resources/Session'
+import ExerciseInstance from './resources/ExerciseInstance'
+import App from './resources/App'
+import User from './resources/User'
 
 const model = {
   Workout,
   Session,
   ExerciseInstance,
-  App
+  App,
+  User
 }
 
 export default model
