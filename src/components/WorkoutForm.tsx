@@ -4,8 +4,8 @@ import NumberInputGroup from '../components/NumberInputGroup';
 import NumberInputNoLabel from '../components/NumberInputNoLabel';
 import UnitSelector from './UnitSelector'
 import Exercise from './Exercise';
-import { WorkoutType } from '../model/services/redux/features/workouts/workoutsSlice'
-import { ExerciseType } from '../model/services/redux/features/exercises/exercisesSlice'
+import { WorkoutType } from '../model/services/redux/reduxApi/features/workouts/workoutsSlice'
+import { ExerciseType } from '../model/services/redux/reduxApi/features/exercises/exercisesSlice'
 
 const stateExercises: ExerciseType[] = [];
 

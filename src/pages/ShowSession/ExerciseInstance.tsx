@@ -1,4 +1,4 @@
-import { ExerciseInstanceType } from "../../model/services/redux/features/exerciseInstance/exerciseInstancesSlice"
+import { ExerciseInstanceType } from "../../model/services/redux/reduxApi/features/exerciseInstance/exerciseInstancesSlice"
 import RepsAndSets from './RepsAndSets'
 import checkImg from './check.png'
 

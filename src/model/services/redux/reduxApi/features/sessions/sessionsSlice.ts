@@ -3,8 +3,7 @@ import {
   PayloadAction
 } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import checkIfSeshComplete from '../../../../../utils/checkIfSeshComplete'
-// import { RootState } from '../../app/store'
+import checkIfSeshComplete from '../../../../../../utils/checkIfSeshComplete'
 
 import { WorkoutType } from '../workouts/workoutsSlice'
 import { ExerciseInstanceType } from '../exerciseInstance/exerciseInstancesSlice'

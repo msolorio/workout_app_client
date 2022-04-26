@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { storeNewSession, selectAllSessions, selectSessionById } from '../features/sessions/sessionsSlice'
+import { useAppDispatch, useAppSelector } from '../reduxApi/app/hooks'
+import { storeSessions, storeNewSession, selectAllSessions, selectSessionById } from '../reduxApi/features/sessions/sessionsSlice'
 import { SessionType } from '../../../Types'
 
 const Session = {
@@ -17,6 +17,14 @@ const Session = {
 
   useGetSessionById(sessionId: string) {
     return useAppSelector(selectSessionById(sessionId))
+  },
+
+  useStoreSessions() {
+    const dispatch = useAppDispatch()
+
+    return function storeSessionsRdx(sessions: SessionType[]) {
+      dispatch(storeSessions(sessions))
+    }
   }
 }
 

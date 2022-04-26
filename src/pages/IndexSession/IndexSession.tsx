@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SessionType } from '../../model/services/redux/features/sessions/sessionsSlice'
+import { SessionType } from '../../model/services/redux/reduxApi/features/sessions/sessionsSlice'
 import DateWidget from '../../components/DateWidget'
 import model from '../../model'
 

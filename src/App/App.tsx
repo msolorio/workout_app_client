@@ -1,12 +1,12 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Routes from '../Routes/index'
-import useSyncToken from './useSyncToken'
-import useInitData from '../utils/hooks/useInitData'
+import model from '../model'
 
 function App() {
-  useSyncToken()
-  useInitData()
+  model.App.useSyncToken()
+  model.App.useInitData()
+  model.App.useSetWindowProcess()
 
   return (
     <div className="window">

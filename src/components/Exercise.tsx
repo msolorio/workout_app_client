@@ -1,5 +1,5 @@
 import { MouseEvent, ChangeEvent } from 'react'
-import { ExerciseType } from '../model/services/redux/features/exercises/exercisesSlice'
+import { ExerciseType } from '../model/services/redux/reduxApi/features/exercises/exercisesSlice'
 import TextInputNoLabel from './TextInputNoLabel';
 import NumberInputNoLabel from './NumberInputNoLabel'
 import UnitSelector from './UnitSelector'

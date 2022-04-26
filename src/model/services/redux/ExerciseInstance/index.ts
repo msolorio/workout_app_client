@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { incrementSetForExInst } from '../features/sessions/sessionsSlice'
+import { useAppDispatch } from '../reduxApi/app/hooks'
+import { incrementSetForExInst } from '../reduxApi/features/sessions/sessionsSlice'
 
 const ExerciseInstance = {
   useIncrementSet() {

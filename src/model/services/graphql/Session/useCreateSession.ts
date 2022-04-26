@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client'
-import { useAppSelector } from '../../redux/app/hooks'
-import { selectLoginTokenInRdx } from '../../redux/features/auth/authSlice'
-import { SessionType } from '../../../Types'
+import { useAppSelector } from '../../redux/reduxApi/app/hooks'
+import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice'
 
 const CREATE_SESSION = gql`
   mutation CreateSessionMutation($token: String!, $workoutId: ID!) {

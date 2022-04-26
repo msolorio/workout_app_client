@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router-dom'
-import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
-import { ExerciseType } from '../../model/services/redux/features/exercises/exercisesSlice'
+import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
+import { ExerciseType } from '../../model/services/redux/reduxApi/features/exercises/exercisesSlice'
 import Exercise from './Exercise'
 import model from '../../model'
 

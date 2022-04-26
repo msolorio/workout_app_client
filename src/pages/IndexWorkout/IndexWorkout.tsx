@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { WorkoutType } from '../../model/services/redux/features/workouts/workoutsSlice'
+import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
 import model from '../../model'
 
 function IndexWorkout() {

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { storeWorkouts } from '../../model/services/redux/features/workouts/workoutsSlice'
-import { storeSessions } from '../../model/services/redux/features/sessions/sessionsSlice'
-import { useAppSelector, useAppDispatch } from '../../model/services/redux/app/hooks'
+import { storeWorkouts } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
+import { storeSessions } from '../../model/services/redux/reduxApi/features/sessions/sessionsSlice'
+import { useAppSelector, useAppDispatch } from '../../model/services/redux/reduxApi/app/hooks'
 import WORKOUTS from '../../queries/workouts/getWorkouts'
 import SESSIONS from '../../queries/sessions/getSessions'
-import { selectAllWorkouts } from '../../model/services/redux/features/workouts/workoutsSlice'
-import { selectAllSessions } from '../../model/services/redux/features/sessions/sessionsSlice'
-import { selectLoginTokenInRdx } from '../../model/services/redux/features/auth/authSlice';
+import { selectAllWorkouts } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
+import { selectAllSessions } from '../../model/services/redux/reduxApi/features/sessions/sessionsSlice'
+import { selectLoginTokenInRdx } from '../../model/services/redux/reduxApi/features/auth/authSlice';
 import { useQuery } from '@apollo/client';
 
 // Initializes app data on login or page refresh

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client'
-import { useAppSelector } from '../../redux/app/hooks'
-import { selectLoginTokenInRdx } from '../../redux/features/auth/authSlice'
+import { useAppSelector } from '../../redux/reduxApi/app/hooks'
+import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice'
 
 const INCREMENT_SET = gql`
   mutation UpdateSetMutation(
