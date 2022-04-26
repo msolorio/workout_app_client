@@ -34,25 +34,20 @@ function Login() {
 
 
   const handleSubmit = async (testUser: boolean=false) => {
-    let username: string = state.username
-    let password: string = state.password
+    let { username, password } = state
 
     if (testUser) {
       username = 'testuser'
       password = '1234'
     }
 
-    if (username === '' || password === '') {
-      return setState({ ...state, errorMessage: 'All fields are required' })
-    }
-
-    const { error, success } = await loginUser(username, password)
+    const { error } = await loginUser(username, password)
 
     if (error) {
       return setState({ ...state, errorMessage: error })
     }
     
-    if (success) {
+    if (!error) {
       setState({ ...state, loggedIn: true })
     }
   }

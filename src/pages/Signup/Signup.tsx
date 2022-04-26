@@ -35,28 +35,20 @@ function Signup() {
 
 
   const handleSubmit = async () => {
-    if (
-      state.username === ''
-      || state.password1 === ''
-      || state.password2 === ''
-    ) {
-      return setState({ ...state, errorMessage: 'All fields are required' })
-    }
+    const { username, password1, password2 } = state
+    const args = { username, password1, password2 }
 
-    if (state.password1 !== state.password2) {
-      return setState({ ...state, errorMessage: 'Both password fields must match.' })
-    }
-
-    const { error, success } = await signupUser(state.username, state.password1)
+    const { error } = await signupUser(args)
 
     if (error) {
       return setState({ ...state, errorMessage: error })
     }
 
-    if (success) {
+    if (!error) {
       return setState({ ...state, loggedIn: true })
     }
   }
+
 
   if (state.loggedIn) return <Redirect to="/workouts" />
 
