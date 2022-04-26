@@ -1,9 +1,12 @@
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
-import { setLoginTokenInLocalStorage } from '../../../utils/authUtils'
+import {
+  setLoginTokenInLocalStorage,
+  removeLoginTokenInLocalStorage
+} from '../../../utils/authUtils'
 
 const User = {
-  loginUser() {
+  useLoginUser() {
     const loginUserGql = gql.User.useLoginUser()
     const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
 
@@ -24,7 +27,7 @@ const User = {
     }
   },
 
-  signupUser() {
+  useSignupUser() {
     const signupUserGql = gql.User.useSignupUser()
     const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
 
@@ -41,6 +44,15 @@ const User = {
       if (error) return { error, success: false }
 
       return { error: 'There was an error signing up', success: false }
+    }
+  },
+
+  useLogoutUser() {
+    const logoutUserRdx = rdx.User.useLogoutUser()
+    
+    return function logoutUser() {
+      removeLoginTokenInLocalStorage()
+      logoutUserRdx()
     }
   }
 }

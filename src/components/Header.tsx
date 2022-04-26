@@ -1,37 +1,19 @@
-// import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client'
-import { useAppDispatch, useAppSelector } from '../model/services/redux/reduxApi/app/hooks'
-import { removeWorkouts } from '../model/services/redux/reduxApi/features/workouts/workoutsSlice'
-import { removeSessions } from '../model/services/redux/reduxApi/features/sessions/sessionsSlice'
-import RESET from '../queries/reset'
-import { removeLoginTokenInLocalStorage } from '../utils/authUtils'
-import { removeLoginTokenInRdx, selectLoginTokenInRdx } from '../model/services/redux/reduxApi/features/auth/authSlice';
 import kettlebellImg from './weight.png'
+import model from '../model'
+
 
 function Header() {
-  const dispatch = useAppDispatch() 
-  const [resetData] = useMutation(RESET)
-
-  const loginToken: string = useAppSelector(selectLoginTokenInRdx)
+  const resetData: () => void = model.App.useResetData()
+  const logoutUser: () => void = model.User.useLogoutUser()
+  const loginToken: string = model.App.useGetLoginToken()
 
   const handleReset = async () => {
-    try {
-      await resetData()
-      dispatch(removeWorkouts())
-      dispatch(removeSessions())
-      removeLoginTokenInLocalStorage()
-      dispatch(removeLoginTokenInRdx())
-    } catch (err) {
-      console.error(err)
-    }
+    await resetData()
   }
 
   function handleLogout() {
-    removeLoginTokenInLocalStorage()
-    dispatch(removeLoginTokenInRdx())
-    dispatch(removeWorkouts())
-    dispatch(removeSessions())
+    logoutUser()
   }
 
   const loggedInLinks = (

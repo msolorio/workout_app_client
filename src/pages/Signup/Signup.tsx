@@ -14,7 +14,7 @@ interface State {
 
 function Signup() {
   model.App.useInitData()
-  const signupUser = model.User.signupUser()
+  const signupUser = model.User.useSignupUser()
 
   const stateObj: State = {
     username: '',

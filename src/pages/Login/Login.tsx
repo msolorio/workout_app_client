@@ -13,7 +13,7 @@ interface State {
 
 function Login() {
   const { dataFetchSuccess } = model.App.useInitData()
-  const loginUser = model.User.loginUser()
+  const loginUser = model.User.useLoginUser()
 
   const stateObj: State = {
     username: '',

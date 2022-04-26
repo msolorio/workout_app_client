@@ -1,6 +1,14 @@
-import { useAppDispatch } from '../reduxApi/app/hooks'
-import { storeLoginTokenInRdx, removeLoginTokenInRdx } from '../reduxApi/features/auth/authSlice';
-import { getLoginTokenFromLocalStorage } from '../../../../utils/authUtils';
+import { useAppDispatch, useAppSelector } from '../reduxApi/app/hooks'
+import {
+  selectLoginTokenInRdx,
+  storeLoginTokenInRdx,
+  removeLoginTokenInRdx
+} from '../reduxApi/features/auth/authSlice';
+import {
+  getLoginTokenFromLocalStorage
+} from '../../../../utils/authUtils';
+import { removeWorkouts } from '../reduxApi/features/workouts/workoutsSlice'
+import { removeSessions } from '../reduxApi/features/sessions/sessionsSlice'
 
 const App = {
   useSyncToken() {
@@ -15,9 +23,23 @@ const App = {
 
   useStoreLoginToken() {
     const dispatch = useAppDispatch()
-
+    
     return function storeLoginToken(loginToken: string) {
       dispatch(storeLoginTokenInRdx(loginToken))
+    }
+  },
+
+  useGetLoginToken() {
+    return useAppSelector(selectLoginTokenInRdx)
+  },
+  
+  useResetData() {
+    const dispatch = useAppDispatch()
+
+    return function resetDataRdx() {
+      dispatch(removeWorkouts())
+      dispatch(removeSessions())
+      dispatch(removeLoginTokenInRdx())
     }
   }
 }

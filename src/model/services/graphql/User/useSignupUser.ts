@@ -25,9 +25,6 @@ function useSignupUser() {
       }
     })
 
-    console.log('response ==>', response)
-    
-
     const error: string | null = response.data.signup.error
     const token: string = response.data.signup.token
 

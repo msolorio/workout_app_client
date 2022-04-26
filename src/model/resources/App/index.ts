@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
+import { removeLoginTokenInLocalStorage } from '../../../utils/authUtils'
 
 const App = {
   // Sets user's workouts and sessions in redux
@@ -8,15 +9,13 @@ const App = {
     const workouts = gql.Workout.useGetMyWorkouts()
     const sessions = gql.Session.useGetMySessions()
 
-    const storeWorkouts = rdx.Workout.useStoreWorkouts()
-    const storeSessions = rdx.Session.useStoreSessions()
+    const storeWorkoutsRdx = rdx.Workout.useStoreWorkouts()
+    const storeSessionsRdx = rdx.Session.useStoreSessions()
 
 
     useEffect(() => {
-      console.log('called useEffect')
-
-      if (workouts) storeWorkouts(workouts)
-      if (sessions) storeSessions(sessions)
+      if (workouts) storeWorkoutsRdx(workouts)
+      if (sessions) storeSessionsRdx(sessions)
     })
 
     return {
@@ -39,6 +38,23 @@ const App = {
       // @ts-ignore
       window.process = { ...window.process, }
     })
+  },
+
+
+  useGetLoginToken() {
+    return rdx.App.useGetLoginToken()
+  },
+
+
+  useResetData() {
+    const resetDataGql = gql.App.useResetData()
+    const resetDataRdx = rdx.App.useResetData()
+
+    return async function resetData() {
+      removeLoginTokenInLocalStorage()
+      resetDataRdx()
+      await resetDataGql()
+    }
   }
 }
 
