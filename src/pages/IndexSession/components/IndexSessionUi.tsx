@@ -1,18 +1,21 @@
 import { Link } from 'react-router-dom'
-import { SessionType } from '../../model/services/redux/reduxApi/features/sessions/sessionsSlice'
-import DateWidget from '../../components/DateWidget'
-import model from '../../model'
+import { SessionType } from '../../../model/services/redux/reduxApi/features/sessions/sessionsSlice'
+import DateWidget from '../../../components/DateWidget'
 
-function IndexSession() {
-  const sessions = model.Session.useGetMySessions()
+interface Props {
+  sessions: SessionType[]
+}
 
+function IndexSessionUi({sessions}: Props) {
   const sessionsJSX = sessions.map((session: SessionType) => {
     return (
       <Link to={`/sessions/${session.id}`} key={session.id}>
         <div className="section">
           <DateWidget timestamp={session.date} />
           <p className="description marginBottomSmall">{session.workout.name}</p>
-          <p className="description">{ session.completed ? <span>completed</span> : <span className="accent-text">in-progress</span> }</p>
+          <p className="description">
+            { session.completed ? <span>completed</span> : <span className="accent-text">in-progress</span> }
+          </p>
         </div>
       </Link>
     )
@@ -26,4 +29,4 @@ function IndexSession() {
   )
 }
 
-export default IndexSession
+export default IndexSessionUi

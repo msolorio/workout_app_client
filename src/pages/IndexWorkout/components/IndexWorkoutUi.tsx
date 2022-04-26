@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
-import model from '../../model'
+import { WorkoutType } from '../../../model/Types'
 
-function IndexWorkout() {
-  const workouts = model.Workout.useGetMyWorkouts()
+interface Props {
+  workouts: WorkoutType[]
+}
 
+function IndexWorkoutUi({ workouts }: Props) {
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>
@@ -24,4 +25,4 @@ function IndexWorkout() {
   )
 }
 
-export default IndexWorkout;
+export default IndexWorkoutUi;

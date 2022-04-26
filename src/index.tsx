@@ -9,7 +9,7 @@ import {
 import { Provider } from 'react-redux'
 import store from './model/services/redux/reduxApi/app/store'
 import './assets/css/index.css'
-import App from './App/App'
+import App from './App'
 import './assets/fonts/Ubuntu-Regular.ttf'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT

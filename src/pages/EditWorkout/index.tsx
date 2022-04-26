@@ -16,7 +16,7 @@ interface State {
 function EditWorkout({ match }: RouteComponentProps<Props>) {
   const { workoutId } = match.params
 
-  const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
+  const currentWorkout: WorkoutType | undefined = model.Workout.useGetWorkoutById(workoutId)
   const updateWorkout = model.Workout.useUpdateWorkout()
 
   const initialState: State = {
@@ -33,7 +33,6 @@ function EditWorkout({ match }: RouteComponentProps<Props>) {
 
 
   if (!currentWorkout) {
-    console.log('No workout found with that id')
     return <Redirect to="/workouts" />
   }
 

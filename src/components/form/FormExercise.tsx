@@ -1,10 +1,10 @@
 import { MouseEvent, ChangeEvent } from 'react'
-import { ExerciseType } from '../model/services/redux/reduxApi/features/exercises/exercisesSlice'
-import TextInputNoLabel from './form/TextInputNoLabel';
-import NumberInputNoLabel from './form/NumberInputNoLabel'
-import UnitSelector from './form/UnitSelector'
+import { ExerciseType } from '../../model/services/redux/reduxApi/features/exercises/exercisesSlice'
+import TextInputNoLabel from './TextInputNoLabel';
+import NumberInputNoLabel from './NumberInputNoLabel'
+import UnitSelector from './UnitSelector'
 
-import NumberInputGroup from './form/NumberInputGroup';
+import NumberInputGroup from './NumberInputGroup';
 
 interface Props {
   exercise: ExerciseType
@@ -13,7 +13,7 @@ interface Props {
   idx: number,
 }
 
-function Exercise(props: Props) {
+function FormExercise(props: Props) {
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     props.handleRemoveExercise(props.idx)
@@ -72,4 +72,4 @@ function Exercise(props: Props) {
   )
 }
 
-export default Exercise;
+export default FormExercise;

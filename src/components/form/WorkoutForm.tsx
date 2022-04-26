@@ -3,7 +3,7 @@ import TextInputGroup from './TextInputGroup';
 import NumberInputGroup from './NumberInputGroup';
 import NumberInputNoLabel from './NumberInputNoLabel';
 import UnitSelector from './UnitSelector'
-import Exercise from '../Exercise';
+import Exercise from './FormExercise';
 import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
 import { ExerciseType } from '../../model/services/redux/reduxApi/features/exercises/exercisesSlice'
 

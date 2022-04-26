@@ -1,5 +1,5 @@
 import React from 'react'
-import { ExerciseType } from '../../model/services/redux/reduxApi/features/exercises/exercisesSlice'
+import { ExerciseType } from '../../../model/services/redux/reduxApi/features/exercises/exercisesSlice'
 
 interface Props {
   exercise: ExerciseType

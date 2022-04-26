@@ -20,7 +20,11 @@ function RepsAndSets({
   }
 
   const handleSetClick = async () => {    
-    handleSetIncrement(exInstId, setsCompleted, sets)
+    handleSetIncrement({
+      exInstId,
+      setsCompleted,
+      maxSets: sets
+    })
   }
 
   const handleRepIncrement = async () => {
