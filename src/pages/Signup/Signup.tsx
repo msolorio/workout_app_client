@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react'
 import { Redirect } from 'react-router-dom'
-import TextInputGroup from '../../components/TextInputGroup'
-import PasswordInputGroup from '../../components/PasswordInputGroup'
+import TextInputGroup from '../../components/form/TextInputGroup'
+import PasswordInputGroup from '../../components/form/PasswordInputGroup'
 import model from '../../model'
 
 interface State {

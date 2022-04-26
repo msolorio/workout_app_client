@@ -1,10 +1,10 @@
 import { MouseEvent, ChangeEvent } from 'react'
 import { ExerciseType } from '../model/services/redux/reduxApi/features/exercises/exercisesSlice'
-import TextInputNoLabel from './TextInputNoLabel';
-import NumberInputNoLabel from './NumberInputNoLabel'
-import UnitSelector from './UnitSelector'
+import TextInputNoLabel from './form/TextInputNoLabel';
+import NumberInputNoLabel from './form/NumberInputNoLabel'
+import UnitSelector from './form/UnitSelector'
 
-import NumberInputGroup from './NumberInputGroup';
+import NumberInputGroup from './form/NumberInputGroup';
 
 interface Props {
   exercise: ExerciseType

@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'
-import CreateWorkout from '../pages/CreateWorkout/CreateWorkout'
+import CreateWorkout from '../pages/CreateWorkout'
 import IndexWorkout from '../pages/IndexWorkout/IndexWorkout'
 import ShowWorkout from '../pages/ShowWorkout/ShowWorkout'
 import IndexSession from '../pages/IndexSession/IndexSession'

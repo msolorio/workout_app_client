@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
-import WorkoutForm from '../../components/WorkoutForm'
+import WorkoutForm from '../../components/form/WorkoutForm'
 import model from '../../model'
 
 interface Props {
