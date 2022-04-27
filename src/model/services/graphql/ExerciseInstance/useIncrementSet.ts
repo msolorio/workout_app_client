@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
-import { useMutation } from '@apollo/client'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice'
+import useHandledMutation from '../utils/useHandledMutation'
 
 const INCREMENT_SET = gql`
   mutation UpdateSetMutation(
@@ -18,11 +18,11 @@ const INCREMENT_SET = gql`
 `
 
 function useIncrementSet() {
-  const [mutation] = useMutation(INCREMENT_SET)
+  const handledMut = useHandledMutation(INCREMENT_SET)
   const token: string = useAppSelector(selectLoginTokenInRdx)
 
   async function incrementSet(exInstId: string, setsCompleted: number) {
-    await mutation({
+    await handledMut({
       variables: {
         token: token,
         id: exInstId,

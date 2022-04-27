@@ -10,7 +10,9 @@ const Workout = {
 
     async function createWorkout(workoutData: WorkoutType) {
       const createdWorkout = await createWorkoutGql(workoutData)
-      createWorkoutRdx(createdWorkout)
+
+      if (!createdWorkout.error) createWorkoutRdx(createdWorkout)
+
       return createdWorkout
     }
 
@@ -25,7 +27,8 @@ const Workout = {
 
     async function updateWorkout(workoutData: WorkoutType) {
       const updatedWorkout = await updateWorkoutGql(workoutData)
-      updateWorkoutRdx(updatedWorkout)
+      
+      if (!updatedWorkout.error) updateWorkoutRdx(updatedWorkout)
     }
 
     return updateWorkout

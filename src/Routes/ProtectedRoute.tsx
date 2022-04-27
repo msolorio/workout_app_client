@@ -5,11 +5,11 @@ import { selectLoginTokenInRdx } from '../model/services/redux/reduxApi/features
 function ProtectedRoute(props: any) {
   const loginToken: string = useAppSelector(selectLoginTokenInRdx)
 
-  if (!loginToken) return <Redirect to="/" />
+  if (!loginToken) return <Redirect to="/login" />
 
   return (
     <Route 
-      exact 
+      exact
       path={props.path} 
       render={props.render}
     />

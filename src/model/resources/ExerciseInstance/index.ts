@@ -13,7 +13,6 @@ const ExerciseInstance = {
   useIncrementSet() {
     const incrementSetGql = gql.ExerciseInstance.useIncrementSet()
     const incrementSetRdx = rdx.ExerciseInstance.useIncrementSet()
-    const completeSessionGql = gql.Session.useCompleteSession()
 
     async function incrementSet({
       exInstId,
@@ -25,10 +24,6 @@ const ExerciseInstance = {
 
       await incrementSetGql(exInstId, setsCompleted)
       incrementSetRdx(exInstId, currentSession.id)
-
-      if (currentSession.completed) {
-        await completeSessionGql(currentSession.id)
-      }
     }
 
     return incrementSet

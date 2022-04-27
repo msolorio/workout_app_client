@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { useMutation } from '@apollo/client'
+import useHandledMutation from '../utils/useHandledMutation'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 
@@ -12,11 +12,12 @@ const COMPLETE_SESSION = gql`
 `
 
 function useCompleteSession() {
-  const [mutation] = useMutation(COMPLETE_SESSION)
+  const handledMut = useHandledMutation(COMPLETE_SESSION)
   const token: string = useAppSelector(selectLoginTokenInRdx)
 
   return async function completeSession(sessionId: string) {
-    await mutation({
+
+    await handledMut({
       variables: { token, id: sessionId }
     })
   }

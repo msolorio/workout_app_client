@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { useMutation } from '@apollo/client';
+import useHandledMutation from '../utils/useHandledMutation'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { WorkoutType } from '../../../Types'
@@ -41,15 +41,15 @@ const UPDATE_WORKOUT = gql`
 `
 
 function useUpdateWorkout() {
-  const [mutation] = useMutation(UPDATE_WORKOUT)
+  const handledMut = useHandledMutation(UPDATE_WORKOUT)
   const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   return async function updateWorkoutGql(workoutData: WorkoutType) {
-    const response = await mutation({
+    const updatedWorkout = await handledMut({
       variables: { ...workoutData, token: logintoken }
     })
 
-    return response.data.updateWorkout
+    return updatedWorkout
   }
 }
 

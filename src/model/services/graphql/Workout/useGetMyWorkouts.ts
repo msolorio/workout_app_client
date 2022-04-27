@@ -33,7 +33,7 @@ function useGetMyWorkouts() {
     variables: { token }
   })
 
-  const workouts = response.workouts || workoutsRdx || null
+  const workouts = response.workouts || workoutsRdx || []
 
   return workouts
 }

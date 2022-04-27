@@ -18,13 +18,13 @@ function Routes() {
       <Route exact path="/login" render={() => <Login />} />
 
       <ProtectedRoute path="/workouts/create" render={() => <CreateWorkout />} />
-      <ProtectedRoute path="/workouts/:workoutId" render={(props: any) => <ShowWorkout {...props} />} />
       <ProtectedRoute path="/workouts/:workoutId/edit" render={(props: any) => <EditWorkout {...props} />} />
+      <ProtectedRoute path="/workouts/:workoutId" render={(props: any) => <ShowWorkout {...props} />} />
       <ProtectedRoute path="/workouts" render={() => <IndexWorkout />} />
       <ProtectedRoute path="/sessions/:sessionId" render={(props: any) => <ShowSession {...props} />} />
       <ProtectedRoute path="/sessions" render={() => <IndexSession />} />
 
-      <Route path="*" render={() => <Redirect to="/" />} />
+      <Route path="*" render={() => <Redirect to="/login" />} />
     </Switch>
   )
 }
