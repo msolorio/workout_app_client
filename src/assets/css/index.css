@@ -127,6 +127,14 @@ a {
   min-height: 500px;
 }
 
+.mainBackground {
+  background: var(--dark-bg-1);
+  color: var(--light-text-color);
+  max-width: 400px;
+  padding: 1em .9em .1em;
+  margin-bottom: -1em;
+}
+
 .pageHeader {
   font-family: UbuntuRegular;
   text-align: center;
@@ -468,7 +476,8 @@ a {
 
 .form-errorMessage {
   background: #545454;
-  padding: .4em .6em .3em;
+  padding: 0.5em 1em 0.7em;
+  line-height: 1.3em;
   border-radius: 4px;
   margin: 0 0 .9em;
 }

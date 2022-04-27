@@ -4,6 +4,7 @@ import {
   storeLoginTokenInRdx,
   removeLoginTokenInRdx
 } from '../reduxApi/features/auth/authSlice';
+import { selectErrorMessage } from '../reduxApi/features/errors/errorsSlice'
 import {
   getLoginTokenFromLocalStorage
 } from '../../../../utils/authUtils';
@@ -29,6 +30,10 @@ const App = {
 
   useGetLoginToken() {
     return useAppSelector(selectLoginTokenInRdx)
+  },
+
+  useGetErrorMessage() {
+    return useAppSelector(selectErrorMessage)
   }
 }
 

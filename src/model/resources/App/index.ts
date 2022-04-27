@@ -55,6 +55,10 @@ const App = {
       logoutUserRdx()
       await resetDataGql()
     }
+  },
+
+  useGetErrorMessage() {
+    return rdx.App.useGetErrorMessage()
   }
 }
 
