@@ -1,5 +1,6 @@
 import gql from '../../services/graphql'
 import rdx from '../../services/redux'
+import { SessionType } from '../../Types'
 
 const Session = {
   useCreateSession() {
@@ -21,6 +22,14 @@ const Session = {
 
   useGetSessionById(sessionId: string) {
     return rdx.Session.useGetSessionById(sessionId)
+  },
+
+  useCheckCompleteSession() {
+    const completeSessionGql = gql.Session.useCompleteSession()
+
+    return async function checkCompleteSession(session: SessionType) {
+      if (session?.completed) await completeSessionGql(session.id)
+    }
   }
 }
 
