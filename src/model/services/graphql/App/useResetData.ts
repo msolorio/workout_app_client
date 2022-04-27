@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client';
+import createHandledMutation from '../utils/createHandledMutation'
 
 const RESET = gql`
   mutation reset {
@@ -50,9 +51,12 @@ const RESET = gql`
 
 function useResetData() {
   const [mutation] = useMutation(RESET)
+  const handledMut = createHandledMutation(mutation)
 
   return async function resetDataGql() {
-    await mutation()
+    const { error } = await handledMut()
+
+    return { error }
   }
 }
 

@@ -4,10 +4,9 @@ import gql from '../../services/graphql'
 import { removeLoginTokenInLocalStorage } from '../../../utils/authUtils'
 
 const App = {
-  // Sets user's workouts and sessions in redux
   useInitData() {
-    const workouts = gql.Workout.useGetMyWorkouts()
-    const sessions = gql.Session.useGetMySessions()
+    const { workouts, error: workoutsError } = gql.Workout.useGetMyWorkouts()
+    const { sessions, error: sessionsError } = gql.Session.useGetMySessions()
 
     const storeWorkoutsRdx = rdx.Workout.useStoreWorkouts()
     const storeSessionsRdx = rdx.Session.useStoreSessions()
@@ -19,7 +18,8 @@ const App = {
     })
 
     return {
-      dataFetchSuccess: workouts && sessions,
+      dataFetchSuccess: !workoutsError,
+      error: workoutsError || sessionsError,
       workouts,
       sessions
     }

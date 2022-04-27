@@ -18,8 +18,6 @@ const User = {
 
       const { error, token } = await loginUserGql(username, password)
 
-      if (error) return { error }
-
       if (token) {
         setLoginTokenInLocalStorage(token)
         storeLoginTokenRdx(token)
@@ -27,7 +25,7 @@ const User = {
         return { error: null }
       }
 
-      return { error: 'There was an error logging in' }
+      return { error }
     }
   },
 

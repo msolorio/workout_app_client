@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client'
+import createHandledMutation from '../utils/createHandledMutation'
 
 const SIGNUP_USER = gql`
   mutation Signup($username: String!, $password: String!) {
@@ -16,17 +17,16 @@ const SIGNUP_USER = gql`
 
 function useSignupUser() {
   const [mutation] = useMutation(SIGNUP_USER)
-
+  const handledMut = createHandledMutation(mutation)
   return async function signupUserGql(username: string, password: string) {
-    const response = await mutation({
+    const response = await handledMut({
       variables: {
         username,
         password
       }
     })
 
-    const error: string | null = response.data.signup.error
-    const token: string = response.data.signup.token
+    const { error, token } = response
 
     return { error, token }
   }

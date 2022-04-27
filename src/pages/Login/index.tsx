@@ -22,7 +22,6 @@ function Login() {
   }
   const [state, setState] = useState(stateObj)
 
-
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     setState({
       ...state,
