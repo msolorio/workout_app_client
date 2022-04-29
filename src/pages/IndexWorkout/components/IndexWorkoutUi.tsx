@@ -5,7 +5,7 @@ interface Props {
   workouts: WorkoutType[]
 }
 
-function IndexWorkoutUi({ workouts }: Props) {
+function IndexWorkoutUi({ workouts }: Props): JSX.Element {
   const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>

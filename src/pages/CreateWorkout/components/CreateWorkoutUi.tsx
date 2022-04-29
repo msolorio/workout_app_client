@@ -5,7 +5,7 @@ interface Props {
   handleCreateWorkout: (workoutData: WorkoutType) => void
 }
 
-function CreateWorkoutUi({ handleCreateWorkout }: Props) {
+function CreateWorkoutUi({ handleCreateWorkout }: Props): JSX.Element {
   return (
     <main className="main">
       <h2 className="pageHeader">Create New Workout</h2>

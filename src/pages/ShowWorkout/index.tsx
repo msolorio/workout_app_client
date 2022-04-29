@@ -13,7 +13,7 @@ interface State {
   sessionId: string
 }
 
-function ShowWorkout({ match }: RouteComponentProps<Props>) {
+function ShowWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
   const { workoutId } = match.params
   const currentWorkout: WorkoutType | undefined = model.Workout.useGetWorkoutById(workoutId)
   const createSession = model.Session.useCreateSession()

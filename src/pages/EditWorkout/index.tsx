@@ -13,7 +13,7 @@ interface State {
 }
 
 
-function EditWorkout({ match }: RouteComponentProps<Props>) {
+function EditWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
   const { workoutId } = match.params
 
   const currentWorkout: WorkoutType | undefined = model.Workout.useGetWorkoutById(workoutId)

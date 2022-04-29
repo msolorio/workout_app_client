@@ -10,7 +10,7 @@ interface State {
   loggedIn: boolean
 }
 
-function Login() {
+function Login(): JSX.Element {
   const { dataFetchSuccess } = model.App.useInitData()
   const loginUser = model.User.useLoginUser()
 

@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { WorkoutType } from '../../model/services/redux/reduxApi/features/workouts/workoutsSlice'
 import CreateWorkoutUi from './components/CreateWorkoutUi'
+import { WorkoutType } from '../../model/Types'
 
 import model from '../../model'
 
-interface State {
+export interface State {
   workoutId: null | string
 }
 
-function CreateWorkout() {
-  const createWorkout = model.Workout.useCreateWorkout()
+function CreateWorkout(): JSX.Element {
+  const createWorkout: (workoutData: WorkoutType) => Promise<WorkoutType> = model.Workout.useCreateWorkout()
 
   const stateObj: State = {
     workoutId: null
@@ -20,11 +20,10 @@ function CreateWorkout() {
 
 
   const handleCreateWorkout = async (workoutData: WorkoutType) => {
-    const createdWorkout = await createWorkout(workoutData)
+    const createdWorkout: WorkoutType = await createWorkout(workoutData)
 
-    setState({ workoutId: createdWorkout.id })
+    createdWorkout.id && setState({ workoutId: createdWorkout.id })
   }
-
 
   if (state.workoutId) return <Redirect to={`/workouts/${state.workoutId}`} />
 
@@ -32,5 +31,6 @@ function CreateWorkout() {
     <CreateWorkoutUi handleCreateWorkout={handleCreateWorkout} />
   )
 }
+
 
 export default CreateWorkout;

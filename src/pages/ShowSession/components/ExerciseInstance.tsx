@@ -1,16 +1,17 @@
 import { ExerciseInstanceType } from "../../../model/services/redux/reduxApi/features/exerciseInstance/exerciseInstancesSlice"
 import RepsAndSets from './RepsAndSets'
 import checkImg from './check.png'
+import { HandleSetIncrementType } from '../../../model/Types'
 
 interface Props {
   exInst: ExerciseInstanceType
-  handleSetIncrement: any
+  handleSetIncrement: HandleSetIncrementType
 }
 
 function ExerciseInstance({
   exInst,
   handleSetIncrement
-}: Props) {
+}: Props): JSX.Element {
   const exInstId = exInst.id
   const {
     name,

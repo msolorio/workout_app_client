@@ -1,10 +1,12 @@
+import { HandleSetIncrementType } from '../../../model/Types'
+
 interface Props {
   reps: number
   sets: number | null
   repsCompleted: number
   setsCompleted: number
   exInstId: string
-  handleSetIncrement: any
+  handleSetIncrement: HandleSetIncrementType
 }
 
 function RepsAndSets({
@@ -14,33 +16,22 @@ function RepsAndSets({
   setsCompleted,
   exInstId,
   handleSetIncrement
-}: Props) {
+}: Props): JSX.Element {
   if (!sets && reps) {
     return <p>Reps: <button>{repsCompleted}/{reps}</button></p>
   }
 
   const handleSetClick = async () => {    
-    handleSetIncrement({
-      exInstId,
-      setsCompleted,
-      maxSets: sets
-    })
+    if (sets) {
+      handleSetIncrement({
+        exInstId,
+        setsCompleted,
+        maxSets: sets
+      })
+    }
   }
 
   const handleRepIncrement = async () => {
-    // if (repsCompleted >= reps) return
-
-    // await incrementSetForExInstance({
-    //   variables: {
-    //     id: exInstId,
-    //     repsCompleted: repsCompleted + 1
-    //   }
-    // })
-
-    // dispatch(incrementSetForExInst({
-    //   exInstId: exInstId,
-    //   sessionId: sessionId
-    // }))
   }
 
   function renderSets() {

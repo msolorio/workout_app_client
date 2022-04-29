@@ -1,16 +1,17 @@
 import DateWidget from '../../../components/DateWidget'
 import ExerciseInstances from './ExerciseInstances'
 import { SessionType } from '../../../model/Types'
+import { HandleSetIncrementType } from '../../../model/Types'
 
 interface Props {
   currentSession: SessionType
-  handleSetIncrement: any
+  handleSetIncrement: HandleSetIncrementType
 }
 
 function ShowSessionUi({
   currentSession,
   handleSetIncrement
-}: Props) {
+}: Props): JSX.Element {
 
   return (
     <main className="main">

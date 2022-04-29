@@ -12,7 +12,7 @@ function ShowWorkout({
   sessionId,
   workout,
   handleCreateSession
-}: Props) {
+}: Props): JSX.Element {
 
   function renderExercises(exercises: ExerciseType[]) {
     return exercises.map((ex: ExerciseType) => {

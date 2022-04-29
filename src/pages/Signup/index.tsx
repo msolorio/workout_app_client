@@ -11,7 +11,7 @@ interface State {
   loggedIn: boolean
 }
 
-function Signup() {
+function Signup(): JSX.Element {
   model.App.useInitData()
   const signupUser = model.User.useSignupUser()
 

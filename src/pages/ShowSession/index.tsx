@@ -3,19 +3,14 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 import ShowSessionUi from './components/ShowSessionUi'
 import model from '../../model'
 import { SessionType } from '../../model/Types'
+import { HandleSetIncrementType } from '../../model/Types'
 
 interface Props {
   sessionId: string
 }
 
-interface handleSetIncrementArgs {
-  exInstId: string
-  setsCompleted: number
-  maxSets: number
-}
 
-
-function ShowSession({match}: RouteComponentProps<Props>) {  
+function ShowSession({match}: RouteComponentProps<Props>): JSX.Element {  
   const { sessionId } = match.params
   const currentSession: SessionType | undefined = model.Session.useGetSessionById(sessionId)
   const incrementSet = model.ExerciseInstance.useIncrementSet()
@@ -35,11 +30,12 @@ function ShowSession({match}: RouteComponentProps<Props>) {
   }
   
   
-  const handleSetIncrement = async ({
+  const handleSetIncrement: HandleSetIncrementType = async ({
     exInstId,
     setsCompleted,
     maxSets
-  }: handleSetIncrementArgs) => {
+  }) => {
+
     await incrementSet({
       exInstId,
       setsCompleted,

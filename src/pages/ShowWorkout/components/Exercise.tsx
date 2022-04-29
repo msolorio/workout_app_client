@@ -5,7 +5,7 @@ interface Props {
   exercise: ExerciseType
 }
 
-function Exercise(props: Props) {
+function Exercise(props: Props): JSX.Element {
   return (
     <div className="section">
       <h3 className="subHeader accent-text">{props.exercise.name}</h3>

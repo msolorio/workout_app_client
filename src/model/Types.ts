@@ -1,6 +1,8 @@
+import { DocumentNode, OperationVariables, TypedDocumentNode } from '@apollo/client'
+
 export interface WorkoutType {
   description: string | null | undefined
-  id: string | undefined
+  readonly id: string | undefined
   length: number | null | undefined
   location: string | null | undefined
   name: string
@@ -8,7 +10,7 @@ export interface WorkoutType {
 }
 
 export interface SessionType {
-  id: string,
+  readonly id: string,
   workout: WorkoutType,
   exerciseInstances: ExerciseInstanceType[]
   date: number
@@ -16,7 +18,7 @@ export interface SessionType {
 }
 
 export interface ExerciseType {
-  id?: string
+  readonly id?: string
   name: string
   reps: number
   sets: number | null
@@ -26,8 +28,25 @@ export interface ExerciseType {
 }
 
 export interface ExerciseInstanceType {
-  id: string
+  readonly id: string
   exercise: ExerciseType
   setsCompleted: number
   repsCompleted: number
 }
+
+export interface ErrorMessage {
+  error: string
+}
+
+export type GqlString = (
+  DocumentNode
+  | TypedDocumentNode<any, OperationVariables>
+)
+
+export interface SetIncrementArgs {
+  exInstId: string
+  setsCompleted: number
+  maxSets: number
+}
+
+export type HandleSetIncrementType = (args: SetIncrementArgs) => Promise<void>

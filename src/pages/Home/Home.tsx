@@ -1,4 +1,4 @@
-function Home() {
+function Home(): JSX.Element {
   return (
     <main className="main">
       <h2 className="pageHeader">Welcome to the Workout App</h2>

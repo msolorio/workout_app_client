@@ -5,14 +5,14 @@ import {
   storeErrorMessage,
   removeErrorMessage
 } from '../../redux/reduxApi/features/errors/errorsSlice'
+import { GqlString } from '../../../Types'
 
-
-function useHandledMutation(mutationString: any) {
+function useHandledMutation(mutationString: GqlString) {
   const [mutation] = useMutation(mutationString)
 
-  return async function (...args: any[]) {
+  return async function (argsObj?: { variables: object }) {
     try {
-      const response = await mutation(...args)
+      const response = await mutation(argsObj)
 
       const mutationName = Object.keys(response.data)[0]
 

@@ -1,15 +1,16 @@
 import { ExerciseInstanceType } from '../../../model/services/redux/reduxApi/features/exerciseInstance/exerciseInstancesSlice'
 import ExerciseInstance from './ExerciseInstance'
+import { HandleSetIncrementType } from '../../../model/Types'
 
 interface Props {
   exInstances: ExerciseInstanceType[]
-  handleSetIncrement: any
+  handleSetIncrement: HandleSetIncrementType
 }
 
 function ExerciseInstances({
   exInstances,
   handleSetIncrement
-}: Props) {
+}: Props): JSX.Element {
   function renderInstances() {
     return exInstances.map((exInst) => {
       return (

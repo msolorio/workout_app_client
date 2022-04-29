@@ -22,7 +22,7 @@ function Signup({
   errorMessage,
   handleInputChange,
   handleSubmit
-}: Props) {
+}: Props): JSX.Element {
   return (
     <main className="main">
       <h2 className="pageHeader">Sign Up</h2>

@@ -19,7 +19,7 @@ function LoginUi({
   errorMessage,
   handleInputChange,
   handleSubmit
-}: Props) {
+}: Props): JSX.Element {
 
   return (
     <main className="main">

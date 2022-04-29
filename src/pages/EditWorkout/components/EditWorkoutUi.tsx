@@ -10,7 +10,7 @@ interface Props {
 function EditWorkoutUi({
   handleUpdateWorkout,
   currentWorkout
-}: Props) {
+}: Props): JSX.Element {
   return (
     <main className="main">
       <h2 className="pageHeader">Edit Your Workout</h2>

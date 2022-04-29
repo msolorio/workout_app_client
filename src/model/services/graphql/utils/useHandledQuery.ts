@@ -5,9 +5,15 @@ import {
   storeErrorMessage,
   removeErrorMessage
 } from '../../redux/reduxApi/features/errors/errorsSlice'
+import { GqlString } from '../../../Types'
 
-function useHandledQuery(queryString: any, args: any) {
-  const response = useQuery(queryString, args)
+interface QueryArgs {
+  skip: boolean,
+  variables: object
+}
+
+function useHandledQuery(queryString: GqlString, argsObj: QueryArgs) {
+  const response = useQuery(queryString, argsObj)
   
   if (response.error) {
     store.dispatch(storeErrorMessage(DEFAULT_ERROR))
