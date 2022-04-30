@@ -21,7 +21,7 @@ function useIncrementSet() {
   const handledMut = useHandledMutation(INCREMENT_SET)
   const token: string = useAppSelector(selectLoginTokenInRdx)
 
-  async function incrementSet(exInstId: string, setsCompleted: number) {
+  async function incrementSet(exInstId: string, setsCompleted: number): Promise<void> {
     await handledMut({
       variables: {
         token: token,

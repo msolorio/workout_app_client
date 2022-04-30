@@ -50,3 +50,16 @@ export interface SetIncrementArgs {
 }
 
 export type HandleSetIncrementType = (args: SetIncrementArgs) => Promise<void>
+
+// interface AuthSuccess {
+//   token: string
+// }
+
+// interface AuthError {
+//   error: string
+// }
+
+export interface AuthResType {
+  token: string | undefined
+  error: string | undefined
+}

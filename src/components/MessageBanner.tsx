@@ -1,6 +1,6 @@
 import model from '../model'
 
-function MessageBanner() {
+function MessageBanner(): JSX.Element {
   const errorMessage = model.App.useGetErrorMessage()
 
   if (!errorMessage) return <></>

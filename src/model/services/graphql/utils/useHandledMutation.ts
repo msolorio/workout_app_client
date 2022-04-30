@@ -10,7 +10,9 @@ import { GqlString } from '../../../Types'
 function useHandledMutation(mutationString: GqlString) {
   const [mutation] = useMutation(mutationString)
 
-  return async function (argsObj?: { variables: object }) {
+  // TODO: remove any - function returns either { error: string } or object
+  // with variable props
+  return async function (argsObj?: { variables: object }): Promise<any> {
     try {
       const response = await mutation(argsObj)
 

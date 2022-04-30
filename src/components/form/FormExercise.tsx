@@ -13,7 +13,7 @@ interface Props {
   idx: number,
 }
 
-function FormExercise(props: Props) {
+function FormExercise(props: Props): JSX.Element {
   const handleRemoveClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     props.handleRemoveExercise(props.idx)

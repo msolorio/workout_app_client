@@ -7,7 +7,7 @@ interface Props {
   handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
-function TextInputNoLabel(props: Props) {
+function TextInputNoLabel(props: Props): JSX.Element {
   return (
     <div>
       <input 

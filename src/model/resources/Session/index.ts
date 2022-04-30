@@ -9,7 +9,11 @@ const Session = {
 
     async function createSession(workoutId: string) {
       const createdSession = await createSessionGql(workoutId)
-      createSessionRdx(createdSession)
+
+      if (!createdSession.error) {
+        createSessionRdx(createdSession as unknown as SessionType)
+      }
+
       return createdSession
     }
 

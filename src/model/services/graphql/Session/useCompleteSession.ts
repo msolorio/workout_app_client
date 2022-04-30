@@ -15,7 +15,7 @@ function useCompleteSession() {
   const handledMut = useHandledMutation(COMPLETE_SESSION)
   const token: string = useAppSelector(selectLoginTokenInRdx)
 
-  return async function completeSession(sessionId: string) {
+  return async function completeSession(sessionId: string): Promise<void> {
 
     await handledMut({
       variables: { token, id: sessionId }

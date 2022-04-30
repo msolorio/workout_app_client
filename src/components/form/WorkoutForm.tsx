@@ -16,7 +16,7 @@ interface Props {
 }
 
 
-function WorkoutForm(props: Props) {
+function WorkoutForm(props: Props): JSX.Element {
   const [state, setState] = useState({
     redirect: false,
     workoutName: props.workoutData?.name || '',

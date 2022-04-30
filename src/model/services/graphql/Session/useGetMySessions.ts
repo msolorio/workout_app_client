@@ -3,6 +3,7 @@ import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { selectAllSessions } from '../../redux/reduxApi/features/sessions/sessionsSlice'
 import useHandledQuery from '../utils/useHandledQuery'
+import { SessionType } from '../../../Types'
 
 const SESSIONS = gql`
   query Sessions($token: String!) {
@@ -34,7 +35,7 @@ const SESSIONS = gql`
   }
 `
 
-function useGetMySessions() {
+function useGetMySessions(): SessionType[] {
   const token: string = useAppSelector(selectLoginTokenInRdx)
   const sessionsRdx = useAppSelector(selectAllSessions)
 
@@ -43,7 +44,7 @@ function useGetMySessions() {
     variables: { token }
   })
 
-  const sessions = response.sessions || sessionsRdx || []
+  const sessions: SessionType[] = response.sessions || sessionsRdx || []
 
   return sessions
 }

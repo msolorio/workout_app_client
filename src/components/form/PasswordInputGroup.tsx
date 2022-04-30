@@ -7,7 +7,7 @@ interface Props {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void 
 }
 
-function PasswordInputGroup(props: Props) {
+function PasswordInputGroup(props: Props): JSX.Element {
   return (
     <div className="form-group-col">
       <label 

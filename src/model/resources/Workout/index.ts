@@ -28,7 +28,9 @@ const Workout = {
     async function updateWorkout(workoutData: WorkoutType) {
       const updatedWorkout = await updateWorkoutGql(workoutData)
       
-      if (!updatedWorkout.error) updateWorkoutRdx(updatedWorkout)
+      if (!updatedWorkout.error) {
+        updateWorkoutRdx(updatedWorkout as unknown as WorkoutType)
+      }
     }
 
     return updateWorkout

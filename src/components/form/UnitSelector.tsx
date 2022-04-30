@@ -6,7 +6,7 @@ interface Props {
   name: string
 }
 
-function UnitSelector(props: Props) {
+function UnitSelector(props: Props): JSX.Element {
   return (
     <select
       className="form-selectInput"

@@ -4,7 +4,11 @@ import {
 } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 
-const initialState = {
+interface State {
+  loginToken: string
+}
+
+const initialState: State = {
   loginToken: ''
 }
 

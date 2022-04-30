@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import useHandledMutation from '../utils/useHandledMutation'
+import { AuthResType } from '../../../Types'
 
 const SIGNUP_USER = gql`
   mutation Signup($username: String!, $password: String!) {
@@ -17,7 +18,7 @@ const SIGNUP_USER = gql`
 function useSignupUser() {
   const handledMut = useHandledMutation(SIGNUP_USER)
 
-  return async function signupUserGql(username: string, password: string) {
+  return async function signupUserGql(username: string, password: string): Promise<AuthResType> {
     const { error, token } = await handledMut({
       variables: {
         username,

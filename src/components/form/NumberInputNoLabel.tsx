@@ -8,7 +8,7 @@ interface Props {
   handleChange: ChangeEventHandler<HTMLInputElement>
 }
 
-function NumberInputNoLabel(props: Props) {
+function NumberInputNoLabel(props: Props): JSX.Element {
   return (
     <input
       className="form-numInput"

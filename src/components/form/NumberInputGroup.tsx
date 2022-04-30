@@ -8,7 +8,7 @@ interface Props {
   handleChange: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => void 
 }
 
-function NumberInputGroup(props: Props) {
+function NumberInputGroup(props: Props): JSX.Element {
   return (
     <div className="form-group-row">
       <label 

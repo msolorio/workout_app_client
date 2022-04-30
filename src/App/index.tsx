@@ -4,7 +4,7 @@ import MessageBanner from '../components/MessageBanner'
 import Routes from '../Routes/index'
 import model from '../model'
 
-function App() {
+function App(): JSX.Element {
   model.App.useSyncToken()
   model.App.useInitData()
   model.App.useSetWindowProcess()

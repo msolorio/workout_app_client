@@ -3,7 +3,7 @@ import kettlebellImg from './weight.png'
 import model from '../model'
 
 
-function Header() {
+function Header(): JSX.Element {
   const resetData: () => void = model.App.useResetData()
   const logoutUser: () => void = model.User.useLogoutUser()
   const loginToken: string = model.App.useGetLoginToken()

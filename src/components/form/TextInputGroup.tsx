@@ -8,7 +8,7 @@ interface Props {
   handleChange: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => void 
 }
 
-function TextInputGroup(props: Props) {
+function TextInputGroup(props: Props): JSX.Element {
   return (
     <div className="form-group-col">
       <label 

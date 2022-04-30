@@ -4,7 +4,7 @@ interface Props {
   timestamp: number
 }
 
-function DateWidget({ timestamp }: Props) {
+function DateWidget({ timestamp }: Props): JSX.Element {
   const date = new Date(timestamp)
   const month = convertMonth(date.getMonth())
   const day = date.getDate()

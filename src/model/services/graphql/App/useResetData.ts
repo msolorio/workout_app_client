@@ -51,7 +51,7 @@ const RESET = gql`
 function useResetData() {
   const handledMut = useHandledMutation(RESET)
 
-  return async function resetDataGql() {
+  return async function resetDataGql(): Promise<void> {
     await handledMut()
   }
 }
