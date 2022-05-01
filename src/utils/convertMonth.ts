@@ -1,4 +1,4 @@
-export default function convertMonth(monthNum: number) {
+export default function convertMonth(monthNum: number): string {
   const months = [
     'Jan',
     'Feb',
