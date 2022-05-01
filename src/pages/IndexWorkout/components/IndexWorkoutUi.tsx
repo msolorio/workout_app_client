@@ -6,7 +6,7 @@ interface Props {
 }
 
 function IndexWorkoutUi({ workouts }: Props): JSX.Element {
-  const workoutsJSX = workouts.map((workout: WorkoutType, idx: number) => {
+  const workoutsJSX = workouts.map((workout: WorkoutType, idx: number): React.ReactNode => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>
         <div className="section">

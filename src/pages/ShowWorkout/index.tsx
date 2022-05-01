@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router-dom'
-import { WorkoutType, SessionType } from '../../model/Types'
+import { SessionType } from '../../model/Types'
 import model from '../../model'
 import ShowWorkoutUi from './components/ShowWorkoutUi'
 
@@ -15,7 +15,7 @@ interface State {
 
 function ShowWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
   const { workoutId } = match.params
-  const currentWorkout: WorkoutType | undefined = model.Workout.useGetWorkoutById(workoutId)
+  const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
   const createSession = model.Session.useCreateSession()
 
   const initialState: State = { sessionId: '' }

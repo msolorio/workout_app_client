@@ -31,10 +31,7 @@ function RepsAndSets({
     }
   }
 
-  const handleRepIncrement = async () => {
-  }
-
-  function renderSets() {
+  function renderSets(): JSX.Element {
     if (sets) {
       return (
         <span className="description">
@@ -46,15 +43,15 @@ function RepsAndSets({
       )
     }
 
-    return
+    return <></>
   }
 
-  function renderReps() {
+  function renderReps(): JSX.Element {
     if (!sets) {
       return (
         <span>
           <span>Reps:</span>
-          <button onClick={handleRepIncrement}>
+          <button>
           {repsCompleted}/{reps}
           </button>
         </span>

@@ -16,7 +16,7 @@ interface State {
 function EditWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
   const { workoutId } = match.params
 
-  const currentWorkout: WorkoutType | undefined = model.Workout.useGetWorkoutById(workoutId)
+  const currentWorkout = model.Workout.useGetWorkoutById(workoutId)
   const updateWorkout = model.Workout.useUpdateWorkout()
 
   const initialState: State = {
@@ -25,7 +25,7 @@ function EditWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
   const [state, setState] = useState(initialState)
 
 
-  const handleUpdateWorkout = async (workoutData: WorkoutType) => {
+  const handleUpdateWorkout = async (workoutData: WorkoutType): Promise<void> => {
     await updateWorkout(workoutData)
     
     setState({ workoutUpdated: true })

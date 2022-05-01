@@ -2,10 +2,17 @@ import { useEffect } from 'react'
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
 import { removeLoginTokenInLocalStorage } from '../../../utils/authUtils'
+import { WorkoutType, SessionType } from '../../Types'
+
+interface UseInitDataResType {
+  dataFetchSuccess: boolean
+  workouts: WorkoutType[]
+  sessions: SessionType[]
+}
 
 const App = {
   // Sets user's workouts and sessions in redux
-  useInitData() {
+  useInitData(): UseInitDataResType {
     const workouts = gql.Workout.useGetMyWorkouts()
     const sessions = gql.Session.useGetMySessions()
 
@@ -14,12 +21,12 @@ const App = {
 
 
     useEffect(() => {
-      if (workouts) storeWorkoutsRdx(workouts)
-      if (sessions) storeSessionsRdx(sessions)
+      storeWorkoutsRdx(workouts)
+      storeSessionsRdx(sessions)
     })
 
     return {
-      dataFetchSuccess: workouts && sessions,
+      dataFetchSuccess: !!workouts && !!sessions,
       workouts,
       sessions
     }
@@ -41,7 +48,7 @@ const App = {
   },
 
 
-  useGetLoginToken() {
+  useGetLoginToken(): string {
     return rdx.App.useGetLoginToken()
   },
 
@@ -57,7 +64,7 @@ const App = {
     }
   },
 
-  useGetErrorMessage() {
+  useGetErrorMessage(): string {
     return rdx.App.useGetErrorMessage()
   }
 }

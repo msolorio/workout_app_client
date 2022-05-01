@@ -1,6 +1,7 @@
 import { WorkoutType } from '../../Types'
 import gql from '../../services/graphql'
 import rdx from '../../services/redux'
+import { WorkoutOrErrorType } from '../../Types'
 
 const Workout = {
 
@@ -8,10 +9,12 @@ const Workout = {
     const createWorkoutGql = gql.Workout.useCreateWorkout()
     const createWorkoutRdx = rdx.Workout.useCreateWorkout()
 
-    async function createWorkout(workoutData: WorkoutType) {
+    async function createWorkout(workoutData: WorkoutType): Promise<WorkoutOrErrorType> {
       const createdWorkout = await createWorkoutGql(workoutData)
 
-      if (!createdWorkout.error) createWorkoutRdx(createdWorkout)
+      if (!createdWorkout.error) {
+        createWorkoutRdx(createdWorkout)
+      }
 
       return createdWorkout
     }
@@ -20,16 +23,15 @@ const Workout = {
   },
 
 
-
   useUpdateWorkout() {
     const updateWorkoutGql = gql.Workout.useUpdateWorkout()
     const updateWorkoutRdx = rdx.Workout.useUpdateWorkout()
 
-    async function updateWorkout(workoutData: WorkoutType) {
+    async function updateWorkout(workoutData: WorkoutType): Promise<void> {
       const updatedWorkout = await updateWorkoutGql(workoutData)
       
       if (!updatedWorkout.error) {
-        updateWorkoutRdx(updatedWorkout as unknown as WorkoutType)
+        updateWorkoutRdx(updatedWorkout)
       }
     }
 
@@ -38,12 +40,12 @@ const Workout = {
 
 
 
-  useGetWorkoutById(workoutId: string) {
+  useGetWorkoutById(workoutId: string): WorkoutType | undefined {
     return rdx.Workout.useGetWorkoutById(workoutId)
   },
 
 
-  useGetMyWorkouts() {
+  useGetMyWorkouts(): WorkoutType[] {
     return rdx.Workout.useGetMyWorkouts()
   }
 

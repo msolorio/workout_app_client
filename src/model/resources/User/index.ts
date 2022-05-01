@@ -4,30 +4,36 @@ import {
   setLoginTokenInLocalStorage,
   removeLoginTokenInLocalStorage
 } from '../../../utils/authUtils'
-
+import { AuthResType } from '../../Types'
 
 const User = {
   useLoginUser() {
     const loginUserGql = gql.User.useLoginUser()
     const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
 
-    return async function loginUser(username: string, password: string) {
+    return async function loginUser(username: string, password: string): Promise<AuthResType> {
       if (username === '' || password === '') {
-        return { error: 'All fields are required' }
+        return {
+          error: 'All fields are required',
+          token: null
+        }
       }
 
       const { error, token } = await loginUserGql(username, password)
 
-      if (error) return { error }
+      if (error) return { error, token: null }
 
       if (token) {
         setLoginTokenInLocalStorage(token)
         storeLoginTokenRdx(token)
         
-        return { error: null }
+        return { error: null, token }
       }
 
-      return { error: 'There was an error logging in' }
+      return {
+        error: 'There was an error logging in',
+        token: null
+      }
     }
   },
 
@@ -42,29 +48,38 @@ const User = {
     const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
     
 
-    return async function signupUser({username, password1, password2}: SignupArgs) {
+    return async function signupUser({username, password1, password2}: SignupArgs): Promise<AuthResType> {
 
       if (username === '' || password1 === '' || password2 === '') {
-        return { error: 'All fields are required' }
+        return {
+          error: 'All fields are required',
+          token: null
+        }
       }
 
       if (password1 !== password2) {
-        return { error: 'Both password fields must match.' }
+        return {
+          error: 'Both password fields must match.',
+          token: null
+        }
       }
 
 
       const { error, token } = await signupUserGql(username, password1)
 
-      if (error) return { error }
+      if (error) return { error, token: null }
 
       if (token) {
         setLoginTokenInLocalStorage(token)
         storeLoginTokenRdx(token)
 
-        return { error: null }
+        return { error: null, token }
       }
 
-      return { error: 'There was an error signing up' }
+      return {
+        error: 'There was an error signing up',
+        token: null
+      }
     }
   },
 

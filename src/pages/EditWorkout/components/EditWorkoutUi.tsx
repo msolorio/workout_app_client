@@ -1,4 +1,4 @@
-import WorkoutForm from '../../../components/form/WorkoutForm'
+import WorkoutForm from '../../../components/form'
 import { WorkoutType } from '../../../model/Types'
 
 interface Props {

@@ -21,7 +21,7 @@ function ExerciseInstance({
     sets
   } = exInst.exercise
   
-  const completed = exInst.setsCompleted >= (sets || Infinity)
+  const completed = sets ? (exInst.setsCompleted >= sets) : false
 
   return (
     <div className="section">

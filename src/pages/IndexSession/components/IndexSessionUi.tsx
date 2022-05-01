@@ -7,7 +7,7 @@ interface Props {
 }
 
 function IndexSessionUi({sessions}: Props): JSX.Element {
-  const sessionsJSX = sessions.map((session: SessionType) => {
+  const sessionsJSX = sessions.map((session: SessionType): React.ReactNode => {
     return (
       <Link to={`/sessions/${session.id}`} key={session.id}>
         <div className="section">

@@ -1,4 +1,9 @@
-import { DocumentNode, OperationVariables, TypedDocumentNode } from '@apollo/client'
+import { ChangeEventHandler } from 'react'
+import {
+  DocumentNode,
+  OperationVariables,
+  TypedDocumentNode
+} from '@apollo/client'
 
 export interface WorkoutType {
   description: string | null | undefined
@@ -51,15 +56,21 @@ export interface SetIncrementArgs {
 
 export type HandleSetIncrementType = (args: SetIncrementArgs) => Promise<void>
 
-// interface AuthSuccess {
-//   token: string
-// }
-
-// interface AuthError {
-//   error: string
-// }
-
 export interface AuthResType {
-  token: string | undefined
-  error: string | undefined
+  token: string | null
+  error: string | null
 }
+
+export type SessionOrErrorType = SessionType & ErrorMessage
+
+export type WorkoutOrErrorType = WorkoutType & ErrorMessage
+
+export interface ClickEvent { target: { name: string, value: string | number } }
+
+export type HandleExUpdateType = (event: ClickEvent, exIdx: number) => void
+
+export type HandleRemoveExercise = (idxToRemove: number) => void
+
+export type HandleInputChangeType = (
+  ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+)

@@ -27,7 +27,9 @@ function Header(): JSX.Element {
       <li className="nav-li">
         <Link className="nav-a" to="/sessions">Sessions</Link>
       </li>
-      <li className="nav-li" onClick={handleLogout}><Link className="nav-a" to="/login">Logout</Link></li>
+      <li className="nav-li" onClick={handleLogout}>
+        <Link className="nav-a" to="/login">Logout</Link>
+      </li>
     </>
   )
 

@@ -5,8 +5,6 @@ interface Props {
 }
 
 function Exercise(props: Props) {
-
-
   return (
     <div>
       <h4>{props.exercise.name}</h4>

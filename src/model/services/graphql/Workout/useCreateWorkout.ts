@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import useHandledMutation from '../utils/useHandledMutation'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
-import { WorkoutType, ErrorMessage } from '../../../Types'
+import { WorkoutType, ErrorMessage, WorkoutOrErrorType } from '../../../Types'
 
 export const CREATE_WORKOUT = gql`
   mutation CreateWorkoutMutation(
@@ -42,7 +42,7 @@ function useCreateWorkout() {
   const handledMut = useHandledMutation(CREATE_WORKOUT)
   const token: string = useAppSelector(selectLoginTokenInRdx)
 
-  return async function createWorkoutGql(workoutData: WorkoutType) {
+  return async function createWorkoutGql(workoutData: WorkoutType): Promise<WorkoutOrErrorType> {
     const createdWorkout: WorkoutType & ErrorMessage = await handledMut({
       variables: { ...workoutData, token }
     });

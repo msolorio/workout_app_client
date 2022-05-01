@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
-import TextInputGroup from '../../../components/form/TextInputGroup'
-import PasswordInputGroup from '../../../components/form/PasswordInputGroup'
+import TextInputGroup from '../../../components/form/components/TextInputGroup'
+import PasswordInputGroup from '../../../components/form/components/PasswordInputGroup'
 
 interface Props {
   username: string

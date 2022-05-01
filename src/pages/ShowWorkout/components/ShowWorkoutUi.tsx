@@ -14,7 +14,7 @@ function ShowWorkout({
   handleCreateSession
 }: Props): JSX.Element {
 
-  function renderExercises(exercises: ExerciseType[]) {
+  function renderExercises(exercises: ExerciseType[]): React.ReactNode {
     return exercises.map((ex: ExerciseType) => {
       return <Exercise exercise={ex} key={ex.id} />
     })

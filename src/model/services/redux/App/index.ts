@@ -28,11 +28,11 @@ const App = {
     }
   },
 
-  useGetLoginToken() {
+  useGetLoginToken(): string {
     return useAppSelector(selectLoginTokenInRdx)
   },
 
-  useGetErrorMessage() {
+  useGetErrorMessage(): string {
     return useAppSelector(selectErrorMessage)
   }
 }

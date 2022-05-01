@@ -10,7 +10,7 @@ export interface State {
 }
 
 function CreateWorkout(): JSX.Element {
-  const createWorkout: (workoutData: WorkoutType) => Promise<WorkoutType> = model.Workout.useCreateWorkout()
+  const createWorkout = model.Workout.useCreateWorkout()
 
   const stateObj: State = {
     workoutId: null

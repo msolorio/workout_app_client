@@ -11,7 +11,7 @@ function ExerciseInstances({
   exInstances,
   handleSetIncrement
 }: Props): JSX.Element {
-  function renderInstances() {
+  function renderInstances(): React.ReactNode {
     return exInstances.map((exInst) => {
       return (
         <ExerciseInstance

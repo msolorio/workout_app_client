@@ -3,6 +3,7 @@ import { useAppSelector } from '../../redux/reduxApi/app/hooks'
 import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { selectAllWorkouts } from '../../redux/reduxApi/features/workouts/workoutsSlice'
 import useHandledQuery from '../utils/useHandledQuery'
+import { WorkoutType } from '../../../Types'
 
 const WORKOUTS = gql`
   query GetWorkouts($token: String!) {
@@ -24,7 +25,9 @@ const WORKOUTS = gql`
   }
 `;
 
-function useGetMyWorkouts() {
+type GetWorkoutsResType = WorkoutType[]
+
+function useGetMyWorkouts(): GetWorkoutsResType {
   const token: string = useAppSelector(selectLoginTokenInRdx)
   const workoutsRdx = useAppSelector(selectAllWorkouts)
 
