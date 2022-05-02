@@ -33,7 +33,6 @@ function ShowWorkout({ match }: RouteComponentProps<Props>): JSX.Element {
 
   
   if (!currentWorkout) {
-    console.log('No workout found with that id')
     return <Redirect to="/workouts" />
   }
 
