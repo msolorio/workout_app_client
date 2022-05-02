@@ -6,7 +6,7 @@ function getLoginTokenFromLocalStorage(): string | null {
   return localStorage.getItem('logintoken')
 }
 
-function removeLoginTokenInLocalStorage() {
+function removeLoginTokenInLocalStorage(): void {
   localStorage.removeItem('logintoken')
 }
 
