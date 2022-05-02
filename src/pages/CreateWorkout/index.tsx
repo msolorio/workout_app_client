@@ -22,7 +22,9 @@ function CreateWorkout(): JSX.Element {
   const handleCreateWorkout = async (workoutData: WorkoutType) => {
     const createdWorkout: WorkoutType = await createWorkout(workoutData)
 
-    createdWorkout.id && setState({ workoutId: createdWorkout.id })
+    if (createdWorkout.id) {
+      setState({ workoutId: createdWorkout.id })
+    }
   }
 
   if (state.workoutId) return <Redirect to={`/workouts/${state.workoutId}`} />

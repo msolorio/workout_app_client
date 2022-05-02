@@ -10,13 +10,13 @@ const Workout = {
     const createWorkoutRdx = rdx.Workout.useCreateWorkout()
 
     async function createWorkout(workoutData: WorkoutType): Promise<WorkoutOrErrorType> {
-      const createdWorkout = await createWorkoutGql(workoutData)
+      const newWorkout = await createWorkoutGql(workoutData)
 
-      if (!createdWorkout.error) {
-        createWorkoutRdx(createdWorkout)
+      if (!newWorkout.error) {
+        createWorkoutRdx(newWorkout)
       }
 
-      return createdWorkout
+      return newWorkout
     }
 
     return createWorkout
