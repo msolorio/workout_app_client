@@ -6,7 +6,7 @@ import model from '../model'
 function Header(): JSX.Element {
   const resetData: () => void = model.App.useResetData()
   const logoutUser: () => void = model.User.useLogoutUser()
-  const loginToken: string = model.App.useGetLoginToken()
+  const loginStatus: boolean = model.App.useGetLoginStatus()
 
   const handleReset = async () => {
     await resetData()
@@ -51,7 +51,7 @@ function Header(): JSX.Element {
       </h1>
       <nav className="nav">
         <ul className="nav-ul">
-          { loginToken ? loggedInLinks : loggedOutLinks }
+          { loginStatus ? loggedInLinks : loggedOutLinks }
           <li className="nav-li" onClick={handleReset}>
             <Link to="/login">Reset</Link>
           </li>

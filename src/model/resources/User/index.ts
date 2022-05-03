@@ -1,15 +1,15 @@
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
-import {
-  setLoginTokenInLocalStorage,
-  removeLoginTokenInLocalStorage
-} from '../../../utils/authUtils'
+// import {
+//   // setLoginTokenInLocalStorage,
+//   removeLoginTokenInLocalStorage
+// } from '../../../utils/authUtils'
 import { AuthResType } from '../../Types'
 
 const User = {
   useLoginUser() {
     const loginUserGql = gql.User.useLoginUser()
-    const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
+    const loginUserRdx = rdx.User.useLoginUser()
 
     return async function loginUser(username: string, password: string): Promise<AuthResType> {
       if (username === '' || password === '') {
@@ -24,8 +24,8 @@ const User = {
       if (error) return { error, token: null }
 
       if (token) {
-        setLoginTokenInLocalStorage(token)
-        storeLoginTokenRdx(token)
+        // setLoginTokenInLocalStorage(token)
+        loginUserRdx()
         
         return { error: null, token }
       }
@@ -45,7 +45,7 @@ const User = {
     }
 
     const signupUserGql = gql.User.useSignupUser()
-    const storeLoginTokenRdx = rdx.App.useStoreLoginToken()
+    const loginUserRdx = rdx.User.useLoginUser()
     
 
     return async function signupUser({username, password1, password2}: SignupArgs): Promise<AuthResType> {
@@ -70,8 +70,8 @@ const User = {
       if (error) return { error, token: null }
 
       if (token) {
-        setLoginTokenInLocalStorage(token)
-        storeLoginTokenRdx(token)
+        // setLoginTokenInLocalStorage(token)
+        loginUserRdx()
 
         return { error: null, token }
       }
@@ -87,7 +87,7 @@ const User = {
     const logoutUserRdx = rdx.User.useLogoutUser()
     
     return function logoutUser() {
-      removeLoginTokenInLocalStorage()
+      // removeLoginTokenInLocalStorage()
       logoutUserRdx()
     }
   }

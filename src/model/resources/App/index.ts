@@ -48,8 +48,8 @@ const App = {
   },
 
 
-  useGetLoginToken(): string {
-    return rdx.App.useGetLoginToken()
+  useGetLoginStatus(): boolean {
+    return rdx.User.useGetLoginStatus()
   },
 
 

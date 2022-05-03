@@ -8,9 +8,9 @@ interface Props {
 }
 
 function ProtectedRoute(props: Props): JSX.Element {
-  const loginToken: string = useAppSelector(selectLoginTokenInRdx)
+  const loginStatus: boolean = useAppSelector(selectLoginTokenInRdx)
 
-  if (!loginToken) return <Redirect to="/login" />
+  if (!loginStatus) return <Redirect to="/login" />
 
   return (
     <Route 

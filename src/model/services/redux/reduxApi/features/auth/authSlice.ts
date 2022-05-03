@@ -1,35 +1,35 @@
 import {
   createSlice,
-  PayloadAction
+  // PayloadAction
 } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 
 interface State {
-  loginToken: string
+  loginStatus: boolean
 }
 
 const initialState: State = {
-  loginToken: ''
+  loginStatus: false
 }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    storeLoginTokenInRdx(state, action: PayloadAction<string>) {
-      state.loginToken = action.payload
+    loginUserRdx(state) {
+      state.loginStatus = true
     },
 
     removeLoginTokenInRdx(state) {
-      state.loginToken = ''
+      state.loginStatus = false
     }
   }
 })
 
-export const selectLoginTokenInRdx = (state: RootState) => state.auth.loginToken
+export const selectLoginTokenInRdx = (state: RootState) => state.auth.loginStatus
 
 export const {
-  storeLoginTokenInRdx,
+  loginUserRdx,
   removeLoginTokenInRdx
 } = authSlice.actions
 
