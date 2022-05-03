@@ -5,6 +5,7 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  createHttpLink
 } from '@apollo/client'
 import { Provider } from 'react-redux'
 import store from './model/services/redux/reduxApi/app/store'
@@ -14,11 +15,17 @@ import './assets/fonts/Ubuntu-Regular.ttf'
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
+const link = createHttpLink({
+  uri: API_ENDPOINT,
+  credentials: 'include'
+})
+
 const client = new ApolloClient({
   uri: API_ENDPOINT,
   cache: new InMemoryCache({
     addTypename: false
-  })
+  }),
+  link
 });
 
 
