@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
-// import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
+import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { selectAllSessions } from '../../redux/reduxApi/features/sessions/sessionsSlice'
 import useHandledQuery from '../utils/useHandledQuery'
 import { SessionType } from '../../../Types'
@@ -36,11 +36,11 @@ const SESSIONS = gql`
 `
 
 function useGetMySessions(): SessionType[] {
-  // const token: boolean = useAppSelector(selectLoginTokenInRdx)
   const sessionsRdx = useAppSelector(selectAllSessions)
+  const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
 
   const response = useHandledQuery(SESSIONS, {
-    skip: !!sessionsRdx.length,
+    skip: !loggedInStatus,
     variables: {}
   })
 

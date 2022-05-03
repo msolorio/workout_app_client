@@ -5,7 +5,6 @@ import Routes from '../Routes/index'
 import model from '../model'
 
 function App(): JSX.Element {
-  model.App.useSyncToken()
   model.App.useInitData()
   model.App.useSetWindowProcess()
 

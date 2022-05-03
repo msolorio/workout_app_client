@@ -12,8 +12,8 @@ function Header(): JSX.Element {
     await resetData()
   }
 
-  function handleLogout() {
-    logoutUser()
+  const handleLogout = async () => {
+    await logoutUser()
   }
 
   const loggedInLinks = (

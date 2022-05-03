@@ -11,6 +11,7 @@ interface State {
 }
 
 function Login(): JSX.Element {
+  // let dataFetchSuccess
   const { dataFetchSuccess } = model.App.useInitData()
   const loginUser = model.User.useLoginUser()
 
@@ -42,7 +43,7 @@ function Login(): JSX.Element {
     const { error } = await loginUser(username, password)
 
     if (error) {
-      return setState({ ...state, errorMessage: error })
+      setState({ ...state, errorMessage: error })
     }
     if (!error) {
       setState({ ...state, loggedIn: true })

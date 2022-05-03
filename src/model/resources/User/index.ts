@@ -1,9 +1,5 @@
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
-// import {
-//   // setLoginTokenInLocalStorage,
-//   removeLoginTokenInLocalStorage
-// } from '../../../utils/authUtils'
 import { AuthResType } from '../../Types'
 
 const User = {
@@ -84,10 +80,12 @@ const User = {
   },
 
   useLogoutUser() {
+    const logoutUserGql = gql.User.useLogoutUser()
     const logoutUserRdx = rdx.User.useLogoutUser()
-    
-    return function logoutUser() {
+
+    return async function logoutUser() {
       // removeLoginTokenInLocalStorage()
+      await logoutUserGql()
       logoutUserRdx()
     }
   }
