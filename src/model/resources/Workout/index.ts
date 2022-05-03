@@ -45,7 +45,7 @@ const Workout = {
   },
 
 
-  useGetMyWorkouts(): WorkoutType[] {
+  useGetMyWorkouts(): WorkoutType[] | null {
     return rdx.Workout.useGetMyWorkouts()
   }
 

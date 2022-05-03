@@ -19,8 +19,7 @@ const User = {
 
       if (error) return { error, token: null }
 
-      if (token) {
-        // setLoginTokenInLocalStorage(token)
+      if (!error) {
         loginUserRdx()
         
         return { error: null, token }
@@ -66,7 +65,6 @@ const User = {
       if (error) return { error, token: null }
 
       if (token) {
-        // setLoginTokenInLocalStorage(token)
         loginUserRdx()
 
         return { error: null, token }
@@ -84,7 +82,6 @@ const User = {
     const logoutUserRdx = rdx.User.useLogoutUser()
 
     return async function logoutUser() {
-      // removeLoginTokenInLocalStorage()
       await logoutUserGql()
       logoutUserRdx()
     }

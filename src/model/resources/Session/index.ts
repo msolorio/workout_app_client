@@ -21,7 +21,7 @@ const Session = {
     return createSession
   },
 
-  useGetMySessions(): SessionType[] {
+  useGetMySessions(): SessionType[] | null {
     return rdx.Session.useGetMySessions()
   },
 

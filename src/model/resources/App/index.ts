@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
-import { removeLoginTokenInLocalStorage } from '../../../utils/authUtils'
 import { WorkoutType, SessionType } from '../../Types'
+import { useAppSelector } from '../../services/redux/reduxApi/app/hooks'
+import { selectLoginTokenInRdx } from '../../services/redux/reduxApi/features/auth/authSlice';
 
 interface UseInitDataResType {
-  dataFetchSuccess: boolean
-  workouts: WorkoutType[]
-  sessions: SessionType[]
+  workouts: WorkoutType[] | null
+  sessions: SessionType[] | null
 }
 
 const App = {
@@ -15,18 +15,20 @@ const App = {
   useInitData(): UseInitDataResType {
     const workouts = gql.Workout.useGetMyWorkouts()
     const sessions = gql.Session.useGetMySessions()
-
+    const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
+    
     const storeWorkoutsRdx = rdx.Workout.useStoreWorkouts()
     const storeSessionsRdx = rdx.Session.useStoreSessions()
-
-
+    
+    
     useEffect(() => {
-      storeWorkoutsRdx(workouts)
-      storeSessionsRdx(sessions)
+      if (workouts && sessions && loggedInStatus) {        
+        storeWorkoutsRdx(workouts)
+        storeSessionsRdx(sessions)
+      }
     })
 
     return {
-      dataFetchSuccess: !!workouts && !!sessions,
       workouts,
       sessions
     }
@@ -55,11 +57,12 @@ const App = {
 
   useResetData() {
     const resetDataGql = gql.App.useResetData()
+    const logoutUserGql = gql.User.useLogoutUser()
     const logoutUserRdx = rdx.User.useLogoutUser()
 
     return async function resetData() {
-      removeLoginTokenInLocalStorage()
       logoutUserRdx()
+      await logoutUserGql()
       await resetDataGql()
     }
   },

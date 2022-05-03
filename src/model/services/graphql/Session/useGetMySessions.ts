@@ -35,16 +35,16 @@ const SESSIONS = gql`
   }
 `
 
-function useGetMySessions(): SessionType[] {
+function useGetMySessions(): SessionType[] | null {
   const sessionsRdx = useAppSelector(selectAllSessions)
   const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
 
   const response = useHandledQuery(SESSIONS, {
-    skip: !loggedInStatus,
+    skip: !loggedInStatus || !!sessionsRdx,
     variables: {}
   })
 
-  const sessions: SessionType[] = response.sessions || sessionsRdx || []
+  const sessions = response.sessions || null
 
   return sessions
 }

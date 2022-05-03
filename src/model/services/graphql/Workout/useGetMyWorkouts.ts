@@ -25,17 +25,15 @@ const WORKOUTS = gql`
   }
 `;
 
-type GetWorkoutsResType = WorkoutType[]
-
-function useGetMyWorkouts(): GetWorkoutsResType {
+function useGetMyWorkouts(): WorkoutType[] | null {
   const workoutsRdx = useAppSelector(selectAllWorkouts)
   const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
   const response = useHandledQuery(WORKOUTS, {
-    skip: !loggedInStatus,
+    skip: !loggedInStatus || !!workoutsRdx,
     variables: {}
   })
 
-  const workouts = response.workouts || workoutsRdx || []
+  const workouts = response.workouts || null
 
   return workouts
 }

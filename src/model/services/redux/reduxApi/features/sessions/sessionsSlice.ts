@@ -22,7 +22,7 @@ interface ExInstanceIdPL {
 }
 
 interface SessionStateType {
-  sessions: SessionType[]
+  sessions: SessionType[] | null
   currentSession: SessionType | null
   status: 'idle' | 'succeeded'
   error: string | null
@@ -30,7 +30,7 @@ interface SessionStateType {
 
 const initialState: SessionStateType = {
   currentSession: null,
-  sessions: [],
+  sessions: null,
   status: 'idle',
   error: null
 }
@@ -40,7 +40,10 @@ const sessionsSlice = createSlice({
   initialState,
   reducers: {
     storeNewSession(state, action: PayloadAction<SessionType>) {
-      state.sessions.push(action.payload)
+
+      if (state.sessions) {
+        state.sessions.push(action.payload)
+      }
     },
 
 
@@ -66,15 +69,17 @@ const sessionsSlice = createSlice({
         return session
       }
 
-      const updatedSessions = state.sessions.map((session) => {
-        return session.id === sessionId ? getUpdatedSesh(session) : session
-      })
-
-      state.sessions = updatedSessions
+      if (state.sessions) {
+        const updatedSessions = state.sessions.map((session) => {
+          return session.id === sessionId ? getUpdatedSesh(session) : session
+        })
+  
+        state.sessions = updatedSessions
+      }
     },
 
     removeSessions(state) {
-      state.sessions = []
+      state.sessions = null
     }
   }
 })

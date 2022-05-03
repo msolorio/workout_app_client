@@ -12,9 +12,9 @@ const User = {
     const dispatch = useAppDispatch()
 
     return function logoutUserRdx() {
+      dispatch(removeLoginTokenInRdx())
       dispatch(removeWorkouts())
       dispatch(removeSessions())
-      dispatch(removeLoginTokenInRdx())
     }
   },
 

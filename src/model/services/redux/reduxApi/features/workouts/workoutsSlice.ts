@@ -15,13 +15,13 @@ export interface WorkoutType {
 }
 
 interface WorkoutsStateType {
-  workouts: WorkoutType[]
+  workouts: WorkoutType[] | null
   status: 'idle' | 'succeeded'
   error: string | null
 }
 
 const initialState: WorkoutsStateType = {
-  workouts: [],
+  workouts: null,
   status: 'idle',
   error: null
 }
@@ -37,22 +37,30 @@ const workoutsSlice = createSlice({
     },
 
     storeNewWorkout(state, action: PayloadAction<WorkoutType>) {
-      state.workouts.push(action.payload)
+      console.log('called storeNewWorkout')
+
+      console.log('action.payload ==>', action.payload)
+
+      if (state.workouts) {
+        state.workouts.push(action.payload)
+      }
     },
 
     updateWorkoutRdx(state, action: PayloadAction<WorkoutType>) {
       const workoutFromDb = action.payload
       const workoutId = workoutFromDb.id
 
-      const updatedWorkouts = state.workouts.map((workout) => {
-        return workout.id === workoutId ? {...workout, ...workoutFromDb} : workout
-      })
-
-      state.workouts = updatedWorkouts
+      if (state.workouts) {
+        const updatedWorkouts = state.workouts.map((workout) => {
+          return workout.id === workoutId ? {...workout, ...workoutFromDb} : workout
+        })
+  
+        state.workouts = updatedWorkouts
+      }
     },
 
     removeWorkouts(state) {
-      state.workouts = []
+      state.workouts = null
     }
   }
 })

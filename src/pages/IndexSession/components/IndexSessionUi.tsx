@@ -3,11 +3,11 @@ import { SessionType } from '../../../model/services/redux/reduxApi/features/ses
 import DateWidget from '../../../components/DateWidget'
 
 interface Props {
-  sessions: SessionType[]
+  sessions: SessionType[] | null
 }
 
 function IndexSessionUi({sessions}: Props): JSX.Element {
-  const sessionsJSX = sessions.map((session: SessionType): React.ReactNode => {
+  const sessionsJSX = sessions?.map((session: SessionType): React.ReactNode => {
     return (
       <Link to={`/sessions/${session.id}`} key={session.id}>
         <div className="section">

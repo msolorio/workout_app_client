@@ -12,7 +12,7 @@ interface State {
 
 function Login(): JSX.Element {
   // let dataFetchSuccess
-  const { dataFetchSuccess } = model.App.useInitData()
+  model.App.useInitData()
   const loginUser = model.User.useLoginUser()
 
   const stateObj: State = {
@@ -51,7 +51,7 @@ function Login(): JSX.Element {
   }
 
 
-  if (state.loggedIn && dataFetchSuccess) return <Redirect to="/workouts" />
+  if (state.loggedIn) return <Redirect to="/workouts" />
 
   return (
     <LoginUi

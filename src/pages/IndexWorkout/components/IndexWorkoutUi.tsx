@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import { WorkoutType } from '../../../model/Types'
 
 interface Props {
-  workouts: WorkoutType[]
+  workouts: WorkoutType[] | null
 }
 
 function IndexWorkoutUi({ workouts }: Props): JSX.Element {
-  const workoutsJSX = workouts.map((workout: WorkoutType, idx: number): React.ReactNode => {
+  const workoutsJSX = workouts?.map((workout: WorkoutType, idx: number): React.ReactNode => {
     return (
       <Link to={`/workouts/${workout.id}`} key={idx}>
         <div className="section">

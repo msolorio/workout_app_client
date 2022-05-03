@@ -1,5 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../reduxApi/app/hooks'
-import { storeWorkouts, selectAllWorkouts, storeNewWorkout, selectWorkoutById, updateWorkoutRdx } from '../reduxApi/features/workouts/workoutsSlice'
+import {
+  storeWorkouts,
+  selectAllWorkouts,
+  storeNewWorkout,
+  selectWorkoutById,
+  updateWorkoutRdx,
+  removeWorkouts
+} from '../reduxApi/features/workouts/workoutsSlice'
 import { WorkoutType } from '../../../Types'
 
 const Workout = {
@@ -7,6 +14,9 @@ const Workout = {
     const dispatch = useAppDispatch()
     
     return function createWorkoutRdx(createdWorkout: WorkoutType) {
+      console.log('createdWorkout ==>', createdWorkout)
+      
+
       dispatch(storeNewWorkout(createdWorkout))
     }
   },
@@ -32,6 +42,14 @@ const Workout = {
 
     return function storeWorkoutsRdx(workouts: WorkoutType[]) {
       dispatch(storeWorkouts(workouts))
+    }
+  },
+
+  useRemoveWorkouts() {
+    const dispatch = useAppDispatch()
+
+    return function removeWorkoutsRdx() {
+      dispatch(removeWorkouts())
     }
   }
 }
