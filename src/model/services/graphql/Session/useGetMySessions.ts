@@ -6,8 +6,8 @@ import useHandledQuery from '../utils/useHandledQuery'
 import { SessionType } from '../../../Types'
 
 const SESSIONS = gql`
-  query Sessions($token: String!) {
-    sessions(token: $token) {
+  query Sessions {
+    sessions {
       id
       date
       workout {
@@ -41,7 +41,7 @@ function useGetMySessions(): SessionType[] {
 
   const response = useHandledQuery(SESSIONS, {
     skip: !!sessionsRdx.length || !token,
-    variables: { token }
+    variables: {}
   })
 
   const sessions: SessionType[] = response.sessions || sessionsRdx || []

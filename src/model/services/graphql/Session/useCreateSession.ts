@@ -1,13 +1,12 @@
 import { gql } from '@apollo/client'
 import useHandledMutation from '../utils/useHandledMutation'
-import { useAppSelector } from '../../redux/reduxApi/app/hooks'
-import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice'
+// import { useAppSelector } from '../../redux/reduxApi/app/hooks'
+// import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice'
 import { SessionOrErrorType } from '../../../Types'
 
 const CREATE_SESSION = gql`
-  mutation CreateSessionMutation($token: String!, $workoutId: ID!) {
+  mutation CreateSessionMutation($workoutId: ID!) {
     createSession(
-      token: $token
       workoutId: $workoutId
     ) {
       id
@@ -38,11 +37,11 @@ const CREATE_SESSION = gql`
 
 function useCreateSession() {
   const handledMut = useHandledMutation(CREATE_SESSION)
-  const token: string = useAppSelector(selectLoginTokenInRdx)
+  // const token: string = useAppSelector(selectLoginTokenInRdx)
 
   return async function createSession(workoutId: string): Promise<SessionOrErrorType> {
     const session = await handledMut({
-      variables: { token, workoutId }
+      variables: { workoutId }
     })
 
     return session

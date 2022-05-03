@@ -6,8 +6,8 @@ import useHandledQuery from '../utils/useHandledQuery'
 import { WorkoutType } from '../../../Types'
 
 const WORKOUTS = gql`
-  query GetWorkouts($token: String!) {
-    workouts(token: $token) {
+  query GetWorkouts {
+    workouts {
       id
       name
       description
@@ -33,7 +33,7 @@ function useGetMyWorkouts(): GetWorkoutsResType {
 
   const response = useHandledQuery(WORKOUTS, {
     skip: !!workoutsRdx.length || !token,
-    variables: { token }
+    variables: {}
   })
 
   const workouts = response.workouts || workoutsRdx || []
