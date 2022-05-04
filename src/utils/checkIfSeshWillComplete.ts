@@ -1,5 +1,6 @@
 import { SessionType, ExerciseInstanceType } from '../model/Types'
 
+// TODO: Computation to mark session complete should be moved serverside
 function checkIfSeshWillComplete(session: SessionType) {
   const totalMaxSets = session.exerciseInstances.reduce((acc, exInst: ExerciseInstanceType) => {
     if (exInst.exercise.sets) {

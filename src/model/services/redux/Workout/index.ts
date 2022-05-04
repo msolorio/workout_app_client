@@ -14,9 +14,6 @@ const Workout = {
     const dispatch = useAppDispatch()
     
     return function createWorkoutRdx(createdWorkout: WorkoutType) {
-      console.log('createdWorkout ==>', createdWorkout)
-      
-
       dispatch(storeNewWorkout(createdWorkout))
     }
   },

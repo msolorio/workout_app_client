@@ -37,10 +37,6 @@ const workoutsSlice = createSlice({
     },
 
     storeNewWorkout(state, action: PayloadAction<WorkoutType>) {
-      console.log('called storeNewWorkout')
-
-      console.log('action.payload ==>', action.payload)
-
       if (state.workouts) {
         state.workouts.push(action.payload)
       }

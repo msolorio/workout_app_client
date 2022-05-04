@@ -28,6 +28,8 @@ const ExerciseInstance = {
 
       incrementSetRdx(exInstId, currentSession.id)
 
+      // TODO: This computation should be moved serverside in
+      // exInst update model
       if (checkIfSeshWillComplete(currentSession)) {
         completeSessionGql(currentSession.id)
       }

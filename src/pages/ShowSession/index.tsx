@@ -16,7 +16,6 @@ function ShowSession({match}: RouteComponentProps<Props>): JSX.Element {
 
 
   if (!currentSession) {
-    console.log('No session found with that id')
     return <Redirect to="/sessions" />
   }
   
