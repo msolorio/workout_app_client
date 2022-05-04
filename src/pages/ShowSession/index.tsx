@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import ShowSessionUi from './components/ShowSessionUi'
 import model from '../../model'
@@ -14,16 +13,8 @@ function ShowSession({match}: RouteComponentProps<Props>): JSX.Element {
   const { sessionId } = match.params
   const currentSession: SessionType | undefined = model.Session.useGetSessionById(sessionId)
   const incrementSet = model.ExerciseInstance.useIncrementSet()
-  const checkCompleteSession = model.Session.useCheckCompleteSession()
 
 
-  useEffect(() => {
-    if (!currentSession) return
-    checkCompleteSession(currentSession)
-
-  }, [currentSession, checkCompleteSession])
-
-  
   if (!currentSession) {
     console.log('No session found with that id')
     return <Redirect to="/sessions" />

@@ -1,6 +1,7 @@
 import gql from '../../services/graphql'
 import rdx from '../../services/redux'
 import { SessionType } from '../../Types'
+import checkIfSeshWillComplete from '../../../utils/checkIfSeshWillComplete'
 
 interface incrementSetArgs {
   exInstId: string,
@@ -13,7 +14,8 @@ const ExerciseInstance = {
   useIncrementSet() {
     const incrementSetGql = gql.ExerciseInstance.useIncrementSet()
     const incrementSetRdx = rdx.ExerciseInstance.useIncrementSet()
-
+    const completeSessionGql = gql.Session.useCompleteSession()
+    
     async function incrementSet({
       exInstId,
       setsCompleted,
@@ -23,7 +25,12 @@ const ExerciseInstance = {
       if (!maxSets || setsCompleted >= maxSets) return
 
       await incrementSetGql(exInstId, setsCompleted)
+
       incrementSetRdx(exInstId, currentSession.id)
+
+      if (checkIfSeshWillComplete(currentSession)) {
+        completeSessionGql(currentSession.id)
+      }
     }
 
     return incrementSet

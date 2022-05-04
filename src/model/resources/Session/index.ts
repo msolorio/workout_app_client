@@ -21,6 +21,7 @@ const Session = {
     return createSession
   },
 
+
   useGetMySessions(): SessionType[] | null {
     return rdx.Session.useGetMySessions()
   },
@@ -33,7 +34,9 @@ const Session = {
     const completeSessionGql = gql.Session.useCompleteSession()
 
     return async function checkCompleteSession(session: SessionType) {
-      if (session?.completed) await completeSessionGql(session.id)
+      if (session?.completed) {
+        await completeSessionGql(session.id)
+      }
     }
   }
 }

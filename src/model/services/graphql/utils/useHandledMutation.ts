@@ -33,6 +33,8 @@ function useHandledMutation(mutationString: GqlString) {
 
 
     } catch (err) {
+      console.log('err:', err)
+
       store.dispatch(storeErrorMessage(DEFAULT_ERROR))
       return { error: DEFAULT_ERROR }
     }

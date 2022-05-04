@@ -8,7 +8,6 @@ const SIGNUP_USER = gql`
         id
         username
       }
-      error
     }
   }
 `
