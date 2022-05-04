@@ -1,7 +1,5 @@
 import { gql } from '@apollo/client'
 import useHandledMutation from '../utils/useHandledMutation'
-// import { useAppSelector } from '../../redux/reduxApi/app/hooks'
-// import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { WorkoutType, WorkoutOrErrorType } from '../../../Types'
 
 const UPDATE_WORKOUT = gql`
@@ -40,7 +38,6 @@ const UPDATE_WORKOUT = gql`
 
 function useUpdateWorkout() {
   const handledMut = useHandledMutation(UPDATE_WORKOUT)
-  // const logintoken: string = useAppSelector(selectLoginTokenInRdx)
 
   return async function updateWorkoutGql(workoutData: WorkoutType): Promise<WorkoutOrErrorType> {
     const updatedWorkout = await handledMut({

@@ -3,7 +3,7 @@ import rdx from '../../services/redux'
 import gql from '../../services/graphql'
 import { WorkoutType, SessionType } from '../../Types'
 import { useAppSelector } from '../../services/redux/reduxApi/app/hooks'
-import { selectLoginTokenInRdx } from '../../services/redux/reduxApi/features/auth/authSlice';
+import { selectLoginStatusRdx } from '../../services/redux/reduxApi/features/auth/authSlice';
 
 interface UseInitDataResType {
   workouts: WorkoutType[] | null
@@ -15,7 +15,7 @@ const App = {
   useInitData(): UseInitDataResType {
     const workouts = gql.Workout.useGetMyWorkouts()
     const sessions = gql.Session.useGetMySessions()
-    const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
+    const loggedInStatus = useAppSelector(selectLoginStatusRdx)
     
     const storeWorkoutsRdx = rdx.Workout.useStoreWorkouts()
     const storeSessionsRdx = rdx.Session.useStoreSessions()
@@ -35,7 +35,7 @@ const App = {
   },
 
   
-  // Syncs token in redux with token in browser storage
+  // Syncs token in redux with token in httpOnly cookie
   useSyncToken() {
     rdx.App.useSyncToken()
   },

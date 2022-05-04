@@ -56,11 +56,6 @@ export interface SetIncrementArgs {
 
 export type HandleSetIncrementType = (args: SetIncrementArgs) => Promise<void>
 
-export interface AuthResType {
-  token: string | null
-  error: string | null
-}
-
 export type SessionOrErrorType = SessionType & ErrorMessage
 
 export type WorkoutOrErrorType = WorkoutType & ErrorMessage

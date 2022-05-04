@@ -20,17 +20,17 @@ const authSlice = createSlice({
       state.loginStatus = true
     },
 
-    removeLoginTokenInRdx(state) {
+    logoutUserRdxInRdx(state) {
       state.loginStatus = false
     }
   }
 })
 
-export const selectLoginTokenInRdx = (state: RootState) => state.auth.loginStatus
+export const selectLoginStatusRdx = (state: RootState) => state.auth.loginStatus
 
 export const {
   loginUserRdx,
-  removeLoginTokenInRdx
+  logoutUserRdxInRdx
 } = authSlice.actions
 
 export default authSlice.reducer

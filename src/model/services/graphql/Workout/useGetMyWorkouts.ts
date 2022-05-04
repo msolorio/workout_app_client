@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 import { useAppSelector } from '../../redux/reduxApi/app/hooks'
-import { selectLoginTokenInRdx } from '../../redux/reduxApi/features/auth/authSlice';
+import { selectLoginStatusRdx } from '../../redux/reduxApi/features/auth/authSlice';
 import { selectAllWorkouts } from '../../redux/reduxApi/features/workouts/workoutsSlice'
 import useHandledQuery from '../utils/useHandledQuery'
 import { WorkoutType } from '../../../Types'
@@ -27,7 +27,7 @@ const WORKOUTS = gql`
 
 function useGetMyWorkouts(): WorkoutType[] | null {
   const workoutsRdx = useAppSelector(selectAllWorkouts)
-  const loggedInStatus = useAppSelector(selectLoginTokenInRdx)
+  const loggedInStatus = useAppSelector(selectLoginStatusRdx)
   const response = useHandledQuery(WORKOUTS, {
     skip: !loggedInStatus || !!workoutsRdx,
     variables: {}

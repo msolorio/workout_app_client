@@ -1,33 +1,28 @@
 import rdx from '../../services/redux'
 import gql from '../../services/graphql'
-import { AuthResType } from '../../Types'
 
 const User = {
   useLoginUser() {
     const loginUserGql = gql.User.useLoginUser()
     const loginUserRdx = rdx.User.useLoginUser()
 
-    return async function loginUser(username: string, password: string): Promise<AuthResType> {
+    return async function loginUser(username: string, password: string) {
       if (username === '' || password === '') {
-        return {
-          error: 'All fields are required',
-          token: null
-        }
+        return { error: 'All fields are required', }
       }
 
-      const { error, token } = await loginUserGql(username, password)
+      const { error } = await loginUserGql(username, password)
 
-      if (error) return { error, token: null }
+      if (error) return { error }
 
       if (!error) {
         loginUserRdx()
         
-        return { error: null, token }
+        return { error: null }
       }
 
       return {
-        error: 'There was an error logging in',
-        token: null
+        error: 'There was an error logging in'
       }
     }
   },
@@ -43,36 +38,33 @@ const User = {
     const loginUserRdx = rdx.User.useLoginUser()
     
 
-    return async function signupUser({username, password1, password2}: SignupArgs): Promise<AuthResType> {
+    return async function signupUser({username, password1, password2}: SignupArgs) {
 
       if (username === '' || password1 === '' || password2 === '') {
         return {
           error: 'All fields are required',
-          token: null
         }
       }
 
       if (password1 !== password2) {
         return {
           error: 'Both password fields must match.',
-          token: null
         }
       }
 
 
-      const { error, token } = await signupUserGql(username, password1)
+      const { error } = await signupUserGql(username, password1)
 
-      if (error) return { error, token: null }
+      if (error) return { error }
 
-      if (token) {
+      if (!error) {
         loginUserRdx()
 
-        return { error: null, token }
+        return { error: null }
       }
 
       return {
         error: 'There was an error signing up',
-        token: null
       }
     }
   },

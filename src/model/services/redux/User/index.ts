@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../reduxApi/app/hooks'
 import { removeWorkouts } from '../reduxApi/features/workouts/workoutsSlice'
 import { removeSessions } from '../reduxApi/features/sessions/sessionsSlice'
-import { removeLoginTokenInRdx } from '../reduxApi/features/auth/authSlice';
 import {
-  selectLoginTokenInRdx,
+  selectLoginStatusRdx,
   loginUserRdx,
+  logoutUserRdxInRdx
 } from '../reduxApi/features/auth/authSlice';
 
 const User = {
@@ -12,7 +12,7 @@ const User = {
     const dispatch = useAppDispatch()
 
     return function logoutUserRdx() {
-      dispatch(removeLoginTokenInRdx())
+      dispatch(logoutUserRdxInRdx())
       dispatch(removeWorkouts())
       dispatch(removeSessions())
     }
@@ -27,7 +27,7 @@ const User = {
   },
 
   useGetLoginStatus(): boolean {
-    return useAppSelector(selectLoginTokenInRdx)
+    return useAppSelector(selectLoginStatusRdx)
   },
 }
 

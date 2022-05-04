@@ -1,6 +1,6 @@
 import { Route, Redirect, RouteComponentProps } from 'react-router-dom';
 import { useAppSelector } from '../model/services/redux/reduxApi/app/hooks'
-import { selectLoginTokenInRdx } from '../model/services/redux/reduxApi/features/auth/authSlice';
+import { selectLoginStatusRdx } from '../model/services/redux/reduxApi/features/auth/authSlice';
 
 interface Props {
   path: string
@@ -8,7 +8,7 @@ interface Props {
 }
 
 function ProtectedRoute(props: Props): JSX.Element {
-  const loginStatus: boolean = useAppSelector(selectLoginTokenInRdx)
+  const loginStatus: boolean = useAppSelector(selectLoginStatusRdx)
 
   if (!loginStatus) return <Redirect to="/login" />
 
