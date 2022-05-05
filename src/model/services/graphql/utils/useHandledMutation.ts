@@ -7,20 +7,18 @@ import {
 } from '../../redux/reduxApi/features/errors/errorsSlice'
 import { GqlString } from '../../../Types'
 
+// catches serverside errors on mutation
+// addresses bug in Apollo where mutation errors not caught
+// https://github.com/apollographql/apollo-client/issues/5708
 function useHandledMutation(mutationString: GqlString) {
   const [mutation] = useMutation(mutationString)
 
-  // TODO: remove any - function returns either { error: string } or object
-  // with variable props
-  return async function (argsObj?: { variables: object }): Promise<any> {
+  return async function (argsObj?: { variables: object }) {
     try {
       const response = await mutation(argsObj)
 
       const mutationName = Object.keys(response.data)[0]
 
-      // catches serverside errors on mutation
-      // addresses bug in Apollo where mutation errors not caught
-      // https://github.com/apollographql/apollo-client/issues/5708
       if (response.data[mutationName] === null) {
         store.dispatch(storeErrorMessage(DEFAULT_ERROR))
         return { error: DEFAULT_ERROR }
