@@ -28,6 +28,8 @@ const WORKOUTS = gql`
 function useGetMyWorkouts(): WorkoutType[] | null {
   const workoutsRdx = useAppSelector(selectAllWorkouts)
   const loggedInStatus = useAppSelector(selectLoginStatusRdx)
+  
+  // TODO: find out why unable to disable cache
   const response = useHandledQuery(WORKOUTS, {
     skip: !loggedInStatus || !!workoutsRdx,
     variables: {}

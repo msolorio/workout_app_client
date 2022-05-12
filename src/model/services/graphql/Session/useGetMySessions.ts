@@ -39,6 +39,7 @@ function useGetMySessions(): SessionType[] | null {
   const sessionsRdx = useAppSelector(selectAllSessions)
   const loggedInStatus = useAppSelector(selectLoginStatusRdx)
 
+  // TODO: find out why unable to disable cache
   const response = useHandledQuery(SESSIONS, {
     skip: !loggedInStatus || !!sessionsRdx,
     variables: {}

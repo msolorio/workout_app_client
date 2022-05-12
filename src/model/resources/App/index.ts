@@ -4,6 +4,7 @@ import gql from '../../services/graphql'
 import { WorkoutType, SessionType } from '../../Types'
 import { useAppSelector } from '../../services/redux/reduxApi/app/hooks'
 import { selectLoginStatusRdx } from '../../services/redux/reduxApi/features/auth/authSlice';
+// import apolloClient from '../../../apolloClient'
 
 interface UseInitDataResType {
   workouts: WorkoutType[] | null
@@ -64,6 +65,8 @@ const App = {
       logoutUserRdx()
       await logoutUserGql()
       await resetDataGql()
+
+      window.location.reload()
     }
   },
 

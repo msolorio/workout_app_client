@@ -76,6 +76,8 @@ const User = {
     return async function logoutUser() {
       await logoutUserGql()
       logoutUserRdx()
+
+      window.location.reload()
     }
   }
 }

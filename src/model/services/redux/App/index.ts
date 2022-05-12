@@ -6,6 +6,7 @@ const App = {
   useSyncToken() {
     // TODO: Check for presence of httpOnly cookie - token
     // If one exists then set loginStatus to true in redux
+    // allows us to remain logged in on page refresh
   },
 
   useGetErrorMessage(): string {
