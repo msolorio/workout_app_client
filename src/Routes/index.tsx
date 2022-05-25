@@ -21,7 +21,7 @@ interface SessionIdRouteParam {
 function Routes(): JSX.Element {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Home />} />
+      <Route exact path="/" render={() => <Redirect to="/login" />} />
       <Route exact path="/signup" render={() => <Signup />} />
       <Route exact path="/login" render={() => <Login />} />
 
