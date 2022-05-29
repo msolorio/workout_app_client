@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { useEffect, MouseEvent, useState } from 'react'
 import {
   WorkoutType,
   ExerciseType,
@@ -7,6 +7,8 @@ import {
   HandleInputChangeType 
 } from '../../model/Types'
 import WorkoutFormUi from './components/WorkoutFormUi'
+import model from '../../model'
+
 
 const stateExercises: ExerciseType[] = [];
 
@@ -18,6 +20,9 @@ interface Props {
 
 
 function WorkoutForm(props: Props): JSX.Element {
+  const setErrorMessage = model.App.useSetErrorMessage()
+  const removeErrorMessage = model.App.useRemoveErrorMessage()
+
   const [state, setState] = useState({
     redirect: false,
     workoutName: props.workoutData?.name || '',
@@ -31,6 +36,12 @@ function WorkoutForm(props: Props): JSX.Element {
     exerciseWeight: '10',
     exerciseUnit: 'lbs',
   });
+
+  useEffect(() => {
+    return function removeErrorMsg() { // specifies component will unmount
+      removeErrorMessage()
+    }
+  })
 
 
   const handleInputChange: HandleInputChangeType = (event) => {
@@ -75,6 +86,12 @@ function WorkoutForm(props: Props): JSX.Element {
   
   
   const handleSubmit = async () => {
+    if (!state.workoutName) {
+      setErrorMessage('The workout name is required.')
+
+      return
+    }
+
     const workoutData = {
       name: state.workoutName,
       description: state.workoutDescription,

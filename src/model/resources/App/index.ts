@@ -4,7 +4,6 @@ import gql from '../../services/graphql'
 import { WorkoutType, SessionType } from '../../Types'
 import { useAppSelector } from '../../services/redux/reduxApi/app/hooks'
 import { selectLoginStatusRdx } from '../../services/redux/reduxApi/features/auth/authSlice';
-// import apolloClient from '../../../apolloClient'
 
 interface UseInitDataResType {
   workouts: WorkoutType[] | null
@@ -72,6 +71,22 @@ const App = {
 
   useGetErrorMessage(): string {
     return rdx.App.useGetErrorMessage()
+  },
+
+  useSetErrorMessage() {
+    const setErrorMsgRdx = rdx.App.useSetErrorMessage()
+
+    return function setErrorMessage(error?: string) {
+      setErrorMsgRdx(error)
+    }
+  },
+
+  useRemoveErrorMessage() {
+    const removeErrorMsgRdx = rdx.App.useRemoveErrorMessage()
+
+    return function removeErrorMessage() {
+      removeErrorMsgRdx()
+    }
   }
 }
 

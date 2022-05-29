@@ -1,5 +1,11 @@
 import { useAppSelector } from '../reduxApi/app/hooks'
-import { selectErrorMessage } from '../reduxApi/features/errors/errorsSlice'
+import store from '../../redux/reduxApi/app/store'
+import DEFAULT_ERROR from '../../../../utils/defaultError'
+import {
+  selectErrorMessage,
+  storeErrorMessage,
+  removeErrorMessage
+} from '../reduxApi/features/errors/errorsSlice'
 
 
 const App = {
@@ -11,6 +17,18 @@ const App = {
 
   useGetErrorMessage(): string {
     return useAppSelector(selectErrorMessage)
+  },
+
+  useSetErrorMessage() {
+    return function setErrorMessage(error: string=DEFAULT_ERROR) {
+      store.dispatch(storeErrorMessage(error))
+    }
+  },
+
+  useRemoveErrorMessage() {
+    return function removeErrorMsg() {
+      store.dispatch(removeErrorMessage())
+    }
   }
 }
 

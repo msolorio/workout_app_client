@@ -8,7 +8,6 @@ import ShowSession from '../pages/ShowSession'
 import EditWorkout from '../pages/EditWorkout'
 import Signup from '../pages/Signup'
 import Login from '../pages/Login'
-import Home from '../pages/Home/Home'
 
 interface WorkoutIdRouteParam {
   workoutId: string
