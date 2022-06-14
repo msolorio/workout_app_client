@@ -47,7 +47,7 @@ function Header(): JSX.Element {
   return (
     <header>
       <h1 className="header-title">
-        Gym Buddie <img className="kettlebellImg" src={kettlebellImg} alt="kettlebell" />
+        Gymara <img className="kettlebellImg" src={kettlebellImg} alt="kettlebell" />
       </h1>
       <nav className="nav">
         <ul className="nav-ul">

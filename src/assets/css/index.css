@@ -77,8 +77,9 @@ table {
 
 /* VARIABLES ********************************************************************** */
 :root {
-  --accent-text: #2bbf1e;
-  --accent-background: #1aa20d;
+  --accent-text: #d5d5d5;
+  --accent-background: #565656;
+  --accent-border: #989898;
   --dark-text-color: #333;
   --light-text-color: #dcdcdc;
 
@@ -247,7 +248,8 @@ a {
 
 .button_accent {
   background: var(--accent-background);
-  border-bottom: .2em solid #32dd22;
+  /* border-bottom: .2em solid #989898; */
+  border-bottom: .2em solid var(--accent-border);
   color: #f5f5f5;
 }
 
@@ -255,7 +257,7 @@ a {
 .button_accent:active,
 .button_accent:focus {
   outline: none;
-  background: #0ea001;
+  background: #474747;
 }
 
 .button-sets {
@@ -313,7 +315,8 @@ a {
 .header-title {
   font-family: UbuntuRegular;
   background: var(--accent-background);
-  border-bottom: .12em solid #57db4b;
+  border-bottom: .12em solid var(--accent-border);
+  color: #e0e0e0;
   padding: .4em 2em;
   font-size: 1.5em;
   text-align: center;
@@ -351,7 +354,7 @@ a {
 }
 
 .nav-li:hover {
-  color: var(--accent-text);
+  color: #646464;
 }
 
 .nav-a {
