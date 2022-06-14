@@ -13,7 +13,7 @@ const User = {
 
       const { error } = await loginUserGql(username, password)
 
-      if (error) return { error }
+      if (error) return {} // no need to return error on failed gql. It is sent to redux.
 
       if (!error) {
         loginUserRdx()
@@ -55,7 +55,7 @@ const User = {
 
       const { error } = await signupUserGql(username, password1)
 
-      if (error) return { error }
+      if (error) return { } // no need to return error on failed gql. It is sent to redux.
 
       if (!error) {
         loginUserRdx()
